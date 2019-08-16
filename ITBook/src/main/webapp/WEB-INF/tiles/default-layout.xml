@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+	<definition name="default-tiles" 			template="/WEB-INF/jsp/cmmn/default-layout.jsp">
+	  	<put-attribute name="head"    			value="/WEB-INF/jsp/cmmn/default-header.jsp" />
+	  	<put-attribute name="nav"    			value="/WEB-INF/jsp/cmmn/default-nav.jsp" />
+	  	<put-attribute name="content"    	value="" />
+	  	<put-attribute name="footer"    		value="/WEB-INF/jsp/cmmn/default-footer.jsp" />
+	</definition>
+	
+	<definition name="*/*.default"  				extends="default-tiles">
+	  	<put-attribute name="content"    	value="/WEB-INF/jsp/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="login-layout" 			template="/WEB-INF/jsp/login/login-layout.jsp">
+	  	<put-attribute name="head"    			value="/WEB-INF/jsp/login/login-header.jsp" />
+	  	<put-attribute name="content"    	value="" />
+	  	<put-attribute name="footer"    		value="/WEB-INF/jsp/login/login-footer.jsp" />
+	</definition>
+	
+	<definition name="*/*.tiles2"  				extends="login-layout">
+	  	<put-attribute name="content"    	value="/WEB-INF/jsp/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="main-tiles" template="/WEB-INF/jsp/tiles_cmmn/main-layouts.jsp">
+		<!-- <put-attribute name="loading"			value="/WEB-INF/jsp/tiles_cmmn/loading.jsp" /> -->
+		<put-attribute name="head"				value="/WEB-INF/jsp/tiles_cmmn/head.jsp" />
+		<put-attribute name="header"			value="/WEB-INF/jsp/tiles_cmmn/header.jsp" />
+		<put-attribute name="search_bar"		value="/WEB-INF/jsp/tiles_cmmn/search_bar.jsp" />
+		<put-attribute name="flowting_menu"		value="/WEB-INF/jsp/tiles_cmmn/flowting_menu.jsp" />
+		<put-attribute name="best_saler"		value="/WEB-INF/jsp/tiles_cmmn/best_saler.jsp" />
+		<put-attribute name="new_book"			value="/WEB-INF/jsp/tiles_cmmn/new_book.jsp" />
+		<put-attribute name="category_book"		value="/WEB-INF/jsp/tiles_cmmn/category_book.jsp" />
+		<put-attribute name="semina"			value="/WEB-INF/jsp/tiles_cmmn/semina.jsp" />
+		<put-attribute name="blog_study"		value="/WEB-INF/jsp/tiles_cmmn/blog_study.jsp" />
+		<put-attribute name="footer"			value="/WEB-INF/jsp/tiles_cmmn/footer.jsp" />
+		<put-attribute name="best_saler_modal"	value="/WEB-INF/jsp/tiles_cmmn/best_saler_Modal.jsp" />
+		<put-attribute name="login_modal"		value="/WEB-INF/jsp/tiles_cmmn/login_modal.jsp" />
+		<put-attribute name="quick_view"		value="/WEB-INF/jsp/tiles_cmmn/quick_view.jsp" />
+		<put-attribute name="link_js"			value="/WEB-INF/jsp/tiles_cmmn/link_js.jsp" />
+	</definition>
+	
+	<!--메인서점 타일즈 -->
+	<definition name="book-tiles" template="/WEB-INF/jsp/book/layout/layouts_book.jsp">
+		<put-attribute name="loading"		value="/WEB-INF/jsp/tiles_cmmn/loading.jsp" />
+		<put-attribute name="head"			value="/WEB-INF/jsp/tiles_cmmn/head.jsp" />
+		<put-attribute name="header"		value="/WEB-INF/jsp/tiles_cmmn/header.jsp" />
+		<put-attribute name="search_bar"	value="/WEB-INF/jsp/tiles_cmmn/search_bar.jsp" />
+		<put-attribute name="flowting_menu"	value="/WEB-INF/jsp/tiles_cmmn/flowting_menu.jsp" />
+		<put-attribute name="content"		value="" />
+		<put-attribute name="footer" 		value="/WEB-INF/jsp/tiles_cmmn/footer.jsp" />
+		<put-attribute name="login_modal"	value="/WEB-INF/jsp/tiles_cmmn/login_modal.jsp" />
+		<put-attribute name="link_js"		value="/WEB-INF/jsp/tiles_cmmn/link_js.jsp" />
+	</definition>
+	
+	<definition name="*.book-main" extends="book-tiles">
+		<put-attribute name="content" value="/WEB-INF/jsp/book/contents/{1}.jsp"/>
+	</definition>
+	
+	<definition name="*.book-detail" extends="book-tiles">
+		<put-attribute name="content" value="/WEB-INF/jsp/book/book_detail/{1}.jsp"/>
+	</definition>
+	<!--메인서점 타일즈//-->
+	
+	<!-- 이벤트/회원가입 타일즈/장바구니/ 마이페이지 Start-->
+	<definition name="event-tiles" 	template="/WEB-INF/jsp/tiles_cmmn/layouts_event.jsp">
+		<put-attribute name="loading"			value="/WEB-INF/jsp/tiles_cmmn/loading.jsp" />
+		<put-attribute name="head"			value="/WEB-INF/jsp/tiles_cmmn/head.jsp" />
+		<put-attribute name="header"		value="/WEB-INF/jsp/tiles_cmmn/header.jsp" />
+		<put-attribute name="search_bar"	value="/WEB-INF/jsp/tiles_cmmn/search_bar.jsp" />
+		<put-attribute name="flowting_menu"	value="/WEB-INF/jsp/tiles_cmmn/flowting_menu.jsp" />
+		<put-attribute name="footer"		value="/WEB-INF/jsp/tiles_cmmn/footer.jsp" />
+		<put-attribute name="login_modal"	value="/WEB-INF/jsp/tiles_cmmn/login_modal.jsp" />
+		<put-attribute name="link_js"		value="/WEB-INF/jsp/tiles_cmmn/link_js.jsp" />
+		<put-attribute name="content"		value="" />
+	</definition>
+	
+	<definition name="*/*.tiles3" extends="event-tiles">
+		<put-attribute name="content" value="/WEB-INF/jsp/{1}/{2}.jsp"/>
+	</definition>
+<!-- 이벤트/회원가입/장바구니/ 마이페이지 타일즈 End-->
+</tiles-definitions>

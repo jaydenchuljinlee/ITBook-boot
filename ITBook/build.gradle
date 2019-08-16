@@ -1,0 +1,57 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'javax.servlet:jstl:1.2'
+	
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	implementation 'com.googlecode.json-simple:json-simple:1.1'
+
+	//tiles 관련 라이브러리
+	implementation 'org.apache.tiles:tiles-jsp:3.0.5'
+	implementation 'org.apache.tiles:tiles-servlet:3.0.5'
+	implementation 'org.apache.tiles:tiles-core:3.0.5'
+	implementation 'org.apache.tiles:tiles-api:3.0.5'
+	implementation 'org.apache.tiles:tiles-el:3.0.5'
+	
+	/* Spring Security */
+	implementation('org.springframework.security:spring-security-oauth2-client') 
+	implementation('org.springframework.security:spring-security-oauth2-jose') 
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation("commons-dbcp:commons-dbcp:1.4")
+	implementation("org.springframework.boot:spring-boot-starter-jdbc:2.0.1.RELEASE")
+	
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
