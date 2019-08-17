@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+src/mian/resources/application.yml
 
 # External tool builders
 .externalToolBuilders/
