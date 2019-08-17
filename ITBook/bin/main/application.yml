@@ -13,7 +13,7 @@ spring:
     url: jdbc:mysql://cheoljin.c8emnh0bb9pj.us-east-2.rds.amazonaws.com:3306/itbook
     driverClassName: com.mysql.cj.jdbc.Driver
     username: cheoljin
-    password: cj12345678
+    password: cj56781234
   jpa:
     properties:
       hibernate:
