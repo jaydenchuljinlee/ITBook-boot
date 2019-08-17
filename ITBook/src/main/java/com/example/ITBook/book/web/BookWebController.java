@@ -12,7 +12,7 @@ public class BookWebController {
 		return "newBook.book-main";
 	}
 	
-	@RequestMapping(value = "/book")
+	@RequestMapping(value = "/recommendBook")
 	public String recommendBook() throws Exception {
 		
 		return "recommendBook.book-main";

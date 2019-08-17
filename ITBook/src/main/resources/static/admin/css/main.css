@@ -1,0 +1,16 @@
+.mainRight {
+	text-align: right;
+}
+
+#mainInfoList .well:hover {
+	cursor: pointer;
+}
+
+#mainInfoList .well:hover .mainRight {
+	text-decoration: underline;
+}
+
+.mainPointer:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}

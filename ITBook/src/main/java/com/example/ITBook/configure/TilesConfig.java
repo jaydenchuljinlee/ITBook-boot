@@ -12,7 +12,7 @@ public class TilesConfig {
 	@Bean(name = "tilesConfigure")
 	public TilesConfigurer tilesConfigurer() {
 		final TilesConfigurer configurer = new TilesConfigurer();
-		configurer.setDefinitions(new String[] {"/WEB-INF/tiles/default-layout.xml"});
+		configurer.setDefinitions(new String[] {"/WEB-INF/tiles/default-layout.xml","/WEB-INF/tiles/admin-layout.xml"});
 		configurer.setCheckRefresh(true);
 		
 		return configurer;

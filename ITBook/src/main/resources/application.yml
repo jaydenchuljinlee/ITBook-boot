@@ -10,10 +10,10 @@ spring:
             client-id: 1541816019295932
             client-secret: cd389cfabd54b39bd190aca4e5af2a42
   datasource: # <- 추가
-    url: jdbc:mysql://cheoljin.c8emnh0bb9pj.us-east-2.rds.amazonaws.com:3306/cheoljin
+    url: jdbc:mysql://cheoljin.c8emnh0bb9pj.us-east-2.rds.amazonaws.com:3306/itbook
     driverClassName: com.mysql.cj.jdbc.Driver
     username: cheoljin
-    password: cjfwls1234
+    password: cheoljin5678
   jpa:
     properties:
       hibernate:
