@@ -2,9 +2,7 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-  <link rel="stylesheet" type="text/css" href="/ITBook/css/book/book.css">
 <h4 class="pull-left">도서 관리</h4>
 <div class="clearfix"></div>
 <hr />
@@ -41,7 +39,7 @@
 						<c:forEach items="${adminBookList}" var="adminBookList" varStatus="status">
 						<tbody>
 							<tr>
-								<td><img src="${adminBookList.bImage }"></td>
+								<td><img src="${adminBookList.bImage}"></td>
 								<td id="book1" class="bookDetail"><a href="#">${adminBookList.bTheme}</a></td>
 								<td>${adminBookList.isbn}</td>
 								<td>${adminBookList.bAuthor}</td>

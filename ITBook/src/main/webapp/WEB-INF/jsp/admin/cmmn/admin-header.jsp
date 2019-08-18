@@ -11,9 +11,7 @@
 <!-- jQuery UI -->
 <link rel="stylesheet" href="/admin/css/jquery-ui.css"> 
 <!-- jQuery Gritter -->
-<link rel="stylesheet" href="/admin/css/jquery.gritter.css">
-<!-- Font awesome CSS -->
-<link href="css/font-awesome.min.css" rel="stylesheet">		
+<link rel="stylesheet" href="/admin/css/jquery.gritter.css">	
 <!-- Custom CSS -->
 <link href="/admin/css/style.css" rel="stylesheet">
 <!-- Widgets stylesheet -->
