@@ -1,29 +1,77 @@
 package com.example.ITBook.admin.book.web;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.ITBook.admin.book.domain.BookInformation;
 import com.example.ITBook.admin.book.domain.NaverClientInformation;
-import com.google.gson.JsonObject;
+import com.example.ITBook.admin.book.service.AdminBookService;
+import com.example.ITBook.domain.BCategory;
+import com.example.ITBook.domain.SCategory;
+import com.example.ITBook.utils.JsonUtil;
 
 @Controller
 public class AdminBookWebRegister {
+	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebRegister.class);
+	
+	private AdminBookService adminBookService;
+	
+	public AdminBookWebRegister(AdminBookService adminBookService) {
+		this.adminBookService = adminBookService;
+	}
 
+	@ModelAttribute("categoryList_1")
+	public List<BCategory> categoryList_1(ModelMap model) throws Exception {
+		return adminBookService.selectParentCategoryList();
+	}
+	
 	@RequestMapping(value= "adminBookRegister")
 	public String adminBookRegister() throws Exception {
 		
 		return "book/bookRegister.adminTiles";
+	}
+	
+	@RequestMapping(value = "categoryList_2")
+	@ResponseBody
+	public Map<String, Object> categoryList2(@RequestBody String reqParam) throws Exception {
+		
+			long param;
+			String parameter = "";
+			
+			parameter = URLDecoder.decode(reqParam, "utf-8");
+			
+			System.out.println(parameter);
+			
+			Map resMap = JsonUtil.JsonToMap(parameter);
+			
+			System.out.println(resMap);
+			
+			param = Long.parseLong((String) resMap.get("param"));
+			
+			BCategory parent = new BCategory(param);
+			
+			List<SCategory> sCategory = adminBookService.selectChildCategoryList(parent);
+			
+			System.out.println(sCategory);
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			resultMap.put("result", "SUCCESS");
+			resultMap.put("list", sCategory);
+			
+			return resultMap;
 	}
 	
 	@RequestMapping(value= "adminBookSearch", produces = "application/xml; charset=utf8")
@@ -31,7 +79,7 @@ public class AdminBookWebRegister {
 	public String adminBookSearch(@RequestParam String isbn) throws Exception {
 
 		NaverClientInformation naverDocument = new NaverClientInformation(isbn);
-
+		
         return naverDocument.getDocument();
 	}
 	
@@ -44,74 +92,11 @@ public class AdminBookWebRegister {
 	@RequestMapping(value= "adminBookSearchDetail", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String adminBookSearchDetail(@RequestParam String url) throws Exception {
-		Document document = Jsoup.connect(url).timeout(10000).get();
 		
-		String originalTitle 	= null;
-		StringBuffer translator = null;
-		String page 			= null;
-		StringBuffer author 	= new StringBuffer();
+		BookInformation bookInfo = new BookInformation(url);
 		
-		Elements infoBox = document.select(".book_info_inner");
-		Elements originalTitleElements = infoBox.select(".tit_ori");
-		
-		//저자
-		Elements authors = infoBox.select("[class^='N=a:bil.author']");
-		
-		for (int i = 0; i < authors.size(); i++) {
-			
-			if (i != 0) {
-				author.append(", ");
-			}
-			
-			author.append(authors.get(i).text());
-		}
-		
-		//해외 책인지 아닌지 체크
-		if (originalTitleElements.size() > 0) {
-			//원제
-			originalTitle = originalTitleElements.first().childNodes().get(1).toString().trim();
-			
-			//역자
-			translator = new StringBuffer();
-			Elements translators = infoBox.select("[class^='N=a:bil.translator']");
-			
-			for (int i = 0; i < translators.size(); i++) {
-				
-				if (i != 0) {
-					translator.append(", ");
-				}
-				
-				translator.append(translators.get(i).text());
-			}
-			
-			//페이지
-			page = infoBox.select(".tit_ori+div").first().childNodes().get(2).toString().trim();
-		} else {
-			//페이지
-			page = infoBox.select("div").get(4).childNodes().get(2).toString().trim();
-		}
-		
-		Element content = document.getElementById("content");
-		
-		String info 		= content.select("#bookIntroContent p").html();
-		String contents 	= content.select("#tableOfContentsContent p").html();
-		String authorInfo 	= content.select("#authorIntroContent p").html();
-		
-		String reviewUrl = url.replace("book_detail.php", "publisher_review.nhn");
-		Document reviewDocument = Jsoup.connect(reviewUrl).timeout(10000).get();
-
-		JsonObject jsonObject = new JsonObject();
-		jsonObject.addProperty("author"			, author.toString());
-		jsonObject.addProperty("originalTitle"	, originalTitle);
-		jsonObject.addProperty("page"			, page);
-		jsonObject.addProperty("info"			, info);
-		jsonObject.addProperty("contents"		, contents);
-		jsonObject.addProperty("authorInfo"		, authorInfo);
-		
-		if (translator != null) {
-			jsonObject.addProperty("translator", translator.toString());
-		}
-		
-		return jsonObject.toString();
+		return bookInfo.getBookJsonObject().toString();
 	}
+	
+	
 }

@@ -19,7 +19,7 @@ public class NaverClientInformation {
 	
 	public String getDocument() throws IOException {
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(this.urlinformation.urlConn.getInputStream()));
+		BufferedReader br = new BufferedReader(new InputStreamReader(this.urlinformation.urlConn.getInputStream(),"UTF-8"));
 	    
         StringBuffer result = new StringBuffer();
         String msg = null;

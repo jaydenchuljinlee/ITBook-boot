@@ -6,40 +6,64 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Builder
 @NoArgsConstructor
 @Getter
 @Entity
 public class Book {
 
 	@Id
-	private Long ISBN;
+	private Long isbn;
 	
-	private int PRICE;
-	private int PAGE;
-	private int B1_BCATEGORY;
-	private int B1_SCATEGORY;
-	private int B2_BCATEGORY;
-	private int B2_SCATEGORY;
-	private int QUANTITY;
+	private int price;
+	private int page;
+	private int bCategory;
+	private int sCategory;
+	private int quantity;
 	
-	private String B_IMAGE;
-	private String B_THEME;
-	private String ORIGINAL;
-	private String PUBLISH;
-	private String B_AUTHOR;
-	private String TRANSLATOR;
+	private String bImage;
+	private String bTheme;
+	private String original;
+	private String publish;
+	private String bAuthor;
+	private String translator;
 	
-	private LocalDateTime PUBLISH_DATE;
+	private LocalDateTime publishDate;
 	
 	@Column(columnDefinition = "TEXT")
-	private String B_INTRO;
+	private String bIntro;
 	@Column(columnDefinition = "TEXT")
-	private String B_CONTENTS;
+	private String bContents;
 	@Column(columnDefinition = "TEXT")
-	private String B_AUTHORINFO;
+	private String bAuthorInfo;
+	
+	
+	public Book(Long isbn,int price,int page,int bCategory,int sCategory,int quantity,String bImage,String bTheme
+			,String original,String publish,String bAuthor,String translator,LocalDateTime publishDate
+			,String bIntro,String bContents,String bAuthorInfo) {
+		
+		this.isbn = isbn;
+		this.price = price;
+		this.page = page;
+		this.bCategory = bCategory;
+		this.sCategory = sCategory;
+		this.quantity = quantity;
+		this.bImage = bImage;
+		this.bTheme = bTheme;
+		this.original = original;
+		this.publish = publish;
+		this.bAuthor = bAuthor;
+		this.translator = translator;
+		this.publishDate = publishDate;
+		this.bIntro = bIntro;
+		this.bContents = bContents;
+		this.bAuthorInfo = bAuthorInfo;
+		
+	}
 	
 	
 }

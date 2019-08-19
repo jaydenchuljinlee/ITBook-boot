@@ -114,24 +114,14 @@
 							<div class="col-md-10">
 								<select id="category1" name="B1_BCATEGORY">
 					                <c:forEach items="${categoryList_1}" var="categoryList_1">
-				                		<option value="<c:out value="${categoryList_1.bcNo}"/>">
-				                			<c:out value="${categoryList_1.bcCategory}"/>
+				                		<option value="<c:out value="${categoryList_1.code}"/>">
+				                			<c:out value="${categoryList_1.name}"/>
 				                		</option>
 					                </c:forEach>
 			                	</select>
 			                	<select id="category2" name="B1_SCATEGORY">
 			                		<option value="">없음</option>
 			                	</select><br>
-			                	<select id="category3" name="B2_BCATEGORY">
-					                <c:forEach items="${categoryList_1}" var="categoryList_1">
-				                		<option value="<c:out value="${categoryList_1.bcNo}"/>">
-				                			<c:out value="${categoryList_1.bcCategory}"/>
-				                		</option>
-					                </c:forEach>
-			                	</select>
-			                	<select id="category4" name="B2_SCATEGORY">
-			                		<option value="">없음</option>
-			                	</select>
 							</div>
 						</div>
 						<div class="form-group">

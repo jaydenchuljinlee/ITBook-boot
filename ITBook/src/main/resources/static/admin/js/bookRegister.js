@@ -9,7 +9,7 @@ $(function() {
 			$("#loader").show();
 
 			$.ajax({
-				url			: "adminBookSearch.do",
+				url			: "adminBookSearch",
 				data		: {'isbn' : isbn},
 				dataType	: "xml",
 				type		: "get",
@@ -37,7 +37,7 @@ $(function() {
 						var link = book.find("link").text();
 						
 						$.ajax({
-							url			: "adminBookSearchDetail.do",
+							url			: "adminBookSearchDetail",
 							data		: {'url' : link},
 							dataType	: "json",
 							type		: "get",
