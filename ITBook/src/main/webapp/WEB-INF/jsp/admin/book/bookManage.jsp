@@ -77,6 +77,15 @@
 
 <script type="text/javascript">
 $(function() {
+
+	var bookCheck = "<c:out value ='${bookCheck}'/>";
+
+	if (bookCheck === 1) {
+		alert("이미 존재하는 책입니다.");
+	} else if (bookCheck === 0) {
+		alert("책 등록이 완료되었습니다.");
+	}
+	
 	$("#bookRegisterBtn").click(function() {
 		location.href = "adminBookRegister.do";
 	});

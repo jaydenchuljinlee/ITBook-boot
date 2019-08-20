@@ -1,7 +1,5 @@
 package com.example.ITBook.domain;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -26,12 +24,14 @@ public class BookCategory {
 	private Book book;
 	
 	@ManyToOne
-	@MapsId("sCode")
-	@JoinColumn(name = "sCode")
-	private Scategory sCategory;
+	@MapsId("scode")
+	@JoinColumn(name = "scode")
+	private Scategory scategory;
 	
-	public BookCategory(Book book,Scategory sCategory) {
-		this.pk = new BookCategoryPK(book.getIsbn(),sCategory.getCode(),LocalDateTime.now());
+	public BookCategory(Book book,Scategory scategory) {
+		this.pk = new BookCategoryPK(book.getIsbn(),scategory.getCode());
+		this.book = book;
+		this.scategory = scategory;
 	}
 	
 }

@@ -1,17 +1,20 @@
 package com.example.ITBook.domain;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @NoArgsConstructor
+@Setter
 @Getter
 @Entity
 public class Book {
@@ -21,47 +24,47 @@ public class Book {
 	
 	private int price;
 	private int page;
-	private int bCategory;
-	private int sCategory;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "s_category")
+	private Scategory s_category;
 	private int quantity;
 	
-	private String bImage;
-	private String bTheme;
+	private String image;
+	private String theme;
 	private String original;
 	private String publish;
-	private String bAuthor;
+	private String author;
 	private String translator;
 	
-	private LocalDateTime publishDate;
+	private String publishdate;
 	
 	@Column(columnDefinition = "TEXT")
-	private String bIntro;
+	private String intro;
 	@Column(columnDefinition = "TEXT")
-	private String bContents;
+	private String contents;
 	@Column(columnDefinition = "TEXT")
-	private String bAuthorInfo;
+	private String authorinfo;
 	
-	
-	public Book(Long isbn,int price,int page,int bCategory,int sCategory,int quantity,String bImage,String bTheme
-			,String original,String publish,String bAuthor,String translator,LocalDateTime publishDate
-			,String bIntro,String bContents,String bAuthorInfo) {
+	public Book(Long isbn,int price,int page,Scategory s_category,int quantity,String image,String theme
+			,String original,String publish,String author,String translator,String publishdate
+			,String intro,String contents,String authorinfo) {
 		
 		this.isbn = isbn;
 		this.price = price;
 		this.page = page;
-		this.bCategory = bCategory;
-		this.sCategory = sCategory;
+		this.s_category = s_category;
 		this.quantity = quantity;
-		this.bImage = bImage;
-		this.bTheme = bTheme;
+		this.image = image;
+		this.theme = theme;
 		this.original = original;
 		this.publish = publish;
-		this.bAuthor = bAuthor;
+		this.author = author;
 		this.translator = translator;
-		this.publishDate = publishDate;
-		this.bIntro = bIntro;
-		this.bContents = bContents;
-		this.bAuthorInfo = bAuthorInfo;
+		this.publishdate = publishdate;
+		this.intro = intro;
+		this.contents = contents;
+		this.authorinfo = authorinfo;
 		
 	}
 	

@@ -25,85 +25,86 @@
 					<button id="searchBookBtn" class="btn btn-success">검색</button>
 					<hr />
 					<!-- Form starts.  -->
-					<form method="post" class="form-horizontal" role="form" action="register_book.do">
-						<input type="hidden" id="isbn" name="ISBN">
+					<form method="post" class="form-horizontal" role="form" action="BookRegisterSuccess">
+						<input type="hidden" id="isbn" name="isbn">
 						<div class="form-group">
 							<label class="col-md-2 control-label">표지</label>
 							<div class="col-md-8">
 								<img id="thumbnail" width="300">
-								<input type="hidden" id="bookThumbnail" name="B_IMAGE">
+								<input type="hidden" id="bookThumbnail" name="image">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">제목</label>
 							<div class="col-md-8">
-								<input type="text" id="title" class="form-control" name="B_THEME" required="required">
+								<input type="text" id="title" class="form-control" name="theme" required="required">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">원제</label>
 							<div class="col-md-8">
-								<input type="text" id="originalTitle" class="form-control" name="ORIGINAL" placeholder="국내책의 경우 빈칸">
+								<input type="text" id="originalTitle" class="form-control" name="original" placeholder="국내책의 경우 빈칸">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">저자</label>
 							<div class="col-md-8">
-								<input type="text" id="author" class="form-control" name="B_AUTHOR" required="required">
+								<input type="text" id="author" class="form-control" name="author" required="required">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">역자</label>
 							<div class="col-md-8">
-								<input type="text" id="translator" class="form-control" name="TRANSLATOR" placeholder="국내책의 경우 빈칸">
+								<input type="text" id="translator" class="form-control" name="translator" placeholder="국내책의 경우 빈칸">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">출판사</label>
 							<div class="col-md-8">
-								<input type="text" id="publisher" class="form-control" name="PUBLISH" required="required">
+								<input type="text" id="publisher" class="form-control" name="publish" required="required">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">출판일</label>
 							<div class="col-md-8">
-								<input type="date" id="publishDate" class="form-control" name="PUBLISH_DATE" required="required">
+								
+								<input type="date" id="publishDate" class="form-control" name="publishdate" required="required">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">가격</label>
 							<div class="col-md-8">
-								<input type="text" id="price" class="form-control" name="PRICE" required="required">
+								<input type="text" id="price" class="form-control" name="price" required="required">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">페이지</label>
 							<div class="col-md-8">
-								<input type="text" id="page" class="form-control" name="PAGE" required="required">
+								<input type="text" id="page" class="form-control" name="page" required="required">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">소개</label>
 							<div class="col-md-8">
-								<textarea id="info" class="form-control" name="B_INTRO" rows="10"></textarea>
+								<textarea id="info" class="form-control" name="intro" rows="10"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">목차</label>
 							<div class="col-md-8">
-								<textarea id="contents" class="form-control" name="B_CONTENTS" rows="10"></textarea>
+								<textarea id="contents" class="form-control" name="contents" rows="10"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">저자 소개</label>
 							<div class="col-md-8">
-								<textarea id="authorInfo" class="form-control" name="B_AUTHORINFO" rows="10"></textarea>
+								<textarea id="authorInfo" class="form-control" name="authorInfo" rows="10"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label">수량</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" name="QUANTITY" required="required">
+								<input type="text" class="form-control" name="quantity" required="required">
 							</div>
 						</div>
 						<div id="categoryGroup" class="form-group">
@@ -112,14 +113,14 @@
 							</label> -->
 							<label class="col-md-2 control-label">카테고리</label>
 							<div class="col-md-10">
-								<select id="category1" name="B1_BCATEGORY">
+								<select id="category1" name="category1">
 					                <c:forEach items="${categoryList_1}" var="categoryList_1">
 				                		<option value="<c:out value="${categoryList_1.code}"/>">
 				                			<c:out value="${categoryList_1.name}"/>
 				                		</option>
 					                </c:forEach>
 			                	</select>
-			                	<select id="category2" name="B1_SCATEGORY">
+			                	<select id="category2" name="category2">
 			                		<option value="">없음</option>
 			                	</select><br>
 							</div>

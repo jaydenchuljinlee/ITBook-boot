@@ -14,16 +14,12 @@ public class BookCategoryPK implements Serializable {
 	@Column(name = "isbn")
 	private long isbn;
 	
-	@Column(name = "sCode")
-	private long sCode;
+	@Column(name = "scode")
+	private long scode;
 	
-	@Column(name = "createdDate")
-	private LocalDateTime createdDate;
-	
-	public BookCategoryPK(long isbn,long sCode,LocalDateTime createdDate) {
+	public BookCategoryPK(long isbn,long scode) {
 		this.isbn = isbn;
-		this.sCode = sCode;
-		this.createdDate = createdDate;
+		this.scode = scode;
 	}
 
 }

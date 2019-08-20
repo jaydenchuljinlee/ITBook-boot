@@ -23,6 +23,11 @@ public class Scategory {
 	
 	private String name;
 	
+	public Scategory(long code,Bcategory bcategory) {
+		this.code = code;
+		this.bcategory = bcategory;
+	}
+	
 	public Scategory(long code,Bcategory bcategory,String name) {
 		this.code = code;
 		this.bcategory = bcategory;
