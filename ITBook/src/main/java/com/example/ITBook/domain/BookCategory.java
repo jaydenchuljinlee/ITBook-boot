@@ -28,9 +28,9 @@ public class BookCategory {
 	@ManyToOne
 	@MapsId("sCode")
 	@JoinColumn(name = "sCode")
-	private SCategory sCategory;
+	private Scategory sCategory;
 	
-	public BookCategory(Book book,SCategory sCategory) {
+	public BookCategory(Book book,Scategory sCategory) {
 		this.pk = new BookCategoryPK(book.getIsbn(),sCategory.getCode(),LocalDateTime.now());
 	}
 	

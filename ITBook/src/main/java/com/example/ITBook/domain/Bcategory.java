@@ -2,7 +2,6 @@ package com.example.ITBook.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,15 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "bcategory")
-public class BCategory {
+public class Bcategory {
 	
 	@Id
 	private long code;
 	
-	String name;
+	private String name;
 	
-	public BCategory(long code) {
+	public Bcategory(long code) {
 		this.code = code;
+	}
+	
+	public Bcategory(long code,String name) {
+		this.code = code;
+		this.name = name;
 	}
 }

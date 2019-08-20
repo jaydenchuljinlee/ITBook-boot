@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.ITBook.admin.book.repository.AdminBigCategoryRepository;
 import com.example.ITBook.admin.book.repository.AdminSmallCategoryRepository;
-import com.example.ITBook.domain.BCategory;
-import com.example.ITBook.domain.SCategory;
+import com.example.ITBook.domain.Bcategory;
+import com.example.ITBook.domain.Scategory;
 
 @Service
 public class AdminBookServiceImple implements AdminBookService {
@@ -22,15 +22,15 @@ public class AdminBookServiceImple implements AdminBookService {
 	}
 
 	@Override
-	public List<BCategory> selectParentCategoryList() throws Exception {
+	public List<Bcategory> selectParentCategoryList() throws Exception {
 		
 		return bCategoryRepository.findAll();
 	}
 
 	@Override
-	public List<SCategory> selectChildCategoryList(BCategory parent) throws Exception {
+	public List<Scategory> selectChildCategoryList(Bcategory parent) throws Exception {
 		
-		return sCategoryRepository.findByBCategory(parent);
+		return sCategoryRepository.findByBcategory(parent);
 	}
 
 }

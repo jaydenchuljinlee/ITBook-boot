@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.ITBook.domain.BCategory;
+import com.example.ITBook.domain.Bcategory;
 
-public interface AdminBigCategoryRepository  extends JpaRepository<BCategory, Long>{
+public interface AdminBigCategoryRepository  extends JpaRepository<Bcategory, Long>{
 	
-	public List<BCategory> findAll();
+	public List<Bcategory> findAll();
 	
-	public List<BCategory> findByCode(long Code);
+	public List<Bcategory> findByCode(long Code);
 
 }

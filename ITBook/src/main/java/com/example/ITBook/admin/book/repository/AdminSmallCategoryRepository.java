@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.ITBook.domain.BCategory;
-import com.example.ITBook.domain.SCategory;
+import com.example.ITBook.domain.Bcategory;
+import com.example.ITBook.domain.Scategory;
 
-
-public interface AdminSmallCategoryRepository  extends JpaRepository<SCategory, Long>{
+public interface AdminSmallCategoryRepository  extends JpaRepository<Scategory, Long>{
 	
-	public List<SCategory> findAll();
+	public List<Scategory> findAll();
 	
-	public List<SCategory> findByBCategory(BCategory parent);
+	public List<Scategory> findByBcategory(Bcategory parent);
 
 }

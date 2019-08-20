@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.ITBook.admin.book.domain.BookInformation;
 import com.example.ITBook.admin.book.domain.NaverClientInformation;
 import com.example.ITBook.admin.book.service.AdminBookService;
-import com.example.ITBook.domain.BCategory;
-import com.example.ITBook.domain.SCategory;
+import com.example.ITBook.domain.Bcategory;
+import com.example.ITBook.domain.Scategory;
 import com.example.ITBook.utils.JsonUtil;
 
 @Controller
@@ -33,7 +33,7 @@ public class AdminBookWebRegister {
 	}
 
 	@ModelAttribute("categoryList_1")
-	public List<BCategory> categoryList_1(ModelMap model) throws Exception {
+	public List<Bcategory> categoryList_1(ModelMap model) throws Exception {
 		return adminBookService.selectParentCategoryList();
 	}
 	
@@ -52,19 +52,13 @@ public class AdminBookWebRegister {
 			
 			parameter = URLDecoder.decode(reqParam, "utf-8");
 			
-			System.out.println(parameter);
-			
 			Map resMap = JsonUtil.JsonToMap(parameter);
-			
-			System.out.println(resMap);
 			
 			param = Long.parseLong((String) resMap.get("param"));
 			
-			BCategory parent = new BCategory(param);
+			Bcategory parent = new Bcategory(param);
 			
-			List<SCategory> sCategory = adminBookService.selectChildCategoryList(parent);
-			
-			System.out.println(sCategory);
+			List<Scategory> sCategory = adminBookService.selectChildCategoryList(parent);
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			
