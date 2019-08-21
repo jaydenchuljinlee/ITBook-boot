@@ -27,7 +27,7 @@ $(function() {
 			
 	$("#category1").on("change",function() {
 		
-		category = this.val();
+		category = $(this).val();
 		
 		createCategory(category);
 	});

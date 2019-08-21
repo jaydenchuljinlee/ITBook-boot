@@ -12,7 +12,9 @@ public interface AdminBookService {
 
 	List<Scategory> selectChildCategoryList(Bcategory parent) throws Exception;
 
-	boolean insertBook(Book book, long category1, long cateogry2) throws Exception;
+	boolean insertBook(Book book, long category1, long cateogry2,List<Long> hash) throws Exception;
+
+	List<Book> selectAllBooks() throws Exception;
 
 	
 }

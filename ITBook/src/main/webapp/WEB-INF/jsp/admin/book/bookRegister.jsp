@@ -128,38 +128,38 @@
 						<div class="form-group">
 								<label class="col-md-2 control-label">해쉬태그</label>
 								<div class="col-md-8">
-									<input type="checkbox" name="hash" value="spring">Spring
-									<input type="checkbox" name="hash" value="it">IT
-									<input type="checkbox" name="hash" value="java">java
-									<input type="checkbox" name="hash" value="hmtl">hmtl
-									<input type="checkbox" name="hash" value="javascript">javascript
-									<input type="checkbox" name="hash" value="jstl">jstl
-									<input type="checkbox" name="hash" value="algorithm">알고리즘
-									<input type="checkbox" name="hash" value="certificate">자격증
-									<input type="checkbox" name="hash" value="llevel">초급
-									<input type="checkbox" name="hash" value="mlevel">중급
-									<input type="checkbox" name="hash" value="hlevel">고급
-									<input type="checkbox" name="hash" value="potoshop">포토샵
-									<input type="checkbox" name="hash" value="css">CSS
-									<input type="checkbox" name="hash" value="aws">AWS
-									<input type="checkbox" name="hash" value="working">실무
-									<input type="checkbox" name="hash" value="angular">앵귤러
-									<input type="checkbox" name="hash" value="python">파이썬
-									<input type="checkbox" name="hash" value="data_structure">자료구조
-									<input type="checkbox" name="hash" value="node_js">node.js
-									<input type="checkbox" name="hash" value="android">안드로이드
-									<input type="checkbox" name="hash" value="php">php
-									<input type="checkbox" name="hash" value="web">웹
-									<input type="checkbox" name="hash" value="cpp">c++
-									<input type="checkbox" name="hash" value="oracle">오라클
-									<input type="checkbox" name="hash" value="web_design">웹디자인
-									<input type="checkbox" name="hash" value="visual_basic">비주얼베이직
-									<input type="checkbox" name="hash" value="c">c언어
-									<input type="checkbox" name="hash" value="mysql">MySQL
-									<input type="checkbox" name="hash" value="R">R언어
-									<input type="checkbox" name="hash" value="autoSAD">autoSAD
-									<input type="checkbox" name="hash" value="ai">AI
-									<input type="checkbox" name="hash" value="ps">ps
+									<input type="checkbox" name="hash" value="1">Spring
+									<input type="checkbox" name="hash" value="2">IT
+									<input type="checkbox" name="hash" value="3">java
+									<input type="checkbox" name="hash" value="4">hmtl
+									<input type="checkbox" name="hash" value="5">javascript
+									<input type="checkbox" name="hash" value="6">jstl
+									<input type="checkbox" name="hash" value="7">알고리즘
+									<input type="checkbox" name="hash" value="8">자격증
+									<input type="checkbox" name="hash" value="9">초급
+									<input type="checkbox" name="hash" value="10">중급
+									<input type="checkbox" name="hash" value="11">고급
+									<input type="checkbox" name="hash" value="12">포토샵
+									<input type="checkbox" name="hash" value="13">CSS
+									<input type="checkbox" name="hash" value="14">AWS
+									<input type="checkbox" name="hash" value="15">실무
+									<input type="checkbox" name="hash" value="16">앵귤러
+									<input type="checkbox" name="hash" value="17">파이썬
+									<input type="checkbox" name="hash" value="18">자료구조
+									<input type="checkbox" name="hash" value="19">node.js
+									<input type="checkbox" name="hash" value="20">안드로이드
+									<input type="checkbox" name="hash" value="21">php
+									<input type="checkbox" name="hash" value="22">웹
+									<input type="checkbox" name="hash" value="23">c++
+									<input type="checkbox" name="hash" value="24">오라클
+									<input type="checkbox" name="hash" value="25">웹디자인
+									<input type="checkbox" name="hash" value="26">비주얼베이직
+									<input type="checkbox" name="hash" value="27">c언어
+									<input type="checkbox" name="hash" value="28">MySQL
+									<input type="checkbox" name="hash" value="29">R언어
+									<input type="checkbox" name="hash" value="30">autoSAD
+									<input type="checkbox" name="hash" value="31">AI
+									<input type="checkbox" name="hash" value="32">ps
 								</div>
 						</div>
 						

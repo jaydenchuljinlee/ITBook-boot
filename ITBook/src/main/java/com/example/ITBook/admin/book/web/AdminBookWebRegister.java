@@ -44,14 +44,12 @@ public class AdminBookWebRegister {
 	public String BookRegisterSuccess(@ModelAttribute Book book,
 			@RequestParam long category1
 			,@RequestParam long category2
+			,@RequestParam List<Long> hash
 			,Model model) throws Exception {
+
+		boolean bookCheck = adminBookService.insertBook(book,category1,category2,hash);
 		
-		
-		boolean bookCheck = adminBookService.insertBook(book,category1,category2);
-		
-		model.addAttribute("bookCheck", bookCheck);
-		
-		return "redirect:adminBookMain";
+		return "redirect:adminBookMain?bookCheck="+bookCheck;
 	}
 	
 	@RequestMapping(value= "adminBookSearch", produces = "application/xml; charset=utf8")

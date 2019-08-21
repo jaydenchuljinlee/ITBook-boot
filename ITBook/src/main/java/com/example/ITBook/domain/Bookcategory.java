@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class BookCategory {
+public class Bookcategory {
 	
 	@EmbeddedId
 	private BookCategoryPK pk;
@@ -28,7 +28,7 @@ public class BookCategory {
 	@JoinColumn(name = "scode")
 	private Scategory scategory;
 	
-	public BookCategory(Book book,Scategory scategory) {
+	public Bookcategory(Book book,Scategory scategory) {
 		this.pk = new BookCategoryPK(book.getIsbn(),scategory.getCode());
 		this.book = book;
 		this.scategory = scategory;

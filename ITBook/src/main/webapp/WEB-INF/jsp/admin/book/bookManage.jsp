@@ -39,12 +39,12 @@
 						<c:forEach items="${adminBookList}" var="adminBookList" varStatus="status">
 						<tbody>
 							<tr>
-								<td><img src="${adminBookList.bImage}"></td>
-								<td id="book1" class="bookDetail"><a href="#">${adminBookList.bTheme}</a></td>
+								<td><img src="${adminBookList.image}"></td>
+								<td id="book1" class="bookDetail"><a href="#">${adminBookList.theme}</a></td>
 								<td>${adminBookList.isbn}</td>
-								<td>${adminBookList.bAuthor}</td>
+								<td>${adminBookList.author}</td>
 								<td>${adminBookList.publish}</td>
-								<td>${adminBookList.publishDate}</td>
+								<td>${adminBookList.publishdate}</td>
 								<td><fmt:formatNumber pattern="###,###" value="${adminBookList.price}"/></td>
 								<td>${adminBookList.quantity}</td>
 							</tr>
@@ -78,13 +78,15 @@
 <script type="text/javascript">
 $(function() {
 
-	var bookCheck = "<c:out value ='${bookCheck}'/>";
+	var bookCheck = "${bookCheck}";
 
-	if (bookCheck === 1) {
+	console.log(bookCheck);
+	
+	/* if (bookCheck == 1) {
 		alert("이미 존재하는 책입니다.");
-	} else if (bookCheck === 0) {
+	} else if (bookCheck == 0) {
 		alert("책 등록이 완료되었습니다.");
-	}
+	} */
 	
 	$("#bookRegisterBtn").click(function() {
 		location.href = "adminBookRegister.do";

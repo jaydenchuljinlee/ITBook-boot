@@ -28,6 +28,7 @@ public class Book {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "s_category")
 	private Scategory s_category;
+	
 	private int quantity;
 	
 	private String image;
