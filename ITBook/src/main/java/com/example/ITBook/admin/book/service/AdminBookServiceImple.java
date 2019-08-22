@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.admin.book.repository.AdminBigCategoryRepository;
@@ -19,6 +21,7 @@ import com.example.ITBook.domain.Hashtag;
 import com.example.ITBook.domain.Scategory;
 import com.example.ITBook.domain.Tag;
 
+@Transactional
 @Service
 public class AdminBookServiceImple implements AdminBookService {
 	
@@ -137,6 +140,8 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 		return list.isPresent();
 	}
+
+	
 
 	
 

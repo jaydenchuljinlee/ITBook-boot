@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ITBook.admin.book.service.AdminBookService;
@@ -24,7 +25,7 @@ public class AdminBookWebCatergory {
 		this.adminBookService = adminBookService;
 	}
 
-	@RequestMapping(value = "categoryList_2")
+	@RequestMapping(value = "categoryList_2",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> categoryList2(@RequestBody String reqParam) throws Exception {
 		

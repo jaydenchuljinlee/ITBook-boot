@@ -40,7 +40,7 @@
 						<tbody>
 							<tr>
 								<td><img src="${adminBookList.image}"></td>
-								<td id="book1" class="bookDetail"><a href="#">${adminBookList.theme}</a></td>
+								<td id="${adminBookList.isbn}" class="bookDetail"><a href="#">${adminBookList.theme}</a></td>
 								<td>${adminBookList.isbn}</td>
 								<td>${adminBookList.author}</td>
 								<td>${adminBookList.publish}</td>
@@ -93,8 +93,8 @@ $(function() {
 	});
 	
 	$(".bookDetail").click(function() {
-		var bookNo = $(this).attr("id").slice(4);
-		location.href = "adminBookDetail.do?bookNo=" + bookNo;
+		var isbn = $(this).attr("id").slice(4);
+		location.href = "adminBookDetail?isbn=" + isbn;
 	});
 });
 </script>

@@ -28,10 +28,6 @@ public class AdminBookWebController {
 		return "book/bookManage.adminTiles";
 	}
 	
-	@RequestMapping(value= "adminBookDetail")
-	public String adminBookDetail() throws Exception {
-		
-		return "book/bookDetail.adminTiles";
-	}
+	
 	
 }

@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import com.example.ITBook.domain.Tag;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +20,10 @@ public class CategoryPK implements Serializable{
 	
 	@Column(name = "code")
 	private long code;
+	
+	public CategoryPK(long isbn) {
+		this.isbn = isbn;
+	}
 	
 	public CategoryPK(long isbn,long code) {
 		this.isbn = isbn;
