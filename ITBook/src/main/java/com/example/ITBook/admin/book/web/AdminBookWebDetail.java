@@ -1,8 +1,6 @@
 package com.example.ITBook.admin.book.web;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ITBook.admin.book.service.AdminBookDetailService;
-import com.example.ITBook.domain.Bcategory;
 import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.Scategory;
 
 @Controller
 public class AdminBookWebDetail {
@@ -52,9 +48,10 @@ public class AdminBookWebDetail {
 	public String adminBookUpdate(@ModelAttribute Book book,
 			@RequestParam long category1
 			,@RequestParam long category2
-			,@RequestParam List<Long> hash) throws Exception {
+			,@RequestParam boolean isChangeB
+			,@RequestParam boolean isChangeC) throws Exception {
 		
-		adminBookDetailService.updateBookInfo(book,category1,category2,hash);
+		adminBookDetailService.updateBookInfo(book,category1,category2,isChangeB,isChangeC);
 		
 		return "redirect:adminBookMain";
 	}
