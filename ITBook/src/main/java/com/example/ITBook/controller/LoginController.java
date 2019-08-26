@@ -16,6 +16,6 @@ public class LoginController {
 
 	@RequestMapping("/loginSuccess")
     public String loginSuccess(@SocialUser User user) {
-        return "redirect:/board";
+        return "redirect:/main";
     }
 }

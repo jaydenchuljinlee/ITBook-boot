@@ -52,11 +52,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return  getUser(user, session);
     }
 
-    private User getUser(User user, HttpSession session) {
-        if (user != null) {
-            return user;
-        }
-
+    private User getUser(User user, HttpSession session){
+    	logger.info("Ž");
+    	
         OAuth2AuthenticationToken auth2AuthenticationToken =
                 (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
@@ -67,8 +65,10 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         Optional<User> email = userRepository.findByEmail(convertUser.getEmail());
         
         if (email.isPresent()) {
+        	System.out.println(email.isPresent());
         	user = email.get();
         } else {
+        	System.out.println(email.isPresent());
         	user = userRepository.save(convertUser);
         }
 

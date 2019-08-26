@@ -56,8 +56,8 @@
 		<put-attribute name="link_js"		value="/WEB-INF/jsp/tiles_cmmn/link_js.jsp" />
 	</definition>
 	
-	<definition name="*.book-main" extends="book-tiles">
-		<put-attribute name="content" value="/WEB-INF/jsp/book/contents/{1}.jsp"/>
+	<definition name="*/*.book-main" extends="book-tiles">
+		<put-attribute name="content" value="/WEB-INF/jsp/book/{1}/{2}.jsp"/>
 	</definition>
 	
 	<definition name="*.book-detail" extends="book-tiles">
@@ -66,7 +66,7 @@
 	<!--메인서점 타일즈//-->
 	
 	<!-- 이벤트/회원가입 타일즈/장바구니/ 마이페이지 Start-->
-	<definition name="event-tiles" 	template="/WEB-INF/jsp/tiles_cmmn/layouts_event.jsp">
+	<definition name="event-tiles" 	template="/WEB-INF/jsp/myPage/mypage_layout.jsp">
 		<put-attribute name="loading"			value="/WEB-INF/jsp/tiles_cmmn/loading.jsp" />
 		<put-attribute name="head"			value="/WEB-INF/jsp/tiles_cmmn/head.jsp" />
 		<put-attribute name="header"		value="/WEB-INF/jsp/tiles_cmmn/header.jsp" />
@@ -78,7 +78,7 @@
 		<put-attribute name="content"		value="" />
 	</definition>
 	
-	<definition name="*/*.tiles3" extends="event-tiles">
+	<definition name="*/*.myPage-tiles" extends="event-tiles">
 		<put-attribute name="content" value="/WEB-INF/jsp/{1}/{2}.jsp"/>
 	</definition>
 <!-- 이벤트/회원가입/장바구니/ 마이페이지 타일즈 End-->

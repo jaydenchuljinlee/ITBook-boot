@@ -68,24 +68,7 @@
 		
 		<!-- //최근 구매이력 -->
 		</div>
-		<!-- //회원등급 -->
-<!-- 		
-		주문배송 조회
-		<div class="submain_mypagae_foot smf_l">
-			<p class="sm_tit">주문/배송조회</p>
-              <hr>
-				<ul class="mypage-step">
-					<li><em> 0 </em> <span>주문접수</span></li>
-					<li><em> 0 </em> <span>결제완료</span></li>
-					<li><em> 0 </em> <span>상품준비중</span></li>
-					<li><em> 0 </em> <span>배송중</span></li>
-					<li><em> 0 </em> <span>배송완료</span></li>
-				</ul>
-			</div>
-		//주문배송 조회
-	
 		
-		 -->
 		<!-- 쇼핑찜 상품 목록 -->
 		<div class="submain_mypagae_foot smf_l">
 			<div class="wish_book_list_area">
@@ -154,36 +137,7 @@
 				</ul>
 			</div>
          </div>
-			<!-- //쇼핑찜 상품 목록 -->
-		<div class="submain_mypagae_foot smf_l">
-			<p class="sm_tit">중고 판매 현황</p>			
-			<table class="list_usedbook" >
-				<tbody class="tbl_type_list_tbody">
-						<tr>
-						<td class="left">팔기 대기</td>	
-						<td class="right">0</td>
-						</tr>		
-						<tr>
-						<td class="left">팔기확정&발송대기</td>	
-						<td class="right">0</td>
-						</tr>		
-						<tr>
-						<td class="left">회수&이동중</td>	
-						<td class="right">0</td>
-						</tr>	
-							<tr>
-						<td class="left">매입 대기/진행중</td>	
-						<td class="right">0</td>
-						</tr>	
-							<tr>
-						<td class="left">매입&정산 완료</td>	
-						<td class="right">0</td>
-						</tr>								
-				</tbody>
-				</table>
 			
-			<!-- // 내역 리스트 -->	
-		</div>
 		
 		<!-- My eBook -->
 		<div class="submain_mypagae_foot smf_c">
@@ -246,11 +200,7 @@
 				</tbody>
 			</table>
 			</div>		
-			<!-- // 내역 리스트 -->	<!-- 
-				<div class="smf_nodata">리스트가 없습니다.</div>
-							
-		</div>		 -->
-		<!-- //My 강의 -->
+
 	</div>
 	
 	</div>

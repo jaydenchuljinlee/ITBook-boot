@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<link rel="stylesheet" type="text/css" href="/ITBook/css/book/book_detail.css"><!-- 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> -->
-
+<link rel="stylesheet" type="text/css" href="/ITBook/css/book/book_detail.css">
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script>
 /*탭시작=======================================================================  */
 
@@ -25,7 +27,24 @@ $(function() {
 		}
 	})/* 상세 수량 제한 끝*/
 		
-	
+	$("#btnAddCart").on("click",function() {
+		var session = "<c:out value='${session}'/>";
+
+		if (session == '') return;
+
+		var parm = "<c:out value='${book.isbn}'/>";
+		
+		$.ajax({
+			type		:"post",
+			url			: "addMyBasket",
+			data		:JSON.stringify(parm),
+			contentType	:"application/json",
+			success		: function(data) {
+				console.log("장바구니에 추가 완료!");
+				//location.href = "book";
+			}
+		})
+	})
 });
 	function hb_show_tabs(t_num) {
 		
@@ -91,7 +110,9 @@ $('#reviewPop').click(function(){
 									<div class="i_tit">
 										<span>* </span>도서명 :
 									</div>
-									<div class="i_con">토비의 스프링 3.1 세트</div>
+									<div class="i_con">
+										<c:out value="${book.theme}"/>
+									</div>
 								</div>
 								<div class="lp_register_li">
 									<div class="i_tit">
@@ -141,14 +162,8 @@ $('#reviewPop').click(function(){
 										<span>* </span>내용 :
 									</div>
 									<div class="i_con" id="hbc_cont_div">
-										<label> <textarea class="editor1" name="editor1"
-												id="editor1" rows="10" cols="50"></textarea> <script
-												type="text/javascript">
-													CKEDITOR.replace('editor1');
-													CKEDITOR.config.height = 300;
-													CKEDITOR.config.language = 'ko';
-													CKEDITOR.replace('info');
-												</script>
+										<label> <textarea class="form-control" name="editor1"
+												id="editor1" rows="10" cols="50"></textarea>
 
 										</label>
 									</div>
@@ -192,20 +207,20 @@ $('#reviewPop').click(function(){
 			<div class="store_product_box">
 				<div class="store_product_box_img">
 					<img
-						src="http://image.kyobobook.co.kr/images/book/large/431/l9788960773431.jpg"
+						src=<c:out value="${book.image}"/>
 						alt="" class="thumb" />
 				</div>
 			</div>
 
 			<div class="store_product_info_box">
-				<h3>토비의 스프링 3.1</h3>
+				<h3><c:out value="${book.theme}"/></h3>
 
 
 				<ul class="info_list">
-					<li><strong>저자 : </strong><span>우재남 , 박길식 </span></li>
-					<li><strong>출판사 : </strong><span>에이콘출판사 </span></li>
-					<li><strong>출간 : </strong><span>2018-02-06</span></li>
-					<li><strong>ISBN : </strong><span>9791156643838</span></li>
+					<li><strong>저자 : </strong><span><c:out value="${book.author}"/></span></li>
+					<li><strong>출판사 : </strong><span><c:out value="${book.publish}"/> </span></li>
+					<li><strong>출간 : </strong><span><c:out value="${book.publishdate}"/></span></li>
+					<li><strong>ISBN : </strong><span><c:out value="${book.isbn}"/></span></li>
 				</ul>
 
 				<div class="book_amount">
@@ -269,18 +284,7 @@ $('#reviewPop').click(function(){
 				<div id="tabs_1">
 					<p class="detail_tit" style="display: none;">책소개</p>
 					<div id="" class="detail_conbox hanbit_edit_view">
-
-						<h3 class="title_detail_basic2">애플리케이션 아키텍처 설계부터 프레임워크 제작까지
-							다룬 스프링 가이드북!</h3>
-
-						<div class="box_detail_article">『토비의 스프링 3.1 세트』는 스프링을 처음
-							접하거나 스프링을 경험했지만 스프링이 어렵게 느껴지는 개발자부터 스프링을 활용한 아키텍처를 설계하고 프레임워크를
-							개발하려고 하는 아키텍트에 이르기까지 모두 참고할 수 있는 스프링 바이블이다. 단순한 예제를 스프링 3.0과 스프링
-							3.1의 기술을 적용하며 발전시켜 나가는 과정을 통해 스프링의 핵심 프로그래밍 모델인 IoC/DI, PSA, AOP의
-							원리와 이에 적용된 다양한 디자인 패턴, 프로그래밍 기법을 이해할 수 있다. 또한 XML 대신 자바코드를 이용해서
-							스프링을 개발할 수 있는 최신 빈 설정 기법부터 편리한 RESTful 스타일의 웹 컨트롤러 작성 기법까지 스프링
-							3.0과 스프링 3.1의 최신 기술을 상세하게 소개하고 그 중에서 자신에게 맞는 최적의 기술을 선택하고 조합할 수
-							있는 기준과 활용전략을 안내하였다.</div>
+						${book.intro}
 
 						<p>&nbsp;</p>
 					</div>
@@ -293,38 +297,7 @@ $('#reviewPop').click(function(){
 					<div id="" class="detail_conbox">
 						<!-- 저자 소개 -->
 						<div class="author_box">
-
-							<b><font color="#9F814F">[ 『토비의 스프링 3.1』 출간에 부쳐 ]</font></b><br>
-							<br> 『토비의 스프링 3』은 원래 3부로 기획했던 책이다. 핵심 기술의 이해, 기술의 선택, 프레임워크
-							확장이라는 세 단계를 통해 스프링을 설명하는 책을 쓰기 시작했다. 하지만 원래 간결하게 설명하는 능력이 부족한
-							탓인지, 친절하고 자세히 설명해야 한다는 강박관념 때문인지 2부까지만 쓰고 마무리했는데도 처음 생각했던 것보다 훨씬
-							많은 분량의 글이 나와 제법 묵직하고 두꺼운 책을 발간하게 되었다. 독자분들은 두꺼운 책이라 휴대하기 힘들어하시기는
-							했지만, 그래도 1부, 2부 두 단계로 스프링을 학습하도록 구성한 방식에 많은 분이 만족해주셨다.<br> <br>
-							개정판을 준비하면서 스프링 3.1의 새로운 기능을 소개하려고 내용을 추가하니 책 분량은 훨씬 더 늘어났고 더 이상은
-							한 권으로 책을 내는 것이 어려워졌다. 그래서 스프링의 원리와 이해를 다룬 1부의 내용을 중심으로 한 권을, 또
-							스프링의 기술과 활용 전략을 다룬 내용을 중심으로 해서 다른 한 권을 해서 두 권으로 분리하게 됐다. 지금까지 가장
-							많이 받은 독자 피드백이 휴대성이 좋도록 책을 분권해달라고 하는 것이었는데 그 요청을 들어드릴 수 있게도 되었다.<br>
-							<br> 스프링 3.1이 나온 지도 제법 시간이 흐르긴 했지만 아직도 현장에서는 스프링 3.0을 이용하는
-							경우가 대부분이고, 이제야 스프링 2.5에서 3.0으로 이전하는 곳도 많다고 한다. 그래서 이 책에서는 전체 내용을
-							스프링 3.1을 기준으로 바꾸는 대신, 스프링 3.0과 스프링 3.1 내용을 함께 담으려고 했다. Vol. 1에서는
-							스프링 3.0을 기준으로 예제를 작성하는 기존 내용을 그대로 두고 후반부에 이 예제를 스프링 3.1의 새로운 기술을
-							적용해서 업그레이드 하는 방법을 설명한다. Vol. 2에서는 스프링 3.0과 스프링 3.1에 동일하게 적용되는 내용은
-							그대로 두고 각 장 마지막에 스프링 3.1의 새로운 기술이나 변경 사항을 집중적으로 다뤘다. 그래서 당장 스프링
-							3.0으로 프로젝트를 진행하면서 필요한 내용을 참조하시려는 분은 물론, 기존 프로젝트를 스프링 3.1로
-							업그레이드하거나 3.1로 새로운 프로젝트를 작성하실 분까지 모두 참고할 수 있게 만들었다. <br> <br>
-							스프링이 이제는 자바 개발자들의 필수 기술이 되었다는 이야기가 들린다. 스프링의 위상이 높아지고 가치가 인정받는 것
-							같아 기쁘다. 그저 스프링에 대한 지식을 많이 쌓은 스프링 전문가보다는 스프링의 도움으로 애플리케이션 개발을 잘 하는
-							개발자가 점점 더 많아지기를 기대한다.<br> <br> - 브리즈번에서 토비 이일민<br>
-							<br> <br> <b><font color="#9F814F">[ 저자 소개 ]</font></b><br>
-							<br> <b><font color="#3C5087">이일민</font></b><br> 호주의 IT
-							서비스 기업인 이프릴의 대표 컨설턴트다. 엔터프라이즈 오픈소스 커뮤니티인 오픈시드의 대표이며
-							한국스프링사용자모임(KSUG)의 공동설립자이기도 하다. 8비트 컴퓨터 시절 프로그래밍의 매력에 빠져 10여 년간
-							취미로 프로그래밍을 즐겨오다 전문 개발자의 길로 들어서서 19년째 소프트웨어 개발과 교육, 컨설팅 일을 해오고 있다.
-							2004년부터 스프링을 이용해서 기업과 학교, 인터넷 서비스 업체의 시스템을 개발해왔고 스프링을 기반으로 한
-							애플리케이션 프레임워크 제작 컨설팅과 스프링 개발자 교육을 해오고 있다. JCO 컨퍼런스에서 세 차례 스프링을 주제로
-							발표했고 기묘, 이프릴, KSUG 등을 통해 스프링 세미나를 진행하기도 했다. 스프링과 오픈소스 기술에 관련된 정보와
-							경험을 공유하는 블로그 <a href="http://toby.epril.com" target="_blank">(toby.epril.com)</a>를
-							운영하고 있다.
+							${book.authorinfo}
 						</div>
 						<!-- //저자 소개 -->
 
@@ -336,16 +309,7 @@ $('#reviewPop').click(function(){
 				<div id="tabs_3">
 					<p class="detail_tit" style="display: none;">목차</p>
 					<div id="" class="detail_conbox hanbit_edit_view">
-						<b>『토비의 스프링 3.1 Vol. 1 스프링의 이해와 원리』</b> <br> <br> 1장
-						오브젝트와 의존관계 <br> 2장 테스트 <br> 3장 템플릿 <br> 4장 예외 <br>
-						5장 서비스 추상화 <br> 6장 AOP <br> 7장 스프링 핵심 기술의 응용 <br>
-						8장 스프링이란 무엇인가? <br> 9장 스프링 프로젝트 시작하기 <br> 부록 A 스프링 모듈 <br>
-						부록 B 스프링 의존 라이브러리 <br> <br> <b>『토비의 스프링 3.1 Vol. 2
-							스프링의 기술과 선택』</b> <br> <br> 1장 IoC 컨테이너와 DI <br> 2장 데이터
-						액세스 기술 <br> 3장 스프링 웹 기술과 스프링 MVC <br> 4장 스프링 @MVC <br>
-						5장 AOP와 LTW <br> 6장 테스트 컨텍스트 프레임워크 <br> 7장 스프링의 기타 기술과
-						효과적인 학습 방법 <br> 부록 A 스프링 모듈 <br> 부록 B 스프링 의존 라이브러리
-
+						${book.contents}
 					</div>
 				</div>
 				<!-- //목차 -->
@@ -543,16 +507,12 @@ $('#reviewPop').click(function(){
 
 			<label>
 				<button name="btnAddCart" id="btnAddCart" type="button" value="장바구니"
-					class="btn_baket" onClick="Cart('cart');">장바구니</button>
+					class="btn_baket">장바구니</button>
 			</label> <label>
-				<button name="" type="submit" value="위시리스트" class="btn_wish"
-					onClick="Wishlist();">위시리스트</button>
+				<button name="" type="submit" value="위시리스트" class="btn_wish">위시리스트</button>
 			</label> <label>
-				<button name="btnBuy" id="btnBuy" type="submit" value="구매하기"
-					class="btn_buy" onClick="Cart('buy');">구매하기</button>
+				<button name="btnBuy" id="btnBuy" type="submit" value="구매하기" class="btn_buy" >구매하기</button>
 			</label>
-
-
 
 			<!-- //결재버튼 -->
 		</fieldset>

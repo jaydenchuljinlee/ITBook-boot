@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,11 +24,14 @@ public class User {
     private String password;
     private String email;
 
+    @Column(name = "createddate")
     private LocalDateTime createdDate;
+    @Column(name = "updateddate")
     private LocalDateTime updatedDate;
 
     // OAuth
     private String principal;
+    @Column(name = "socialtype")
     private SocialType socialType;
 
     @Builder

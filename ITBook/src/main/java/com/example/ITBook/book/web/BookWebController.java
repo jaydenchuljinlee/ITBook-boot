@@ -25,12 +25,12 @@ public class BookWebController {
 		
 		model.addAttribute("bookList", list);
 		
-		return "newBook.book-main";
+		return "contents/newBook.book-main";
 	}
 	
 	@RequestMapping(value = "/recommendBook")
 	public String recommendBook() throws Exception {
 		
-		return "recommendBook.book-main";
+		return "contents/recommendBook.book-main";
 	}
 }
