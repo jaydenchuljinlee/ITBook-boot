@@ -6,90 +6,12 @@
 
 <link rel="stylesheet" type="text/css" href="/ITBook/css/book/book_detail.css">
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<script>
-/*탭시작=======================================================================  */
+<script type="text/javascript" src="/ITBook/ckeditor/ckeditor.js"></script>
 
-$(function() {
-	$( ".detial_tabs" ).tabs();
-	$(".detail_tit").css({
-		"display" : "block"
-	});
-	
-	/* 상세 수량 제한 시작 */
-	$(".book_amount input").click(function(){
-		
-		var amountInput = $(".book_amount input").val();
-	/* 	alert(amountInput);
-		 */
-		if(amountInput <= "0" ){
-			alert("수량은 최소 1이상 입력하셔야 합니다.");
-			$(".book_amount input").val("1");
-		}
-	})/* 상세 수량 제한 끝*/
-		
-	$("#btnAddCart").on("click",function() {
-		var session = "<c:out value='${session}'/>";
-
-		if (session == '') return;
-
-		var parm = "<c:out value='${book.isbn}'/>";
-		
-		$.ajax({
-			type		:"post",
-			url			: "addMyBasket",
-			data		:JSON.stringify(parm),
-			contentType	:"application/json",
-			success		: function(data) {
-				console.log("장바구니에 추가 완료!");
-				//location.href = "book";
-			}
-		})
-	})
-});
-	function hb_show_tabs(t_num) {
-		
-		//alert(t_num);
-		var t_max = 9;
-		for (var t = 1; t < t_max; t++) {
-			if (t_num == 0) {
-				$("#tabs_" + t).show();
-				$(".detail_tit").css({
-					"display" : "block"
-				});
-			} else {
-				if (t == t_num) {
-					$("#tabs_" + t).show();
-					$(".detail_tit").css({
-						"display" : "block"
-					});
-				} else {
-					$("#tabs_" + t).hide();
-				}
-			}
-		}
-
-	}
-	var tid= "";
-	if(tid=="review"){	
-		hb_show_tabs(5);
-		document.getElementById("review_tab").scrollIntoView();
-		
-	}else if(tid=="misprint"){	
-		hb_show_tabs(6);
-		document.getElementById("misprint_tab").scrollIntoView();
-
-	}else if(tid=="exam"){	
-		hb_show_tabs(7);
-		document.getElementById("exam_tab").scrollIntoView();
-		
-	}else{
-		hb_show_tabs(0);
-	}
-/*=======================================================================탭끝  */
-$('#reviewPop').click(function(){
-	$('#reviewPop').modal({show:true})
-});
-</script>
+<form id="wishNbasket" method="post">
+	<input type="hidden" id="isbnInput" name="isbn">
+	<input type="hidden" id="userInput" name="userIdx">
+</form>
 	
 	
 <!-- 모달  리뷰쓰기 -->
@@ -102,75 +24,74 @@ $('#reviewPop').click(function(){
         <h4 class="modal-title" id="myModalLabel"><img alt="" src="images/store/review.jpg">  리뷰쓰기</h4>
       </div>
       <div class="modal-body layer_scroll">
-        <form id="frm" name="frm" method="post"
-					enctype="multipart/form-data">
-						<div class="layer_con_box">
-							<fieldset>
-								<div class="lp_register_li">
-									<div class="i_tit">
-										<span>* </span>도서명 :
-									</div>
-									<div class="i_con">
-										<c:out value="${book.theme}"/>
-									</div>
-								</div>
-								<div class="lp_register_li">
-									<div class="i_tit">
-										<span>* </span>제목 :
-									</div>
-									<div class="i_con">
-									 <input type="text" name="hbr_title" id="hbr_title" class="i_text1" value="">
-									</div>
-								</div>
-								<div class="lp_register_li">
-									<div class="i_tit">
-										<span>* </span>실무경력:
-									</div>
-									<div class="i_con">
-										<select name="s1" class="i_select2">																	
-										<option value="">경력선택</option>																
-										<option value="1년">1year</option>
-										<option value="2년">2year</option>	
-										<option value="3년">3year</option>	
-										<option value="4년">4year</option>	
-										<option value="5년">5year</option>
-										<option value="6년">6year</option>	
-										<option value="7년">7year</option>	
-									    <option value="8년">8year</option>	
-										<option value="9년">9year</option>	
-										<option value="10년">10year</option>	
-									    <option value="고급">고급</option>											
-									</select>    	
-									</div>
-								</div>
-								<div class="lp_register_li">
-
-									<div class="i_tit">
-										<span>* </span>별점평가
-									</div>
-									<div class="i_con">
-										<div id="default" style="margin-top: 5px;">
-										<img src="images/store/star.png" alt="" style="margin: 0px; height: 20px;" />
-										</div>
-										<div class="highlight">
-										</div>
-									</div>
-								</div>
-
-								<div class="lp_register_li">
-									<div class="i_tit">
-										<span>* </span>내용 :
-									</div>
-									<div class="i_con" id="hbc_cont_div">
-										<label> <textarea class="form-control" name="editor1"
-												id="editor1" rows="10" cols="50"></textarea>
-
-										</label>
-									</div>
-								</div>
-							</fieldset>
+        <form id="reviewFrm" method="post" enctype="multipart/form-data">
+			<div class="layer_con_box">
+				<fieldset>
+					<div class="lp_register_li">
+						<div class="i_tit">
+							<span>* </span>도서명 :
 						</div>
-				</form>        
+						<div class="i_con">
+							<c:out value="${book.theme}"/>
+						</div>
+					</div>
+					<div class="lp_register_li">
+						<div class="i_tit">
+							<span>* </span>제목 :
+						</div>
+						<div class="i_con">
+						 <input type="text" name="hbr_title" id="hbr_title" class="i_text1" value="">
+						</div>
+					</div>
+					<div class="lp_register_li">
+						<div class="i_tit">
+							<span>* </span>실무경력:
+						</div>
+						<div class="i_con">
+							<select name="s1" class="i_select2">																	
+							<option value="">경력선택</option>																
+							<option value="1">1year</option>
+							<option value="2">2year</option>	
+							<option value="3">3year</option>	
+							<option value="4">4year</option>	
+							<option value="5">5year</option>
+							<option value="6">6year</option>	
+							<option value="7">7year</option>	
+						    <option value="8">8year</option>	
+							<option value="9">9year</option>	
+							<option value="10">10year</option>	
+						    <option value="11">고급</option>											
+						</select>    	
+						</div>
+					</div>
+					<div class="lp_register_li">
+
+						<div class="i_tit">
+							<span>* </span>별점평가
+						</div>
+						<div class="i_con">
+							<div id="default" style="margin-top: 5px;">
+							<img src="images/store/star.png" alt="" style="margin: 0px; height: 20px;" />
+							</div>
+							<div class="highlight">
+							</div>
+						</div>
+					</div>
+
+					<div class="lp_register_li">
+						<div class="i_tit">
+							<span>* </span>내용 :
+						</div>
+						<div class="i_con" id="hbc_cont_div">
+							<label> <textarea class="form-control" name="editor1"
+									id="editor1" rows="10" cols="50"></textarea>
+
+							</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</form>        
       </div>
       <div class="modal-footer">
         

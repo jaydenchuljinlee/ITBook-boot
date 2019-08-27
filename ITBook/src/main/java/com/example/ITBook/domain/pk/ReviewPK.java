@@ -11,19 +11,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Embeddable
-public class MyBasketPK  implements Serializable{
+public class ReviewPK  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Column(name = "isbn")
 	private long isbn;
 	
 	@Column(name = "idx")
 	private long index;
 	
-	public MyBasketPK(long isbn,long index) {
+	public ReviewPK(long isbn,long index) {
 		this.isbn = isbn;
 		this.index = index;
 	}
-	
 }

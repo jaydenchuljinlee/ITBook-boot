@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ITBook.book.service.BookDetailService;
 import com.example.ITBook.domain.Book;
+import com.example.ITBook.domain.User;
 
 @Controller
 public class BookWebDetail {
@@ -32,7 +33,7 @@ public class BookWebDetail {
 		Optional<Book> book = bookDetailService.selectOneBook(isbn);
 		
 		model.addAttribute("book", book.get());
-		model.addAttribute("session", session.getId());
+		model.addAttribute("userSession", ((User)session.getAttribute("user")).getIndex());
 		
 		return "book_detail/bookDetail.book-main";
 	}

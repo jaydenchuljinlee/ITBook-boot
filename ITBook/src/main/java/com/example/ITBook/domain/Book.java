@@ -47,6 +47,10 @@ public class Book {
 	@Column(columnDefinition = "TEXT")
 	private String authorinfo;
 	
+	public Book(Long isbn) {
+		this.isbn = isbn;
+	}
+	
 	public Book(Long isbn,int price,int page,Scategory s_category,int quantity,String image,String theme
 			,String original,String publish,String author,String translator,String publishdate
 			,String intro,String contents,String authorinfo) {

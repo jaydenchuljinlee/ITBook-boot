@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Builder
 @Entity
 @Getter
 @NoArgsConstructor
@@ -34,7 +35,10 @@ public class User {
     @Column(name = "socialtype")
     private SocialType socialType;
 
-    @Builder
+    public User(Long index) {
+    	this.index = index;
+    }
+    
     public User(Long index, String name, String password, String email, LocalDateTime createdDate, LocalDateTime updatedDate, String principal, SocialType socialType) {
         this.index = index;
         this.name = name;

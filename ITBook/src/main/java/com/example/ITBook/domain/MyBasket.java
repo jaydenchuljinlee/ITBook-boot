@@ -9,9 +9,12 @@ import javax.persistence.Table;
 
 import com.example.ITBook.domain.pk.MyBasketPK;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "mybasket")
 public class MyBasket {
@@ -25,8 +28,8 @@ public class MyBasket {
 	private Book book;
 	
 	@ManyToOne
-	@MapsId("index")
-	@JoinColumn(name = "index")
+	@MapsId("idx")
+	@JoinColumn(name = "idx")
 	private User user;
 	
 	public MyBasket(Book book,User user) {

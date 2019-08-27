@@ -794,7 +794,7 @@ body .ui-tooltip {
 }
 .ui-widget-content {
 	border: 1px solid #aaaaaa;
-	background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;
+	background: #ffffff 50% 50% repeat-x;
 	color: #222222;
 }
 .ui-widget-content a {
@@ -802,7 +802,7 @@ body .ui-tooltip {
 }
 .ui-widget-header {
 	border: 1px solid #aaaaaa;
-	background: #cccccc url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;
+	background: #cccccc  50% 50% repeat-x;
 	color: #222222;
 	font-weight: bold;
 }
@@ -816,7 +816,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
 	border: 1px solid #d3d3d3;
-	background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+	background: #e6e6e6  50% 50% repeat-x;
 	font-weight: normal;
 	color: #555555;
 }
@@ -833,7 +833,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #999999;
-	background: #dadada url(images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x;
+	background: #dadada  50% 50% repeat-x;
 	font-weight: normal;
 	color: #212121;
 }
@@ -848,7 +848,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
 	border: 1px solid #aaaaaa;
-	background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
+	background: #ffffff 50% 50% repeat-x;
 	font-weight: normal;
 	color: #212121;
 }
@@ -865,7 +865,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
 	border: 1px solid #fcefa1;
-	background: #fbf9ee url(images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x;
+	background: #fbf9ee 50% 50% repeat-x;
 	color: #363636;
 }
 .ui-state-highlight a,
@@ -877,7 +877,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-error,
 .ui-widget-header .ui-state-error {
 	border: 1px solid #cd0a0a;
-	background: #fef1ec url(images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x;
+	background: #fef1ec 50% 50% repeat-x;
 	color: #cd0a0a;
 }
 .ui-state-error a,
@@ -920,30 +920,6 @@ body .ui-tooltip {
 .ui-icon {
 	width: 16px;
 	height: 16px;
-}
-.ui-icon,
-.ui-widget-content .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
-}
-.ui-widget-header .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
-}
-.ui-state-default .ui-icon {
-	background-image: url(images/ui-icons_888888_256x240.png);
-}
-.ui-state-hover .ui-icon,
-.ui-state-focus .ui-icon {
-	background-image: url(images/ui-icons_454545_256x240.png);
-}
-.ui-state-active .ui-icon {
-	background-image: url(images/ui-icons_454545_256x240.png);
-}
-.ui-state-highlight .ui-icon {
-	background-image: url(images/ui-icons_2e83ff_256x240.png);
-}
-.ui-state-error .ui-icon,
-.ui-state-error-text .ui-icon {
-	background-image: url(images/ui-icons_cd0a0a_256x240.png);
 }
 
 /* positioning */
@@ -1156,14 +1132,14 @@ body .ui-tooltip {
 
 /* Overlays */
 .ui-widget-overlay {
-	background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
+	background: #aaaaaa 50% 50% repeat-x;
 	opacity: .3;
 	filter: Alpha(Opacity=30);
 }
 .ui-widget-shadow {
 	margin: -8px 0 0 -8px;
 	padding: 8px;
-	background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
+	background: #aaaaaa 50% 50% repeat-x;
 	opacity: .3;
 	filter: Alpha(Opacity=30);
 	border-radius: 8px;
@@ -1789,7 +1765,7 @@ span.mshed_srch {float:right; width:60px; margin:0 0 40px; background:url(/image
 /* ---------------------- 湲곕낯?뺣낫 ---------------------- */
 
 /* 湲곕낯?뺣낫 - ?덉씠?꾩썐 */
-.store_view_area {position:relative; overflow:hidden; width:880px; background:url(/images/store/bg_store_view_info.gif) repeat-y; border-bottom:1px solid #ccc; border-top:1px solid #ccc;}
+.store_view_area {position:relative; overflow:hidden; width:880px; repeat-y; border-bottom:1px solid #ccc; border-top:1px solid #ccc;}
 /* 湲곕낯?뺣낫 - ?덉씠?꾩썐 */
 
 
@@ -1822,7 +1798,7 @@ span.mshed_srch {float:right; width:60px; margin:0 0 40px; background:url(/image
 
 .store_product_info_box .info_list {clear:both; padding:30px 0; margin:30px 0; border-bottom:1px solid #ccc; border-top:1px solid #ccc;}
 .store_product_info_box .info_list li {overflow:hidden; clear:both; padding-bottom:10px; font-size:13px; line-height:22px;}
-.store_product_info_box .info_list strong {display:block; float:left; width:90px; background:url(/images/common/bl_grey2.gif) no-repeat 1px 10px; font-family:'NanumGothic'; padding:0 0 0 11px; font-size:15px;  }
+.store_product_info_box .info_list strong {display:block; float:left; width:90px; font-family:'NanumGothic'; padding:0 0 0 11px; font-size:15px;  }
 .store_product_info_box .info_list span {display:block; float:left; width:330px; font-size:15px;}
 .store_product_info_box .info_list  a.view_map {display:inline-block; height:24px; padding:5px 15px 0; background:#00afa0; border-radius:2px; -moz-border-radius:2px; -khtml-border-radius:2px; -webkit-border-radius:2px; color:#fff; font-family:'NanumGothicBold'; line-height:14px; transition:all .1s;}
 .store_product_info_box .info_list  a.view_map:hover {background:#00837a;}
@@ -1873,7 +1849,7 @@ span.mshed_srch {float:right; width:60px; margin:0 0 40px; background:url(/image
 .store_like_area .store_grade .store_grade_star {display:inline-block; position:relative; top:5px;}
 
 .store_like_area .store_like {display:inline-block; font-family:'NanumGothicBold'; line-height:44px;}
-.store_like_area .store_like span {display:inline-block; width:110px; height:48px; margin-right:13px; background:url(/images/store/ico_like_detail.png) no-repeat; font-family:'NanumGothic'; text-align:right;}
+.store_like_area .store_like span {display:inline-block; width:110px; height:48px; margin-right:13px; font-family:'NanumGothic'; text-align:right;}
 
 .store_like_area .store_review {display:inline-block; width:160px; margin:0 100px 0 0; height:48px;}
 .store_like_area .store_review span {display:inline-block; width:110px; height:48px; margin-left:px; background:url(/images/store/ico_like_detail.png) no-repeat; font-family:'NanumGothic'; text-align:right;}
