@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" type="text/css" href="/ITBook/css/mypage/mypage.css">
+<script type="text/javascript" src="/ITBook/js/myPage/myBasket.js">
+
+</script>
 
 <div class="product-grid-holder tc-padding2">
 <div class="row">
@@ -48,21 +55,16 @@
 		<div class="select_area2">
 			<div class="check_area">
 				<label for="check_select">
-					<input class="i_check" type="checkbox" id="checkAll" name="checkAll" value="" checked>
+					<input class="i_check parent_chk" type="checkbox" id="checkAll" name="checkAll">
 					<strong>전체선택</strong>
 				</label>
 			</div>
-			<label>
-				<button name="" type="submit" value="선택항목 삭제하기" class="btn_remove">선택상품삭제</button>
-			</label>
-			<label>
-				<button name="" type="submit" value="선택항목 위시리스트 담기" class="btn_basket">선택상품보관</button>
-			</label>
 		</div>
 		<!-- //선택영역 -->		
 		
 		<!-- 장바구니 리스트 -->
-		<form name="frm" id="frm" action="payment.do" method="post">
+		<form id="myBasketFrm" action="payment" method="post">
+		
 		<div class="table_area_cart">
 			<table class="tbl_type_list" summary="장바구니 리스트 테이블">
 				<caption>장바구니 리스트</caption>
@@ -85,57 +87,30 @@
 					</tr>
 				</thead>
 				<tbody>
-								
-					<tr>
-						<td class="check_area">
-							<label for="check_select">
-								<input class="i_check" type="checkbox" name="checked_isbn_1" value="9788979149883" checked>
-							</label>
-						</td>
-						<td class="thumb_area"><a href="#"><img src="http://image.kyobobook.co.kr/images/book/large/125/l9791188621125.jpg" alt="" class="thumb" /></a></td>
-						<td class="left info">
-							<p class="txt_nomal"><a href="/store/books/look.php?p_code=B2901427500">알고리즘 도감 그림으로 공부하는 알고리즘 26</a></p>
-						</td>
-						<td>
-							<p class="price">23,400원
-							<span class="mileage">234점</span>								
-						</td>
-						<td>						
-						 <label class="option_label"><input type="text" value="1" name="quantity_isbn_1" class="i_text" maxlength="2"></label>																				
-						</td>
-						<td class="price2">23,400원</td>
-						<td><a href="#" class=""><i class="fas fa-trash-alt delete"></i></a></td>
-					</tr>
-								
-					<tr>
-						<td class="check_area">
-							<label for="check_select">
-								<input class="i_check" type="checkbox" name="checked_isbn_3" value="9788968480799" checked>
-							</label>
-						</td>
-						<td class="thumb_area">
-						<a href="">
-						<img src="http://image.kyobobook.co.kr/images/book/large/565/l9791160502565.jpg" alt="" class="thumb" />
-						</a>
-						</td>
-						<td class="left info">
-						<p class="txt_nomal">
-						<a href="">시나공 워드프로세서 실기(2018)</a>
-						</p>
-							<!-- 2차 상품 -->
-					    <!-- //2차 상품 -->
-						</td>
-						<td>
-							<p class="price">17,000원
-							<span class="mileage">170점</span>								
-						</td>
-						<td>
-                            <label class="option_label"><input type="text" value="1" name="quantity_isbn_3" class="i_text" maxlength="2"></label>																				
-						</td>
-						<td class="price2">17,000원</td>
-						<td><a href="#" class=""><i class="fas fa-trash-alt delete"></i></a></td>
-					</tr>
-																
+					<c:forEach items="${myBasketList}" var="myBasket" varStatus="status">
+						<tr>
+							<td class="check_area">
+								<label for="check_select">
+									<input class="i_check child_chk" type="checkbox" name="idx" value=${status.index} />
+								</label>
+							</td>
+							<td class="thumb_area"><a href="#"><img src="<c:out value="${myBasket.book.image}" />" alt="" class="thumb" /></a></td>
+							<td class="left info">
+								<p class="txt_nomal"><a href="/store/books/look.php?p_code=B2901427500">"<c:out value="${myBasket.book.theme}" />"</a></p>
+							</td>
+							<td>
+								<p class="price" data-price="${myBasket.book.price}"><fmt:formatNumber value="${myBasket.book.price}" pattern="#.###" />원
+								<span class="mileage"></span>								
+							</td>
+							<td>						
+							 <label class="option_label">
+							 	<input id="quantity" value=1 name="quantity" class="i_text"/>
+							 </label>																				
+							</td>
+							<td class="price2"><fmt:formatNumber value="${myBasket.book.price}" pattern="#.###" />원</td>
+							<td><a href="#" class=""><i class="fas fa-trash-alt delete"></i></a></td>
+						</tr>
+					</c:forEach>									
 				</tbody>
 			</table>
 		</div>
@@ -146,16 +121,25 @@
 		
 		<div class="cart_result_box">
 			<ul>
-				<li>주문상품 수량 :   <span id='buyCnt'>2종 [2개]</span></li>
-				<li>예상 마일리지 적립 :  <span id='mileage'>404점</span></li>
-				<li>배송료 :  <span id='deliveryCost'>0원</span></li>
-				<li>총 상품 금액 :  <span class="price" id='totalPrice'>40,400원</span></li>
+				<li>주문상품 수량 :   <span id='buyCnt'>2종 [2개]</span>
+					<input type="hidden" id="genreCnt" name="genreCnt"/>
+					<input type="hidden" id="totalCnt" name="totalCnt"/>
+				</li>
+				<li>예상 마일리지 적립 :  <span id='totalMileage'>404점</span>
+					<input type="hidden" id="totalMil" name="totalMil"/>
+				</li>
+				<li>배송료 :  <span id='deliveryCost'>0원</span>
+					<input type="hidden" id="delivery" name="delivery"/>
+				</li>
+				<li>총 상품 금액 :  <span class="price" id='totalPrice'>40,400원</span>
+					<input type="hidden" id="totalFee" name="totalFee"/>
+				</li>
 			</ul>
 		</div>
 		
 		<div class="btn_area_cart">
 			<!--<a href="/myhanbit/order_payment.html" class="btn_green">주문하기</a> -->
-			<button type="submit"  class="btn_green" style="height:50px">주문하기
+			<button id="submitBtn"  class="btn_green" style="height:50px">주문하기
 		</div>		
 		</form>
 		<!-- 장바구니 버튼 -->						

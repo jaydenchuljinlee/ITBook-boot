@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.ITBook.domain.MyBasket;
+import com.example.ITBook.domain.User;
 import com.example.ITBook.domain.pk.MyBasketPK;
 
 public interface MyBasketRepository extends JpaRepository<MyBasket, MyBasketPK>{
 
-	List<MyBasket> findAllByIdx(Long index)throws Exception;
+	List<MyBasket> findAllByUser(User user)throws Exception;
+
 
 }

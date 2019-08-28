@@ -31,6 +31,8 @@ public class MyBasketWebController {
 		
 		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getIndex());
 		
+		model.addAttribute("myBasketList", list);
+		
 		return "myPage/myBasket.myPage-tiles";
 	}
 	
@@ -38,9 +40,6 @@ public class MyBasketWebController {
 	public String addMyBasket(@RequestParam long isbn
 			,@RequestParam long userIdx
 			,Model model) throws Exception {
-		
-		System.out.println(isbn);
-		System.out.println(userIdx);
 		
 		boolean check = myBasketService.insertMyBasket(isbn,userIdx);
 		

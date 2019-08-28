@@ -23,7 +23,8 @@ public class MyBasketServiceImpl implements MyBasketService {
 	@Override
 	public List<MyBasket> selectByUser(Long index) throws Exception {
 		
-		return myBasketRepository.findAllByIdx(index);
+		
+		return myBasketRepository.findAllByUser(new User(index));
 	}
 	
 	@Override
