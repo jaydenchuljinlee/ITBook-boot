@@ -259,7 +259,7 @@
 
 .cart_result_box {overflow:hidden; width:1140px; margin:20px 0 0; padding:22px 0; background:#f9f9f9; border:#ddd 1px solid; text-align:center;}
 .cart_result_box ul {}
-.cart_result_box li {float:left; margin:0 40px; padding-left:10px; background:url(/images/common/bl_blue1.gif) no-repeat 0 18px; font-size:16px;}
+.cart_result_box li {float:left; margin:0 40px; padding-left:10px; no-repeat 0 18px; font-size:16px;}
 .cart_result_box li span {margin-left:10px; font-size:18px; font-family:'NanumGothicBold';}
 .cart_result_box li span.price {color:#fe981e;}
 .msg_delivery {clear:both; font-family:'NanumGothicBold'; text-align:center; margin:50px 0 ;}

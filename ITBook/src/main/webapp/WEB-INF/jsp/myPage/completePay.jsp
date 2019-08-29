@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-    <link rel="stylesheet" type="text/css" href="/ITBook/css/mypage/mypage.css">
+<link rel="stylesheet" type="text/css" href="/ITBook/css/mypage/mypage.css">
 
 <!-- Contents -->
 <div class="product-grid-holder tc-padding2">
@@ -54,44 +58,54 @@
                     <div class="register_li">
 						<div class="i_tit"><strong>주문번호</strong></div>
 						<div class="i_con">
-								<p>111111</p>
+								<p><c:out value="${payInfoList[0].payment.idx}"/></p>
 						</div>
 					</div>
 					 <div class="register_li">
 						<div class="i_tit"><strong>총 결제 금액</strong></div>
 						<div class="i_con">
-								<p>40,400원</p>
+								<p><c:out value="${payInfoList[0].payment.totalPrice}"/>원</p>
 						</div>
 					</div>
                     <div class="register_li">
 						<div class="i_tit"><strong>결제방법</strong></div>
 						<div class="i_con">
+							<c:if test="${payInfoList[0].payment.method eq 'card'}">
 								<p>신용카드</p>
+							</c:if>
+							<c:if test="${payInfoList[0].payment.method eq 'cash'}">
+								<p>계좌이체</p>
+							</c:if>
+							<c:if test="${payInfoList[0].payment.method eq 'bank'}">
+								<p>무통장</p>
+							</c:if>
 						</div>
 					</div>
 					   <div class="register_li">
 						<div class="i_tit"><strong>결제일</strong></div>
 						<div class="i_con">
-								<p>2018-03-10</p>
+								<p><c:out value="${payInfoList[0].payment.payDate}"/></p>
 						</div>
 					</div>
 					   <div class="register_li">
 						<div class="i_tit"><strong>구매목록</strong></div>
 						<div class="i_con">
-								<p>알고리즘 도감 그림으로 공부하는 알고리즘 26<br>
-								    시나공 워드프로세서 실기(2018)
-								</p>
+							<p>
+								<c:out value="${payInfoList[0].book.theme}"/>
+								<c:if test="${payInfoList[0].payment.totalquantity > 1}">
+									외<c:out value="${payInfoList[0].payment.totalquantity - 1}"/>개
+								</c:if>
+							</p>
 						</div>
 					</div>	  
 					 <div class="register_li">
 						<div class="i_tit"><strong>예상적립 마일리지</strong></div>
 						<div class="i_con">
-								<p>370점</p>
+								<p><c:out value="${payInfoList[0].payment.mileage}"/>점</p>
 						</div>
 					</div>
 				</fieldset>
-							</div>
-			
+			</div>
 		</div>
 		
 		</div>

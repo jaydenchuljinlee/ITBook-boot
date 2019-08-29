@@ -7,8 +7,92 @@
 
 <link rel="stylesheet" type="text/css" href="/ITBook/css/mypage/mypage.css">
 
+<script type="text/javascript">
+	var phone	= '<c:out value="${user.phone}" />',
+		add_1	= '<c:out value="${user.address1}" />',
+		add_2	= '<c:out value="${user.address2}" />',
+		add_3	= '<c:out value="${user.address3}" />',
+		name	= '<c:out value="${user.name}" />';
+
+	var totalMileage	= <c:out value="${totalMil}" />,
+		delivery		= <c:out value="${delivery}"/>,
+		totalFee		= <c:out value="${totalFee}" /> - delivery,
+		applyMileage	= <c:out value="${totalMil}" />,
+		totalQuantity	= <c:out value="${totalCnt}" />;
+
+	$(function() {
+		
+		// 페이지가 처음 로딩 되었을 때, 이전 페이지로부터 가져온 전체 합계와 그에 따른 마일리지
+		$("#sum_t_price_show").text(totalFee+"원");
+		$("#sum_st_mileage_show").text((totalFee/100)+"점");
+		
+		//'주문자 정보와 일치'라는 라디오 버튼을 눌렀을 때, 유저 정보를 input에 담음
+		$("#delivery_Orderaddr").on("click",function() {
+
+			$("#m_name").val(name);
+			$("#m_zipcode").val(add_1);
+			$("#m_address").val(add_2);
+			$("#m_address_sub").val(add_3);
+			$("#m_mobile_1").val(phone.substring(0,3));
+			$("#m_mobile_2").val(phone.substring(3,7));
+			$("#m_mobile_3").val(phone.substring(7));
+			
+						
+		});
+
+		//마일리지 적용 버튼을 클릭했을 때
+		$("#apply_mileage").on("click",function() {
+			changeCashState()
+		})
+
+		//마일리지 input의 상태가 변화했을 때
+		$("#e_coin").on("change",function() {
+			changeCashState()
+		})
+
+		//마일리지 적용 취소 버튼을 눌렀을 때, 다시 페이지 로딩 상태로 변화
+		$("#cancle_mileage").on("click",function() {
+			$("#e_coin").val(0);
+
+			$("#discount").text("0원");
+			$("#sum_t_price_show").text(totalFee+"원");
+			$("#sum_st_mileage_show").text((totalFee/100)+"점");
+		})
+	})
+	
+	function changeCashState() {
+		var current = $("#e_coin").val(),
+			mileage	= Number($("#remain_ecoin").text().trim());
+		
+		//현재 내가 적용하려는 마일리지가 내가 가지고 있는 마일리지 보다 큰지를 판단
+		if (current > mileage) {
+			alert("가지고 있는 마일리지가 적습니다!");
+			//마일리지와 전체 합계,할인 금액을 페이지가 로딩되었을 때의 상태로 돌림
+			$("#e_coin").val(0);
+			$("#remain_ecoin").val(<c:out value="${user.mileage}"/>);
+			$("#discount").text("0원");
+			$("#sum_t_price_show").text(totalFee+"원");
+			$("#sum_st_mileage_show").text((totalFee/100)+"점");
+			
+			return;
+		}
+
+		//적용 마일리지가 변했으므로, 할인금액,전체합계,마일리지를 변화
+		$("#remain_ecoin").text(mileage-current);
+		$("#discount").text(current+"원");
+		$("#sum_t_price_show").text((totalFee-current)+"원");
+		$("#sum_st_mileage_show").text(((totalFee-current)/100)+"점");
+	}
+</script>
+
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="/ITBook/js/myPage/payment.js"></script>
+
+
+
 <!-- Contents -->
 <div class="product-grid-holder tc-padding2">
+	<form id="payFrm" action="completePay" method="post">
 	<div class="row">
 		<div class="myItbook_wrap">
 		
@@ -48,88 +132,79 @@
 
 		<!-- 주문 상품 목록 -->
 		<div class="table_area_cart">
-			<table class="tbl_type_list" summary="장바구니 리스트 테이블">
-				<caption>장바구니 리스트</caption>
-				<colgroup>
-				<col width="">
-				<col width="">
-				<col width="">
-				<col width="140px">
-				<col width="130px">
-				<col width="130px">
-				<col width="90px">
-				</colgroup>
-				<thead>
-					<tr>
-						<th colspan="3" scope="col">상품명</th>
-						<th scope="col">판매가</th>
-						<th scope="col">수량</th>
-						<th scope="col">합계</th>
-						<th scope="col">삭제</th>
-					</tr>
-				</thead>
-				<tbody>
+			
+				<input type="hidden" id="input_totalPrice" name="totalPrice"/>
+				<input type="hidden" id="input_mileage" name="mileage"/>
+				<input type="hidden" id="input_totalquantity" name="totalquantity"/>
+				<table class="tbl_type_list" summary="장바구니 리스트 테이블">
+					<caption>장바구니 리스트</caption>
+					<colgroup>
+					<col width="">
+					<col width="">
+					<col width="">
+					<col width="140px">
+					<col width="130px">
+					<col width="130px">
+					<col width="90px">
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="3" scope="col">상품명</th>
+							<th scope="col">판매가</th>
+							<th scope="col">수량</th>
+							<th scope="col">합계</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${bookList}" var="book">
+							
+							<tr>
+								<td class="check_area">
+									<input class="i_check" type="hidden" id="cart_idx[]" name="isbn" value="<c:out value="${book.isbn}" />" >
+								</td>
+								<td class="thumb_area">
+									<input type="hidden" name="thumb" value="<c:out value="${book.image}" />">
+									<img src="<c:out value="${book.image}" />" alt="" class="thumb" />
+								</td>
+								<td class="left info">
+									<p class="txt_nomal">
+										<input type="hidden" class="theme" name="theme" value="<c:out value="${book.theme}" />">
+										<c:out value="${book.theme}" />
+									</p>
+								</td>
+								<td>
+									<p class="price">
+										<fmt:formatNumber value="${book.price}" pattern="#.###"/>
+									</p>
+									<input type="hidden" name="price" value="<c:out value="${book.price}" />">
+								</td>
 								
-					<tr>
-						<td class="check_area">
-							<label for="check_select">
-								<input class="i_check" type="checkbox" id="cart_idx[]" name="cart_idx[]" value="130628" checked>
+								<td>
+									<input type="hidden" name="quantity" value="${book.quantity}"/>
+									<c:out value="${book.quantity}"/>
+								</td>
 								
-							</label>
-						</td>
-						<td class="thumb_area"><a href="#"><img src="http://image.kyobobook.co.kr/images/book/large/125/l9791188621125.jpg" alt="" class="thumb" /></a></td>
-						<td class="left info">
-							<p class="txt_nomal"><a href="/store/books/look.php?p_code=B2901427500">알고리즘 도감 그림으로 공부하는 알고리즘 26</a></p>
-						</td>
-						<td>
-							<p class="price">23,400원</p>
-							<input type="hidden" name="price" value="23400">
-							<span class="mileage">234점</span>
-						</td>
-						
-						<td>1</td>
-						
-						<td class="price2">23,400원</td>
-						
-						<td><a href="#" class=""><i class="fas fa-trash-alt delete"></i></a></td>
-					</tr>
+								<td id="bookTotal" class="price2">
+									<c:out value="${book.price*book.quantity}"/>원
+								</td>
 								
-					<tr>
-						<td class="check_area">
-							<label for="check_select">
-								<input class="i_check" type="checkbox" id="cart_idx[]" name="cart_idx[]" value="130253" checked>
-								<input type="hidden" id="hid_pcode[]" name="hid_pcode[]" value="B1526053540" >
-							</label>
-						</td>
-						<td class="thumb_area"><a href=""><img src="http://image.kyobobook.co.kr/images/book/large/565/l9791160502565.jpg" alt="" class="thumb" /></a></td>
-						<td class="left info">
-							<p class="txt_nomal"><a href="">시나공 워드프로세서 실기(2018)</a></p>
-						</td>
-						<td>
-							<p class="price">17,000원</p>
-							<input type="hidden" name="price" value="17000">
-							<span class="mileage">170점</span>								
-						</td>
-						
-						<td>1</td>
-						
-						<td class="price2">17,000원</td>
-						
-						<td><a href="#" class=""><i class="fas fa-trash-alt delete"></i></a></td>
-					</tr>
-																
-				</tbody>
-			</table>
+								<td class="price2"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			
 		</div>
 		<!-- //주문 상품 목록 -->
 		
 				<!-- 장바구니 합계 -->
 		<div class="cart_result_box">
 			<ul>
-				<li>주문상품 수량 :  <span id='sumTr'></span>종 [<span id="quantity"></span>개 ]</li>
-				<li>예상 마일리지 적립 :  <span id='mileage'></span>점</li>
-				<li>배송료 :  <span id='deliveryCost'>0</span>원</li> 
-				<li>총 주문 금액 :  <span class="price" id='totalPrice'>40,400원</span></li>
+				<li>주문상품 수량 :  <span id='sumTr'><c:out value="${genreCnt}"/></span>종 [<span id="quantity"><c:out value="${totalCnt}"/></span>개 ]</li>
+				<li>예상 마일리지 적립 :  <span id='mileage'><c:out value="${totalMil}"/></span>점</li>
+				<li>배송료 :  <span id='deliveryCost'><c:out value="${delivery}"/></span>원</li> 
+				<li>총 주문 금액 :  <span class="price" id='totalPrice'><c:out value="${totalFee}"/>원</span></li>
 			</ul>
 		</div>
 		<!-- //장바구니 합계 -->
@@ -138,11 +213,12 @@
         	<p class="tit">마일리지 사용</p>
             <div class="discount_info">
                 <div class="register_li">
-					<input type="hidden" value="0" name="my_e_coin" id="my_e_coin"  >              	            
+					<input type="hidden" name="totalMil" id="my_e_coin"  >              	            
                     <label>
                         <input type="text" value="" name="e_coin" id="e_coin" class="i_text2" > 점		
                         <input type="button" value="적용" id="apply_mileage" class="i_button">
-                        <span id="remain_ecoin">보유 마일리지 : 4,300점</span>    			
+                        <input type="button" value="취소" id="cancle_mileage" class="i_button">
+                       보유 마일리지 : <span id="remain_ecoin"> <c:out value="${user.mileage}" /></span>  점  			
                     </label>
                                 
                   	</div>
@@ -162,7 +238,7 @@
 						<div class="i_con">													
 							
 							<label class="ra_label">
-								<input type="radio" name="delivery_addr" id="delivery_Orderaddr"  value="Orderaddr"  class="i_radio" checked  onclick="javascript:set_deliveryAddr();" >
+								<input type="radio" id="delivery_Orderaddr"  value="Orderaddr"  class="i_radio" >
 								<span>주문자와 동일</span>
 							</label>
 						</div>
@@ -170,17 +246,17 @@
                     <div class="register_li">
 						<div class="i_tit"><strong>이름<span> *</span></strong></div>
 						<div class="i_con">
-								<input type="text" value="" name="m_name"  id="m_name" class="i_text" >	
+								<input type="text" value="" name="name"  id="m_name" class="i_text" >	
 						</div>
 					</div>
                     <div class="register_li">
 						<div class="i_tit"><strong>주소<span> * </span></strong></div>
 							<div class="i_con">
-								<input type="text" name="m_zipcode" id="m_zipcode" class="i_text">
+								<input type="text" name="address1" id="m_zipcode" class="i_text">
 								<input type="button" value="우편번호 검색" id="prof_zipcode" class="i_button" >
 								<div class="input_space"></div>
-								<input type="text" name="m_address" id="m_address" class="i_text2">
-								<input type="text" name="m_address_sub" id="m_address_sub" class="i_text2"> <br>
+								<input type="text" name="address2" id="m_address" class="i_text2">
+								<input type="text" name="address3" id="m_address_sub" class="i_text2"> <br>
 								<span class="address_span">※ 배송주소를 다시 한번 확인해 주세요.</span>
 
 							</div>
@@ -188,13 +264,12 @@
                     <div class="register_li">
 						<div class="i_tit"><strong>휴대전화<span> *</span></strong></div>
 						<div class="i_con">
-								<input type="text"  name="m_mobile_1" id="m_mobile_1" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
-									-
-								<input type="text"  name="m_mobile_2" id="m_mobile_2" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
-							
-							- 
-							
-								<input type="text"  name="m_mobile_3" id="m_mobile_3" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" ><br />
+							<input type="hidden" data-phone="phone" name="phone">
+								<input type="text" id="m_mobile_1" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
+								-
+								<input type="text" id="m_mobile_2" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
+								- 
+								<input type="text" id="m_mobile_3" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" ><br />
           						
 						</div>
 					</div>
@@ -202,12 +277,12 @@
                     <div class="register_li">
 						<div class="i_tit"><strong>일반전화</strong></div>
 						<div class="i_con">
-								<input type="text" name="m_phone_1" id="m_phone_1" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
-									- 
-								<input type="text" name="m_phone_2" id="m_phone_2" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
-							
-							- 
-								<input type="text" name="m_phone_3" id="m_phone_3" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
+								<input type="hidden" data-call="call" name="call">
+								<input type="text" id="m_phone_1" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
+								- 
+								<input type="text"id="m_phone_2" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
+								- 
+								<input type="text"id="m_phone_3" class="i_text3" onkeyup="this.value=number_filter(this.value);" maxlength="4" >	
 							
 						</div>
 					</div>
@@ -215,7 +290,7 @@
 						<div class="i_tit"><strong>배송메시지</strong></div>
 						<div class="i_con">
 							
-								<input type="text" name="ord_comment" id="ord_comment" class="i_text4" >
+								<input type="text" name="message" id="ord_comment" class="i_text4" >
                                  <span>(50자 이내 작성)</span>
 							
 						</div>
@@ -223,6 +298,7 @@
 				</div>
 				</fieldset>
 							</div>
+							
 			
 		</div>
 		
@@ -235,19 +311,19 @@
 				<dt>결제방법 선택</dt>
 				<dd>
 					<label class="ra_label">
-						<input type="radio" name="ord_pay_method" id="ord_pay_method" class="i_radio" value="card" checked="checked" onclick="javascript:select_pay_method(0);">
+						<input type="radio" name="method" id="ord_pay_method" class="i_radio" value="card" checked="checked" >
 						<span>신용카드</span>
 					</label>
 				</dd>
 				<dd>
 					<label class="ra_label">
-						<input type="radio" name="ord_pay_method" id="ord_pay_method" class="i_radio" value="bank" onclick="javascript:select_pay_method(2);">
+						<input type="radio" name="method" id="ord_pay_method" class="i_radio" value="bank" >
 						<span>무통장 입금</span>
 					</label>
 				</dd>
 				<dd>
 					<label class="ra_label">
-						<input type="radio" name="ord_pay_method" id="ord_pay_method" class="i_radio" value="mobile" onclick="javascript:select_pay_method(3);">
+						<input type="radio" name="method" value="phone" id="ord_pay_method" class="i_radio" >
 						<span>휴대폰 결제</span>
 					</label>
 				</dd>
@@ -258,32 +334,25 @@
 		<!-- 주문,결제 최종 정보 영역 -->
 		<div class="total_info">			
 			
-			<input  type="hidden" id="sum_sale_price" name="sum_sale_price">
-			<input  type="hidden" id="sum_ecoin_price" name="sum_ecoin_price">
-			<input  type="hidden" id="sum_coupon_price" name="sum_coupon_price">
-			<input  type="hidden" id="sum_total_price" name="sum_total_price" value="37800">
-			<input  type="hidden" id="sum_total_mileage" name="sum_total_mileage" value="2100">
-			<input  type="hidden" id="p_delivery_price" name="p_delivery_price" value="0">
-			
 			<!-- 주문 총액 정보 -->
 			<dl class="total_order">
 				<dt>주문상품 : </dt>
-				<dd>총 2종 [2개]</dd>
+				<dd>총 <c:out value="${genreCnt}"/>종 [<c:out value="${totalCnt}"/>개]</dd>
 				<dt>총 상품금액 : </dt>
-				<dd>40,400원</dd>
+				<dd id="totalFee"><fmt:formatNumber value="${totalFee}" pattern="#.###" />원</dd>
 				<dt>배송비 : </dt>
-				<dd>0원</dd>
+				<dd id="delivery"><fmt:formatNumber value="${delivery}" pattern="#.###" />원</dd>
 				<dt>할인금액 : </dt>
-				<dd><span id="sum_st_price_show">0원</span></dd>
+				<dd><span id="discount">0원</span></dd>
 			</dl>
 			<!-- //주문 총액 정보 -->
 			
 			<!-- 최종 결제 정보 -->
 			<dl class="total_payment">
 				<dt><strong>최종 결제 금액 :</strong></dt>
-				<dd><strong><span id="sum_t_price_show">40,400원</span></strong></dd>
+				<dd><strong><span id="sum_t_price_show"></span></strong></dd>
 				<dt>최종 적립 마일리지 :</dt>
-				<dd><span id="sum_st_mileage_show">404</span>점</dd>
+				<dd><span id="sum_st_mileage_show"></span></dd>
 			</dl>
 			<!-- //최종 결제 정보 -->
 			
@@ -299,63 +368,6 @@
 		</div>
 		</div>	<!-- //itbook wrap -->
 	</div>
+	</form>
 </div>
 
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript">
-	$(function() {
-		var payList		= $(".tbl_type_list tbody");
-		var sumPrice	= 0,
-			sumTr		= 0,
-			quantity	= 0,
-			saveMileage	= 0,
-			delivery	= 2500;
-		//alert(Number(payList.children("tr:eq(0)").children("td:eq(4)").text().trim()));
-		for(var i=0; i<payList.children("tr").length; i++){
-			
-			sumPrice += Number(payList.children("tr:eq("+i+")").children("td").children("input[name='price']").val());
-			
-			quantity += Number(payList.children("tr:eq("+i+")").children("td:eq(4)").text().trim());
-			
-			sumTr++;
-			
-			$("#sumTr").text(sumTr);
-			$("#quantity").text(quantity);
-			
-		}
-		saveMileage	= Math.round(sumPrice/100);
-		$("#mileage").text(saveMileage);
-		
-		if (sumPrice < 50000) {
-			$("#deliveryCost").text("2500");
-		} else {
-			$("#deliveryCost").text("0");
-		}
-		
-		$(".btn_payment").click(function() {
-			var IMP = window.IMP; // 생략가능
-			IMP.init('imp19176780');
-
-			//결제창
-			IMP.request_pay({
-			    pg : 'inicis', // version 1.1.0부터 지원.
-			    pay_method : 'card',
-			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '알고리즘 도감 그림으로 공부하는 알고리즘 26 외 1권',
-			    amount : 1000,
-			    buyer_email : 'ivvve@naver.com',
-			    buyer_name : '손영철',
-			    buyer_tel : '010-0000-0000'
-			}, function(rsp) {
-				
-				if ( rsp.success ) {
-					location.href = "completePay.do";
-			    } else {
-			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
-			        alert(msg);
-			    }
-			});
-		});
-	});
-</script>

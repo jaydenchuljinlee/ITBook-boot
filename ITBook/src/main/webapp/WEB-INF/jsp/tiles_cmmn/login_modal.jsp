@@ -22,15 +22,3 @@
 	</div>
 </div> 
 <!-- Login Modal -->
-
-<script>
-$(function() {
-	
-	$("#login").click(function() {
-		
-		$("#loginFrm").attr("action",$(this).attr("id")+".do");
-		$("#loginFrm").attr("method","post");
-		$("#loginFrm").submit();
-	})
-})
-</script>

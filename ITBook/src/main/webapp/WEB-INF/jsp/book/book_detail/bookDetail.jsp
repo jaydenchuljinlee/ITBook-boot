@@ -5,8 +5,29 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" type="text/css" href="/ITBook/css/book/book_detail.css">
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="/ITBook/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var session = "<c:out value='${userSession}'/>";
+
+		$("#btnAddCart").on("click",function() {
+			
+			if (session == '') return;
+
+			var form = {
+					isbn : <c:out value='${book.isbn}'/>,
+					user : session
+			}
+
+			$("#isbnInput").val(<c:out value='${book.isbn}'/>);
+			$("#userInput").val(session);
+
+			$("#wishNbasket").attr("action","addMyBasket");
+			$("#wishNbasket").submit();
+	});
+})
+</script>
+<script type="text/javascript" src="/ITBook/js/book/bookDetail.js"></script>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 
 <form id="wishNbasket" method="post">
 	<input type="hidden" id="isbnInput" name="isbn">

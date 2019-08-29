@@ -1,6 +1,7 @@
 package com.example.ITBook.myPage.myBasket.web;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ITBook.domain.MyBasket;
 import com.example.ITBook.domain.User;
@@ -29,7 +32,7 @@ public class MyBasketWebController {
 	public String mybascket(HttpSession session
 			,Model model) throws Exception {
 		
-		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getIndex());
+		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getIdx());
 		
 		model.addAttribute("myBasketList", list);
 		
@@ -46,5 +49,15 @@ public class MyBasketWebController {
 		model.addAttribute("isSave", check);
 		
 		return "redirect:/book";
+	}
+	
+	@RequestMapping(value = "deleteMyBasket",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String ,String> deleteMyBasket(@RequestParam(required=false) long isbn
+			,HttpSession session) throws Exception {
+		
+		Map<String ,String> map = myBasketService.deleteMyBasket(isbn,((User)session.getAttribute("user")));
+		
+		return map;
 	}
 }

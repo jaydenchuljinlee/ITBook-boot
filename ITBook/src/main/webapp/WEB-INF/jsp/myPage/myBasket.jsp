@@ -6,6 +6,31 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" type="text/css" href="/ITBook/css/mypage/mypage.css">
+<script type="text/javascript">
+	$(function(){
+		
+		$(".delete_myBasket").on("click",function() {
+			var that = this,
+			isbn =$(this).closest("tr").children(".check_area").children().children().val();
+		
+			$.ajax({
+				type		: "post",
+				url 		: "deleteMyBasket",
+				contentType	: "application/json",
+				data		: isbn,
+				successs	: function(data) {
+					
+					console.log(data.result);
+					$(that).closest("tr").remove();
+				},
+				error		: function(error) {
+					console.log(error);
+				}
+			})
+			
+		});
+	})
+</script>
 <script type="text/javascript" src="/ITBook/js/myPage/myBasket.js">
 
 </script>
@@ -89,26 +114,30 @@
 				<tbody>
 					<c:forEach items="${myBasketList}" var="myBasket" varStatus="status">
 						<tr>
-							<td class="check_area">
+							<td class="check_area" data-idx = ${status.index}>
 								<label for="check_select">
-									<input class="i_check child_chk" type="checkbox" name="idx" value=${status.index} />
+									<input id="isbn_${status.index}" class="i_check child_chk" type="checkbox" name="isbn" value="${myBasket.book.isbn}" />
 								</label>
 							</td>
-							<td class="thumb_area"><a href="#"><img src="<c:out value="${myBasket.book.image}" />" alt="" class="thumb" /></a></td>
+							<td class="thumb_area">
+								<input type="hidden" id="thumb_${status.index}" name="thumb" value="${myBasket.book.image}" >
+								<img src="<c:out value="${myBasket.book.image}" />" alt="" class="thumb" /></td>
 							<td class="left info">
-								<p class="txt_nomal"><a href="/store/books/look.php?p_code=B2901427500">"<c:out value="${myBasket.book.theme}" />"</a></p>
+								<input type="hidden" id="theme_${status.index}" name="theme" value="${myBasket.book.theme}">
+								<p class="txt_nomal"><c:out value="${myBasket.book.theme}" /></p>
 							</td>
 							<td>
+								<input type="hidden" id="price_${status.index}" name="price" value="${myBasket.book.price}">
 								<p class="price" data-price="${myBasket.book.price}"><fmt:formatNumber value="${myBasket.book.price}" pattern="#.###" />원
 								<span class="mileage"></span>								
 							</td>
-							<td>						
+							<td>
 							 <label class="option_label">
-							 	<input id="quantity" value=1 name="quantity" class="i_text"/>
+							 	<input id="quantity_${status.index}" value=1 name="quantity" class="i_text"/>
 							 </label>																				
 							</td>
 							<td class="price2"><fmt:formatNumber value="${myBasket.book.price}" pattern="#.###" />원</td>
-							<td><a href="#" class=""><i class="fas fa-trash-alt delete"></i></a></td>
+							<td><a class="delete_myBasket"><i class="fas fa-trash-alt delete"></i></a></td>
 						</tr>
 					</c:forEach>									
 				</tbody>

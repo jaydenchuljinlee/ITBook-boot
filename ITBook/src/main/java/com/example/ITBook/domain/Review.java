@@ -43,7 +43,7 @@ public class Review {
 	private String contents;
 	
 	public Review(Book book,User user,int career,int star,String title,String contents) {
-		this.reviewPK = new ReviewPK(book.getIsbn(),user.getIndex());
+		this.reviewPK = new ReviewPK(book.getIsbn(),user.getIdx());
 		this.book = book;
 		this.user = user;
 		this.career = career;

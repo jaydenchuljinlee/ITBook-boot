@@ -17,22 +17,7 @@ $(function() {
 	})
 	/* 상세 수량 제한 끝*/
 		
-	$("#btnAddCart").on("click",function() {
-		var session = "<c:out value='${userSession}'/>";
-		
-		if (session == '') return;
-
-		var form = {
-				isbn : <c:out value='${book.isbn}'/>,
-				user : session
-		}
-
-		$("#isbnInput").val(<c:out value='${book.isbn}'/>);
-		$("#userInput").val(session);
-
-		$("#wishNbasket").attr("action","addMyBasket");
-		$("#wishNbasket").submit();
-	})
+	
 });
 	function hb_show_tabs(t_num) {
 		

@@ -77,18 +77,30 @@ function changeTotal() {
 			chk			= $(chkBoxTd).children().children(),
 			price		= Number($(item).children("td:eq(3)").children("p").data("price")),
 			quantity	= Number($(item).children("td:eq(4)").children().children().val()),
-			isbn		= $(chk).val();
+			idx			= $(chkBoxTd).data("idx");
 		
 		if ($(chk).attr("checked") == "checked") {
 			
-			transArr.push(isbn);
+			transArr.push(idx);
 			
 			totalPrice += (price*quantity);
 			totalMileage =  totalPrice/100,
 			totalQuantity += quantity;
 			
+			$("#isbn_"+idx).attr("name","isbn");
+			$("#thumb_"+idx).attr("name","thumb");
+			$("#theme_"+idx).attr("name","theme");
+			$("#price_"+idx).attr("name","price");
+			$("#quantity_"+idx).attr("name","quantity");
+			
 		} else {
-			transArr.splice(transArr.indexOf(isbn),1);
+			transArr.splice(transArr.indexOf(idx),1);
+			
+			$("#isbn_"+idx).removeAttr("name");
+			$("#thumb_"+idx).removeAttr("name");
+			$("#theme_"+idx).removeAttr("name");
+			$("#price_"+idx).removeAttr("name");
+			$("#quantity_"+idx).removeAttr("name");
 		}
 	});
 	

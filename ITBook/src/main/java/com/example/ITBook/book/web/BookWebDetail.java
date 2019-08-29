@@ -33,7 +33,7 @@ public class BookWebDetail {
 		Optional<Book> book = bookDetailService.selectOneBook(isbn);
 		
 		model.addAttribute("book", book.get());
-		model.addAttribute("userSession", ((User)session.getAttribute("user")).getIndex());
+		model.addAttribute("userSession", ((User)session.getAttribute("user")).getIdx());
 		
 		return "book_detail/bookDetail.book-main";
 	}
