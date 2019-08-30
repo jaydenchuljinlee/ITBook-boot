@@ -4,9 +4,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<link rel="stylesheet" type="text/css" href="/ITBook/css/book/book_detail.css">
+
 <script type="text/javascript">
+	
+
 	$(function(){
+
 		var session = "<c:out value='${userSession}'/>";
 
 		$("#btnAddCart").on("click",function() {
@@ -23,9 +26,18 @@
 
 			$("#wishNbasket").attr("action","addMyBasket");
 			$("#wishNbasket").submit();
-	});
+		});
+	
+		$("#proc_btn").on("click", function() {
+			$("#reviewFrm").attr("action","bookReview");
+			$("#reviewFrm").submit();
+			
+		});
 })
 </script>
+<link rel="stylesheet" type="text/css" href="/ITBook/css/book/book_detail.css">
+<script src="/ITBook/js/star.js"></script>
+
 <script type="text/javascript" src="/ITBook/js/book/bookDetail.js"></script>
 <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 
@@ -46,6 +58,7 @@
       </div>
       <div class="modal-body layer_scroll">
         <form id="reviewFrm" method="post" enctype="multipart/form-data">
+        	<input type="hidden" name="isbn" value=<c:out value="${book.isbn}"/> />
 			<div class="layer_con_box">
 				<fieldset>
 					<div class="lp_register_li">
@@ -61,7 +74,7 @@
 							<span>* </span>제목 :
 						</div>
 						<div class="i_con">
-						 <input type="text" name="hbr_title" id="hbr_title" class="i_text1" value="">
+						 <input type="text" name="title" id="hbr_title" class="i_text1" value="">
 						</div>
 					</div>
 					<div class="lp_register_li">
@@ -69,18 +82,18 @@
 							<span>* </span>실무경력:
 						</div>
 						<div class="i_con">
-							<select name="s1" class="i_select2">																	
-							<option value="">경력선택</option>																
-							<option value="1">1year</option>
-							<option value="2">2year</option>	
-							<option value="3">3year</option>	
-							<option value="4">4year</option>	
-							<option value="5">5year</option>
-							<option value="6">6year</option>	
-							<option value="7">7year</option>	
-						    <option value="8">8year</option>	
-							<option value="9">9year</option>	
-							<option value="10">10year</option>	
+							<select id="career_select" class="i_select2" name="career">																	
+								<option value="">경력선택</option>																
+								<option value="1">1year</option>
+								<option value="2">2year</option>	
+								<option value="3">3year</option>	
+								<option value="4">4year</option>	
+								<option value="5">5year</option>
+								<option value="6">6year</option>	
+								<option value="7">7year</option>	
+							    <option value="8">8year</option>	
+								<option value="9">9year</option>	
+								<option value="10">10year</option>	
 						    <option value="11">고급</option>											
 						</select>    	
 						</div>
@@ -91,11 +104,21 @@
 							<span>* </span>별점평가
 						</div>
 						<div class="i_con">
-							<div id="default" style="margin-top: 5px;">
-							<img src="images/store/star.png" alt="" style="margin: 0px; height: 20px;" />
-							</div>
-							<div class="highlight">
-							</div>
+							<span class="star-input">
+								<span class="input">
+							    	<input type="radio" name="star-input" value="1" id="p1">
+							    	<label for="p1">1</label>
+							    	<input type="radio" name="star-input" value="2" id="p2">
+							    	<label for="p2">2</label>
+							    	<input type="radio" name="star-input" value="3" id="p3">
+							    	<label for="p3">3</label>
+							    	<input type="radio" name="star-input" value="4" id="p4">
+							    	<label for="p4">4</label>
+							    	<input type="radio" name="star-input" value="5" id="p5">
+							    	<label for="p5">5</label>
+							  	</span>
+							  	<input type="hidden" id="input_grade" name="star" value="">					
+							</span>
 						</div>
 					</div>
 
@@ -104,7 +127,7 @@
 							<span>* </span>내용 :
 						</div>
 						<div class="i_con" id="hbc_cont_div">
-							<label> <textarea class="form-control" name="editor1"
+							<label> <textarea class="form-control" name="contents"
 									id="editor1" rows="10" cols="50"></textarea>
 
 							</label>
@@ -112,7 +135,7 @@
 					</div>
 				</fieldset>
 			</div>
-		</form>        
+		</form>
       </div>
       <div class="modal-footer">
         
@@ -126,11 +149,11 @@
 						</p>
 
 						<div class="btn_layer_default">
-							<label><button id="proc_btn" name="proc_btn"
-									type="button" value="" class="btn_blue"
-									onclick="review_proc('re_ins','');">등록</button></label> <label><button
-									id="reset_btn" name="reset_btn" type="button" value=""
-									class="btn_white" onclick="frm_reset();">취소</button></label>
+							<label>
+								<button id="proc_btn" name="proc_btn" type="button" class="btn_blue">등록</button></label> 
+									
+							<label>
+								<button id="reset_btn" name="reset_btn" type="button" class="btn_white close" data-dismiss="modal" aria-label="Close">취소</button></label>
 						</div>
 					
       </div>
@@ -189,14 +212,14 @@
 		<div class="store_like_area">
 
 			<div class="store_grade">
-				<span><img src="images/store/star.png" alt="" /> 4점 (10명)</span>
+				<span><img src="images/store/star.png" alt="" /> <c:out value="${bookGrade}"/>점 (<c:out value="${bookLength}" />명)</span>
 			</div>
 			<div class="store_like">
 				<span><img src="images/store/love.png" alt="" /> 좋아요 : </span><font
 					id="likescore">3</font>
 			</div>
 			<div class="store_review">
-				<button class="btn_review" data-toggle="modal" data-target="#reviewPop">
+				<button type="button" class="btn_review" data-toggle="modal" data-target="#reviewPop">
 				리뷰쓰기!
 				</button>
 			</div>
@@ -269,30 +292,24 @@
 						<div class="detail_review_area">
 		<!-- 유저 댓글 목록 시작 -->
 									<ul>
-										<li>
-											<div class="comment" style="border-bottom:1px solid #e7e7e7;">
-												<h6>
-													bgh0987<span>| 2018-03-02, 4:00pm | 경력 : 2년차  |</span><span><img src="images/store/star.png" alt="" style="margin: 0px; height: 20px;"/></span>
-												</h6>
-												<p style="margin-bottom: 5px;">
-												   <strong><i class="fas fa-chevron-left"></i>스프링책 추천!!</strong><i class="fas fa-chevron-right"></i><br>
-												
-												스프링에 대해 좀 더 알고 싶어서 구매했는데 내용이 좀 어렵긴 하네요. 하지만
-												    아주 유익한 책입니다.!! 추천합니다.</p>
-											</div></li>
-										<li>
-										<li>
-											<div class="comment">
-												<h6 style="margin-top: 10px;">
-													ohj1234<span>| 2018-03-13, 1:39pm | 경력 : 없음  |</span><span><img src="images/store/star.png" alt="" style="margin: 0px; height: 20px;"/></span>
-												</h6>
-												<p style="margin-bottom: 5px;">
-												 <strong><i class="fas fa-chevron-left"></i>생각보다 어렵네요 ㅠㅠ</strong><i class="fas fa-chevron-right"></i><br>
-												스프링 공부하려고 샀는데 생각보다 많이 어렵네요 ㅠㅠ </p>
-											</div>
-											</li>
-										<li>
-										
+										<c:forEach items="${reviewList}" var="review">
+											<li>
+												<div class="comment" style="border-bottom:1px solid #e7e7e7;">
+													<h6>
+														<c:out value="${review.user.name}"/>													
+	
+														<span>| <c:out value="${review.createdDate}"/> | 경력 : <c:out value="${review.career}"/>년차  |</span><span><img src="images/store/star.png" alt="" style="margin: 0px; height: 20px;"/></span>
+													</h6>
+													<p style="margin-bottom: 5px;">
+													   <strong>
+													   	<i class="fas fa-chevron-left"></i><c:out value="${review.title}"/>
+													   </strong>
+													   <i class="fas fa-chevron-right"></i><br>
+														<c:out value="${review.contents}"/>
+													</p>
+												</div></li>
+											<li>
+										</c:forEach>
 									</ul>
 									<!-- 유저 댓글 목록 끝 -->
 								</div>

@@ -29,5 +29,7 @@
 	<tiles:insertAttribute name="quick_view" />
 	<!-- Switcher  Panel -->
 	<tiles:insertAttribute name="link_js" />
+	
+	
 </body>
 </html>

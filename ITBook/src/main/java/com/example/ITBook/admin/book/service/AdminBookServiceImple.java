@@ -86,7 +86,9 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 		Bookcategory categoryInfo = setBookCategory(book,child);
 
-		List<Hashtag> tagInfos = setBookhashtag(book,hash);
+		List<Hashtag> tagInfos = new ArrayList<>();
+		
+		if (hash != null) tagInfos = setBookhashtag(book,hash);
 		
 		repositorySave(book,categoryInfo,tagInfos);
 		
@@ -97,11 +99,9 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 		bookRegisterRepository.save(book);
 		
-		for (Hashtag item: tagInfo) {
-			bookHashtageRepository.save(item);
+		if (tagInfo != null) {
+			for (Hashtag item: tagInfo) bookHashtageRepository.save(item);
 		}
-		
-		
 		
 		bookCategoryRepository.save(categoryInfo);
 		

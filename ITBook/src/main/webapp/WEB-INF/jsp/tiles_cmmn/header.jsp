@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- Top Bar -->
 <div class="topbar">
 	<div class="container">
@@ -61,11 +65,11 @@
 			<div class="navigation">
 				<ul>
 					<li class="dropdown-icon">
-						<a href="#"><i class="fas fa-book"></i>도서 <i class="fas fa-angle-down"></i></a>
+						<a id="book" class="menu"><i class="fas fa-book"></i>도서 <i class="fas fa-angle-down"></i></a>
 						<ul>
-							<li><a href="#" id="recommendBook" class="menu">맞춤도서</a></li>
-							<li><a href="#" id="newBook" class="menu">신간도서</a></li>
-							<li><a href="#" id="categoryBook" class="menu">전체 도서</a></li>
+							<li><a id="recommendBook" class="menu">맞춤도서</a></li>
+							<li><a id="book" class="menu">신간도서</a></li>
+							<li><a id="categoryBook" class="menu">전체 도서</a></li>
 						</ul>
 					</li>
 					<li class="dropdown-icon">
@@ -106,28 +110,25 @@
 		</div>
 	</div>
 </nav>
-<!-- Nav -->
-<form id="moveFrm"></form>
 
 <form id="frm" method="post"> 
 	<input type="hidden" id="pageName" name="pageName"/>
 </form>
 
-<script>
-$(document).ready(function() {
-	
-	$(".menu").click(function() {
-		
-		$("#moveFrm").attr("action",$(this).attr("id")+".do")
-		$("#moveFrm").submit()
-	})
-})
-</script>
-
 <script>	
+	$(function() {
+
+		
+		$(".menu").on("click", function() {
+			var page = $(this).attr("id");
+
+			header.pageSubmitFn(page);
+		})
+	})
+
 	var header = { // 리터럴 함수를 선언하여  각 메뉴를 클릭할 때, id가 frm인 곳으로 매개변수를 전달하여, value에 추가하도록 하였다.
 			pageSubmitFn : function(str) {
-				$("#frm").attr("action",str + ".do");
+				$("#frm").attr("action",str);
 				$("#pageName").val(str);
 				$("#frm").submit();
 			}

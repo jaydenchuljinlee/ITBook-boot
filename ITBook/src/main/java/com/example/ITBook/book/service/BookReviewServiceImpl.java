@@ -26,10 +26,6 @@ public class BookReviewServiceImpl implements BookReviewService {
 		
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
-		Optional<Review> chkisReview = bookReviewRepository.findById(pk);
-		
-		if (chkisReview.isPresent()) return false;
-		
 		Book book = new Book(isbn);
 		User user = new User(idx);
 		
@@ -39,7 +35,7 @@ public class BookReviewServiceImpl implements BookReviewService {
 		
 		bookReviewRepository.save(review);
 		
-		return false;
+		return true;
 	}
 
 }

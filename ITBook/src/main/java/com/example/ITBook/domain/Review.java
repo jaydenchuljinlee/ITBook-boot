@@ -1,5 +1,7 @@
 package com.example.ITBook.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -38,6 +40,12 @@ public class Review {
 	private int star;
 	
 	private String title;
+	
+	@Column(name = "created_date")
+	private LocalDateTime createdDate;
+	
+	@Column(name = "updated_date")
+	private LocalDateTime updatedDate;
 	
 	@Column(columnDefinition="TEXT")
 	private String contents;

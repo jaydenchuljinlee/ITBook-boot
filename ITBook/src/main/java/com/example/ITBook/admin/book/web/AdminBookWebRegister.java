@@ -44,7 +44,7 @@ public class AdminBookWebRegister {
 	public String BookRegisterSuccess(@ModelAttribute Book book,
 			@RequestParam long category1
 			,@RequestParam long category2
-			,@RequestParam List<Long> hash
+			,@RequestParam(required=false) List<Long> hash
 			,Model model) throws Exception {
 
 		boolean bookCheck = adminBookService.insertBook(book,category1,category2,hash);
