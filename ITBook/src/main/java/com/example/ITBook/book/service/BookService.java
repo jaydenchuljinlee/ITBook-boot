@@ -8,4 +8,8 @@ public interface BookService {
 
 	List<Book> selectBookListAll() throws Exception;
 
+	List<Book> selectNewBookList() throws Exception;
+
+	List<Book> selectBestBookList() throws Exception;
+
 }
