@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.admin.book.repository.AdminBigCategoryRepository;
@@ -32,6 +33,7 @@ public class AdminBookServiceImple implements AdminBookService {
 	private AdminBookHashtageRepository bookHashtageRepository;
 	private AdminBookRepository adminBookRepository;
 	
+	@Autowired
 	public AdminBookServiceImple(AdminBigCategoryRepository bCategoryRepository
 			,AdminSmallCategoryRepository sCategoryRepository
 			,AdminBookRegisterRepository bookRegisterRepository

@@ -1,5 +1,7 @@
 package com.example.ITBook.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -38,7 +40,7 @@ public class Book {
 	private String author;
 	private String translator;
 	
-	private String publishdate;
+	private LocalDateTime publishdate;
 	
 	@Column(columnDefinition = "TEXT")
 	private String intro;
@@ -51,8 +53,9 @@ public class Book {
 		this.isbn = isbn;
 	}
 	
+	@Builder
 	public Book(Long isbn,int price,int page,Scategory s_category,int quantity,String image,String theme
-			,String original,String publish,String author,String translator,String publishdate
+			,String original,String publish,String author,String translator,LocalDateTime publishdate
 			,String intro,String contents,String authorinfo) {
 		
 		this.isbn = isbn;
@@ -66,7 +69,7 @@ public class Book {
 		this.publish = publish;
 		this.author = author;
 		this.translator = translator;
-		this.publishdate = publishdate;
+		this.publishdate = LocalDateTime.now();
 		this.intro = intro;
 		this.contents = contents;
 		this.authorinfo = authorinfo;

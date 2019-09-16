@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.admin.book.repository.AdminBigCategoryRepository;
@@ -26,7 +27,6 @@ import com.example.ITBook.domain.pk.CategoryPK;
 public class AdminBookDetailServiceImpl implements AdminBookDetailService {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookDetailServiceImpl.class);
 	
-	
 	private AdminBigCategoryRepository bCategoryRepository;
 	private AdminSmallCategoryRepository sCategoryRepository;
 	private AdminBookRegisterRepository bookRegisterRepository;
@@ -34,6 +34,7 @@ public class AdminBookDetailServiceImpl implements AdminBookDetailService {
 	private AdminBookHashtageRepository bookHashtageRepository;
 	private AdminBookRepository adminBookRepository;
 	
+	@Autowired
 	public AdminBookDetailServiceImpl(AdminBigCategoryRepository bCategoryRepository
 			,AdminSmallCategoryRepository sCategoryRepository
 			,AdminBookRegisterRepository bookRegisterRepository

@@ -6,10 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
+@Setter
 @Getter
 @Entity
 public class Scategory {
@@ -23,6 +26,7 @@ public class Scategory {
 	
 	private String name;
 	
+	@Builder
 	public Scategory(long code,Bcategory bcategory) {
 		this.code = code;
 		this.bcategory = bcategory;
