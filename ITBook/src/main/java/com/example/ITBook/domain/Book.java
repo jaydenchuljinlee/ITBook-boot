@@ -28,7 +28,7 @@ public class Book {
 	private int page;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "s_category")
+	@JoinColumn(name = "scode")
 	private Scategory s_category;
 	
 	private int quantity;
