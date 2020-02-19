@@ -17,6 +17,7 @@ import com.example.ITBook.domain.Scategory;
 import com.example.ITBook.utils.JsonUtil;
 
 @Controller
+@RequestMapping("/admin/book")
 public class AdminBookWebCatergory {
 	
 	private AdminBookService adminBookService;
@@ -25,7 +26,7 @@ public class AdminBookWebCatergory {
 		this.adminBookService = adminBookService;
 	}
 
-	@RequestMapping(value = "categoryList_2",method = RequestMethod.POST)
+	@RequestMapping(value = "/categoryList_2",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> categoryList2(@RequestBody String reqParam) throws Exception {
 		

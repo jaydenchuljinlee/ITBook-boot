@@ -1,5 +1,6 @@
 package com.example.ITBook.configure;
 
+import com.example.ITBook.enums.Authority;
 import com.example.ITBook.enums.SocialType;
 import com.example.ITBook.oauth2.CustomOAuth2Provider;
 import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
@@ -37,6 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/oauth2/**", "/login/**","/css/**", "/images/**", "/js/**", "/console/**")
                     .permitAll()
+                .antMatchers("/admin/**")
+                	.hasAnyAuthority(Authority.ADMIN.getRoleType())
                 .antMatchers("/facebook")
                     .hasAnyAuthority(SocialType.FACEBOOK.getRoleType())
                 .antMatchers("/google")

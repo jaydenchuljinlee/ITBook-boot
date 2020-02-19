@@ -40,6 +40,12 @@ public class AdminBookWebRegister {
 		return "book/bookRegister.adminTiles";
 	}
 	
+	/**
+	 * 책 검색 크롤링
+	 * @param book : 책 객체, category1 : 대분류, category2 : 소분류, hash : 해시태그
+	 * @return : 해당페이지 redirect + 등록 여부
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "BookRegisterSuccess",method = RequestMethod.POST)
 	public String BookRegisterSuccess(@ModelAttribute Book book,
 			@RequestParam long category1
@@ -52,6 +58,12 @@ public class AdminBookWebRegister {
 		return "redirect:adminBookMain?bookCheck="+bookCheck;
 	}
 	
+	/**
+	 * 책 검색 크롤링
+	 * @param isbn : 검색한 isbn
+	 * @return : 크롤링한 도큐먼트
+	 * @throws Exception
+	 */
 	@RequestMapping(value= "adminBookSearch", produces = "application/xml; charset=utf8")
 	@ResponseBody
 	public String adminBookSearch(@RequestParam String isbn) throws Exception {

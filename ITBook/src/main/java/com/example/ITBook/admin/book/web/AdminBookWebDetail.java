@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import com.example.ITBook.admin.book.service.AdminBookDetailService;
 import com.example.ITBook.domain.Book;
 
 @Controller
+@RequestMapping("/admin/book")
 public class AdminBookWebDetail {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebDetail.class);
 	
@@ -24,7 +26,7 @@ public class AdminBookWebDetail {
 		this.adminBookDetailService = adminBookDetailService;
 	}
 
-	@RequestMapping(value= "adminBookDetail")
+	@GetMapping(value= "/detail")
 	public String adminBookDetail(@RequestParam long isbn,Model model) throws Exception {
 		
 		Map<String,Object> rtnMap = adminBookDetailService.selectBookAndCategory(isbn);
@@ -44,7 +46,7 @@ public class AdminBookWebDetail {
 		
 	}
 
-	@RequestMapping(value= "adminBookUpdate",method = RequestMethod.POST)
+	@RequestMapping(value= "/update",method = RequestMethod.POST)
 	public String adminBookUpdate(@ModelAttribute Book book,
 			@RequestParam long category1
 			,@RequestParam long category2

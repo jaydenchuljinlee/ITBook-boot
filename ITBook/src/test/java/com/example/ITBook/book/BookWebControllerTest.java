@@ -58,4 +58,15 @@ public class BookWebControllerTest {
 			.andDo(print())
 			.andExpect(status().isOk());
 	}
+	
+	@Test
+	@WithMockUser(username = "user",roles = "USER")
+	public void recommend_book_mvc_mock_Å×½ºÆ®() throws Exception {
+		
+		assertThat(mockMvc).isNotNull();
+		
+		mockMvc.perform(get("/recommendBook"))
+			.andDo(print())
+			.andExpect(status().isOk());
+	}
 }
