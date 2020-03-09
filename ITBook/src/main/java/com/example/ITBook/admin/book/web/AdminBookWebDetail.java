@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +21,14 @@ import com.example.ITBook.domain.Book;
 public class AdminBookWebDetail {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebDetail.class);
 	
+	@Autowired
 	private AdminBookDetailService adminBookDetailService;
-	
-	public AdminBookWebDetail(AdminBookDetailService adminBookDetailService) {
-		this.adminBookDetailService = adminBookDetailService;
-	}
 
+	/*
+	 * @param 		:  isbn(책 번호), model
+	 * @return		: 관리자 책 관리 상세 페이지
+	 * @addView()	: 상세 페이지에 올릴 뷰 정보들 묶음
+	 */
 	@GetMapping(value= "/detail")
 	public String adminBookDetail(@RequestParam long isbn,Model model) throws Exception {
 		
@@ -36,6 +39,9 @@ public class AdminBookWebDetail {
 		return "book/bookDetail.adminTiles";
 	}
 
+	/*
+	 * @param 	:  rtnMap(책과 카테고리 정보), model
+	 */
 	private void addView(Map<String, Object> rtnMap, Model model) {
 
 		model.addAttribute("scategory", rtnMap.get("s_category"));
@@ -46,6 +52,11 @@ public class AdminBookWebDetail {
 		
 	}
 
+	/*
+	 * @param 		:  book(책 객체),category1(부모 카테고리),category2(자식 카테고리)
+	 * 					,isChangeB(책 업뎃 여부),isChangeC(카테고리 없뎃 여부), model
+	 * @return		: 관리자 책 관리 메인 페이지
+	 */
 	@RequestMapping(value= "/update",method = RequestMethod.POST)
 	public String adminBookUpdate(@ModelAttribute Book book,
 			@RequestParam long category1

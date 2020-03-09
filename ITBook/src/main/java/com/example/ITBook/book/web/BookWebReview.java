@@ -19,6 +19,7 @@ import com.example.ITBook.domain.Review;
 import com.example.ITBook.domain.User;
 
 @Controller
+@RequestMapping("/book/review")
 public class BookWebReview {
 	private static final Logger logger = LoggerFactory.getLogger(BookWebReview.class);
 	private BookReviewService bookReviewService;
@@ -28,7 +29,11 @@ public class BookWebReview {
 	}
 	
 
-	@RequestMapping(value = "bookReview",method = RequestMethod.POST)
+	/*
+	 * @param 	: isbn(책 번호), session(세션), model
+	 * @return	: 기존 클릭했던 상세 페이지
+	 */
+	@RequestMapping(value = "/",method = RequestMethod.POST)
 	public String bookReview(@ModelAttribute Review review
 			,@RequestParam long isbn
 			,HttpSession session

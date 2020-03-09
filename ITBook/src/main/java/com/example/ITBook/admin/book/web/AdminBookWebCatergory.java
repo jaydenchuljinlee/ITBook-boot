@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,13 @@ import com.example.ITBook.utils.JsonUtil;
 @RequestMapping("/admin/book")
 public class AdminBookWebCatergory {
 	
+	@Autowired
 	private AdminBookService adminBookService;
-	
-	public AdminBookWebCatergory(AdminBookService adminBookService) {
-		this.adminBookService = adminBookService;
-	}
 
+	/*
+	 * @param 	: reqParam(json 형식으로 받아 온 부모 카테고리 정보)
+	 * @return	: list(자식 카테고리 리스트), result(성공 여부)
+	 */
 	@RequestMapping(value = "/categoryList_2",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> categoryList2(@RequestBody String reqParam) throws Exception {

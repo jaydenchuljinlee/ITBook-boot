@@ -2,6 +2,7 @@ package com.example.ITBook.admin.book.web;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +15,13 @@ import com.example.ITBook.domain.Book;
 @RequestMapping(value = "/admin/book")
 public class AdminBookWebController {
 	
+	@Autowired
 	private AdminBookService adminBookService;
-	
-	public AdminBookWebController(AdminBookService adminBookService) {
-		this.adminBookService = adminBookService;
-	}
 
+	/*
+	 * @param 	:  model
+	 * @return	: 관리자 책 관리 메인 페이지
+	 */
 	@GetMapping(value= "/")
 	public String adminBookMain(Model model) throws Exception {
 		

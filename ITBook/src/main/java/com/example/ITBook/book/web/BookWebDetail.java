@@ -19,6 +19,7 @@ import com.example.ITBook.domain.Review;
 import com.example.ITBook.domain.User;
 
 @Controller
+@RequestMapping("/book/detail")
 public class BookWebDetail {
 	private static final Logger logger = LoggerFactory.getLogger(BookWebDetail.class);
 
@@ -28,7 +29,11 @@ public class BookWebDetail {
 		this.bookDetailService = bookDetailService;
 	}
 	
-	@RequestMapping(value = "bookDetail")
+	/*
+	 * @param 	: isbn(책 번호), session(세션), model
+	 * @return	: 디테일 페이지
+	 */
+	@RequestMapping(value = "/")
 	private String bookDetail(@RequestParam Long isbn
 			,HttpSession session
 			,Model model) throws Exception {

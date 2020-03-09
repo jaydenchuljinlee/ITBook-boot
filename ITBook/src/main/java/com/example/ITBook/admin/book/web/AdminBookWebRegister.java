@@ -20,6 +20,7 @@ import com.example.ITBook.domain.Bcategory;
 import com.example.ITBook.domain.Book;
 
 @Controller
+@RequestMapping("/admin/book")
 public class AdminBookWebRegister {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebRegister.class);
 	
@@ -34,7 +35,7 @@ public class AdminBookWebRegister {
 		return adminBookService.selectParentCategoryList();
 	}
 	
-	@RequestMapping(value= "adminBookRegister")
+	@RequestMapping(value= "/register")
 	public String adminBookRegister() throws Exception {
 		
 		return "book/bookRegister.adminTiles";
@@ -46,7 +47,7 @@ public class AdminBookWebRegister {
 	 * @return : 해당페이지 redirect + 등록 여부
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "BookRegisterSuccess",method = RequestMethod.POST)
+	@RequestMapping(value = "/register/success",method = RequestMethod.POST)
 	public String BookRegisterSuccess(@ModelAttribute Book book,
 			@RequestParam long category1
 			,@RequestParam long category2
@@ -64,7 +65,7 @@ public class AdminBookWebRegister {
 	 * @return : 크롤링한 도큐먼트
 	 * @throws Exception
 	 */
-	@RequestMapping(value= "adminBookSearch", produces = "application/xml; charset=utf8")
+	@RequestMapping(value= "/search", produces = "application/xml; charset=utf8")
 	@ResponseBody
 	public String adminBookSearch(@RequestParam String isbn) throws Exception {
 
@@ -79,7 +80,7 @@ public class AdminBookWebRegister {
 	 * @return : 상세 정보 JSON
 	 * @throws Exception
 	 */
-	@RequestMapping(value= "adminBookSearchDetail", produces = "application/json; charset=utf8")
+	@RequestMapping(value= "/search/detail", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String adminBookSearchDetail(@RequestParam String url) throws Exception {
 		

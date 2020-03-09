@@ -16,6 +16,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.ITBook.admin.book.domain.NaverClientInformation;
+import com.example.ITBook.domain.Bcategory;
+import com.example.ITBook.domain.Book;
+import com.example.ITBook.domain.Hashtag;
+import com.example.ITBook.domain.Scategory;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
@@ -25,9 +31,20 @@ public class AdminBookRegisterTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	private NaverClientInformation naverDocument;
+	
+	private Book book;
+	private Bcategory bcategory;
+	private Scategory scategory;
+	private Hashtag hashtage;
+	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception{
 		
+		naverDocument = new NaverClientInformation("20120099");
+		
+		bcategory = new Bcategory(1);
+		scategory = new Scategory(1,bcategory);
 		
 		
 		logger.info("set up ...");

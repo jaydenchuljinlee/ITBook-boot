@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,29 +27,20 @@ import com.example.ITBook.domain.Tag;
 @Transactional
 @Service
 public class AdminBookServiceImple implements AdminBookService {
-	
-	private AdminBigCategoryRepository bCategoryRepository;
-	private AdminSmallCategoryRepository sCategoryRepository;
-	private AdminBookRegisterRepository bookRegisterRepository;
-	private AdminBookCategoryRepository bookCategoryRepository;
-	private AdminBookHashtageRepository bookHashtageRepository;
-	private AdminBookRepository adminBookRepository;
+	private static final Logger logger = LoggerFactory.getLogger(AdminBookServiceImple.class);
 	
 	@Autowired
-	public AdminBookServiceImple(AdminBigCategoryRepository bCategoryRepository
-			,AdminSmallCategoryRepository sCategoryRepository
-			,AdminBookRegisterRepository bookRegisterRepository
-			,AdminBookCategoryRepository bookCategoryRepository
-			,AdminBookHashtageRepository bookHashtageRepository
-			,AdminBookRepository adminBookRepository) {
-		
-		this.bCategoryRepository = bCategoryRepository;
-		this.sCategoryRepository = sCategoryRepository;
-		this.bookRegisterRepository = bookRegisterRepository;
-		this.bookCategoryRepository = bookCategoryRepository;
-		this.bookHashtageRepository = bookHashtageRepository;
-		this.adminBookRepository = adminBookRepository;
-	}
+	private AdminBigCategoryRepository bCategoryRepository;
+	@Autowired
+	private AdminSmallCategoryRepository sCategoryRepository;
+	@Autowired
+	private AdminBookRegisterRepository bookRegisterRepository;
+	@Autowired
+	private AdminBookCategoryRepository bookCategoryRepository;
+	@Autowired
+	private AdminBookHashtageRepository bookHashtageRepository;
+	@Autowired
+	private AdminBookRepository adminBookRepository;
 	
 	@Override
 	public List<Book> selectAllBooks() throws Exception {
@@ -67,6 +60,11 @@ public class AdminBookServiceImple implements AdminBookService {
 		return sCategoryRepository.findByBcategory(parent);
 	}
 
+	/*
+	 * @param 			: book(책 객체), category1(부모 카테고리), category2(자식 카테고리), hash(해시 태그 정보)
+	 * @return			: 등록 성공 여부
+	 * @isBookPresent()	: 책 존재 여부
+	 */
 	@Override
 	public boolean insertBook(Book book, long category1, long category2,List<Long> hash) throws Exception {
 		
@@ -82,6 +80,13 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 	}
 
+	/*
+	 * @param 				: book(책 객체), category1(부모 카테고리), category2(자식 카테고리), hash(해시 태그 정보)
+	 * @categoryCreate()	: 카테고리 객체 생성
+	 * @setBookCategory()	: 책 객체에 카테고리 객체 매핑
+	 * @setBookhashtag()	: 책 객체에 해시태그 객체 매핑
+	 * @repositorySave()	: 디비에 저장
+	 */
 	private void bookAndCategoryAndhashSave(Book book, long category1, long category2,List<Long> hash) {
 		
 		Scategory child = categoryCreate(category1,category2);
@@ -96,6 +101,9 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 	}
 
+	/*
+	 * @param 			: book(책 객체), categoryInfo(부모 카테고리), tagInfo(해시 태그 정보)
+	 */
 	private void repositorySave(Book book, Bookcategory categoryInfo, List<Hashtag> tagInfo) {
 		
 		
@@ -109,6 +117,10 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 	}
 
+	/*
+	 * @param 	: book(책 객체), hash(해시 태그 정보)
+	 * @return	: 해시태그 리스트	
+	 */
 	private List<Hashtag> setBookhashtag(Book book,List<Long> hash) {
 		
 		List<Hashtag> tagInfos = new ArrayList<Hashtag>();
