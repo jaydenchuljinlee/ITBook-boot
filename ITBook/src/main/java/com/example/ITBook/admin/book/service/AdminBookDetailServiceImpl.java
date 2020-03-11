@@ -16,12 +16,12 @@ import com.example.ITBook.admin.book.repository.AdminBookHashtageRepository;
 import com.example.ITBook.admin.book.repository.AdminBookRegisterRepository;
 import com.example.ITBook.admin.book.repository.AdminBookRepository;
 import com.example.ITBook.admin.book.repository.AdminSmallCategoryRepository;
-import com.example.ITBook.domain.Bcategory;
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.BookCategoryPK;
-import com.example.ITBook.domain.Bookcategory;
-import com.example.ITBook.domain.Scategory;
-import com.example.ITBook.domain.pk.CategoryPK;
+import com.example.ITBook.common.domain.Bcategory;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.BookCategoryPK;
+import com.example.ITBook.common.domain.Bookcategory;
+import com.example.ITBook.common.domain.Scategory;
+import com.example.ITBook.common.domain.pk.CategoryPK;
 
 @Service
 public class AdminBookDetailServiceImpl implements AdminBookDetailService {

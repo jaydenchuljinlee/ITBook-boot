@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ITBook.book.service.BookService;
-import com.example.ITBook.domain.Book;
+import com.example.ITBook.common.domain.Book;
 
 @Controller
 public class MainWebController {

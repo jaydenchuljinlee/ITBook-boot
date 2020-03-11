@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.ITBook.domain.MyBasket;
-import com.example.ITBook.domain.User;
+import com.example.ITBook.common.domain.MyBasket;
+import com.example.ITBook.common.domain.User;
 import com.example.ITBook.myPage.myBasket.service.MyBasketService;
 
 @Controller

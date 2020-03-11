@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.PayInfo;
-import com.example.ITBook.domain.Payment;
-import com.example.ITBook.domain.PaymentInformation;
-import com.example.ITBook.domain.User;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.PayInfo;
+import com.example.ITBook.common.domain.Payment;
+import com.example.ITBook.common.domain.PaymentInformation;
+import com.example.ITBook.common.domain.User;
 import com.example.ITBook.myPage.paymentList.service.PaymentService;
 
 

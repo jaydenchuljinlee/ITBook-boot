@@ -2,7 +2,7 @@ package com.example.ITBook.book.service;
 
 import java.util.List;
 
-import com.example.ITBook.domain.Book;
+import com.example.ITBook.common.domain.Book;
 
 public interface BookService {
 

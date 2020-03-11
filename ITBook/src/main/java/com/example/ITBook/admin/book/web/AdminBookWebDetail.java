@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ITBook.admin.book.service.AdminBookDetailService;
-import com.example.ITBook.domain.Book;
+import com.example.ITBook.common.domain.Book;
 
 @Controller
 @RequestMapping("/admin/book")

@@ -9,10 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.MyBasket;
-import com.example.ITBook.domain.User;
-import com.example.ITBook.domain.pk.MyBasketPK;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.MyBasket;
+import com.example.ITBook.common.domain.User;
+import com.example.ITBook.common.domain.pk.MyBasketPK;
 import com.example.ITBook.myPage.myBasket.repository.MyBasketRepository;
 
 @Service

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ITBook.admin.book.service.AdminBookService;
-import com.example.ITBook.domain.Book;
+import com.example.ITBook.common.domain.Book;
 
 @Controller
 @RequestMapping(value = "/admin/book")

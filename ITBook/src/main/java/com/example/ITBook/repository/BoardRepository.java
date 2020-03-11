@@ -1,7 +1,7 @@
 package com.example.ITBook.repository;
 
-import com.example.ITBook.domain.Board;
-import com.example.ITBook.domain.User;
+import com.example.ITBook.common.domain.Board;
+import com.example.ITBook.common.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

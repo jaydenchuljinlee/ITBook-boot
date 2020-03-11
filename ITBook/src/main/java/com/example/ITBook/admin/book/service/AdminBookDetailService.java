@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.example.ITBook.domain.Book;
+import com.example.ITBook.common.domain.Book;
 
 public interface AdminBookDetailService {
 

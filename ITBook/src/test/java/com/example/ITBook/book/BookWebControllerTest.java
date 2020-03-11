@@ -23,9 +23,9 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.example.ITBook.domain.Bcategory;
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.Scategory;
+import com.example.ITBook.common.domain.Bcategory;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.Scategory;
 
 
 import static org.assertj.core.api.Assertions.assertThat;

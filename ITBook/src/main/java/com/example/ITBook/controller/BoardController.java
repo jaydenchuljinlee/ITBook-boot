@@ -1,6 +1,6 @@
 package com.example.ITBook.controller;
 
-import com.example.ITBook.domain.Board;
+import com.example.ITBook.common.domain.Board;
 import com.example.ITBook.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

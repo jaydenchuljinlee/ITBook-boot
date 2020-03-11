@@ -7,11 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.PayInfo;
-import com.example.ITBook.domain.Payment;
-import com.example.ITBook.domain.PaymentInformation;
-import com.example.ITBook.domain.User;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.PayInfo;
+import com.example.ITBook.common.domain.Payment;
+import com.example.ITBook.common.domain.PaymentInformation;
+import com.example.ITBook.common.domain.User;
 import com.example.ITBook.myPage.paymentList.repository.PayInfoRepository;
 import com.example.ITBook.myPage.paymentList.repository.PaymentRepository;
 import com.example.ITBook.repository.UserRepository;

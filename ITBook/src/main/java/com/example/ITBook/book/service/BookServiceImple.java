@@ -9,11 +9,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.book.repository.BookRepository;
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.PaymentInformation;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.PaymentInformation;
 
 import lombok.Getter;
 
@@ -25,11 +26,8 @@ public class BookServiceImple implements BookService {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@Autowired
 	private BookRepository bookRepository;
-	
-	public BookServiceImple(BookRepository bookRepository) {
-		this.bookRepository = bookRepository;
-	}
 	
 	@Override
 	public List<Book> selectBookListAll() throws Exception {
@@ -37,6 +35,11 @@ public class BookServiceImple implements BookService {
 		return bookRepository.findAll();
 	}
 
+	/*
+	 * @query 	: JPQL을 통한 쿼리 생성 후 책 정보를 내림차순으로 정렬한 쿼리
+	 * 			: setMaxResults(7) 메서드를 통해 7개 까지만 뽑아 옴
+	 * @return	: 책 정보
+	 * */
 	@Override
 	public List<Book> selectNewBookList() throws Exception {
 
@@ -51,6 +54,11 @@ public class BookServiceImple implements BookService {
 		return bookList;
 	}
 
+	/*
+	 * @query 	: JPQL을 통한 책 구매 리스트 쿼리 생성 후 책 정보를 판매량 순으로 내림차순으로 정렬한 쿼리
+	 * 			: setMaxResults(7) 메서드를 통해 7개 까지만 뽑아 옴
+	 * @return	: 책 정보
+	 * */
 	@Override
 	public List<Book> selectBestBookList() throws Exception {
 

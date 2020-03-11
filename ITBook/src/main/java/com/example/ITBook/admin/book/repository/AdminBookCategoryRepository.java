@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
-import com.example.ITBook.domain.Bookcategory;
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.BookCategoryPK;
+import com.example.ITBook.common.domain.Bookcategory;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.BookCategoryPK;
 
 public interface AdminBookCategoryRepository extends JpaRepository<Bookcategory, BookCategoryPK>{
 

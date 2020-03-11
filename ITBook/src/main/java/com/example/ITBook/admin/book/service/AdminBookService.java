@@ -2,9 +2,9 @@ package com.example.ITBook.admin.book.service;
 
 import java.util.List;
 
-import com.example.ITBook.domain.Bcategory;
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.Scategory;
+import com.example.ITBook.common.domain.Bcategory;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.Scategory;
 
 public interface AdminBookService {
 

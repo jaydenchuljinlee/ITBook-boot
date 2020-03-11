@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.ITBook.domain.Bcategory;
-import com.example.ITBook.domain.Scategory;
+import com.example.ITBook.common.domain.Bcategory;
+import com.example.ITBook.common.domain.Scategory;
 
 public interface AdminSmallCategoryRepository  extends JpaRepository<Scategory, Long>{
 	

@@ -3,8 +3,8 @@ package com.example.ITBook.myPage.myBasket.service;
 import java.util.List;
 import java.util.Map;
 
-import com.example.ITBook.domain.MyBasket;
-import com.example.ITBook.domain.User;
+import com.example.ITBook.common.domain.MyBasket;
+import com.example.ITBook.common.domain.User;
 
 public interface MyBasketService {
 

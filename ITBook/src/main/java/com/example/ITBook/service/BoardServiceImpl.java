@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.repository.BoardRepository;
-import com.example.ITBook.domain.Board;
+import com.example.ITBook.common.domain.Board;
 
 @Service
 public class BoardServiceImpl implements BoardService {

@@ -16,9 +16,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.ITBook.domain.Bcategory;
-import com.example.ITBook.domain.Book;
-import com.example.ITBook.domain.Scategory;
+import com.example.ITBook.common.domain.Bcategory;
+import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.domain.Scategory;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

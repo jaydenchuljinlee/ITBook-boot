@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.ITBook.domain.MyBasket;
-import com.example.ITBook.domain.User;
-import com.example.ITBook.domain.pk.MyBasketPK;
+import com.example.ITBook.common.domain.MyBasket;
+import com.example.ITBook.common.domain.User;
+import com.example.ITBook.common.domain.pk.MyBasketPK;
 
 @Repository
 public interface MyBasketRepository extends JpaRepository<MyBasket, MyBasketPK>{

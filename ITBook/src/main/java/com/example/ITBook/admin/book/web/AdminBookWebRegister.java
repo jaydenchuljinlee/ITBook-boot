@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.ITBook.admin.book.domain.BookInformation;
 import com.example.ITBook.admin.book.domain.NaverClientInformation;
 import com.example.ITBook.admin.book.service.AdminBookService;
-import com.example.ITBook.domain.Bcategory;
-import com.example.ITBook.domain.Book;
+import com.example.ITBook.common.domain.Bcategory;
+import com.example.ITBook.common.domain.Book;
 
 @Controller
 @RequestMapping("/admin/book")
