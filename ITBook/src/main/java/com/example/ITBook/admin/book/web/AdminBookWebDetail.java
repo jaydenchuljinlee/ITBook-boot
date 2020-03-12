@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.ITBook.admin.book.service.AdminBookDetailService;
 import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.exception.BookNotFoundException;
 
 @Controller
 @RequestMapping("/admin/book")
@@ -33,6 +34,10 @@ public class AdminBookWebDetail {
 	public String adminBookDetail(@RequestParam long isbn,Model model) throws Exception {
 		
 		Map<String,Object> rtnMap = adminBookDetailService.selectBookAndCategory(isbn);
+		
+		if (rtnMap.get("book") == null) {
+			throw new BookNotFoundException(isbn);
+		} 
 		
 		addView(rtnMap,model);
 		

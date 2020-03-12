@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,23 +19,30 @@ import com.example.ITBook.admin.book.domain.NaverClientInformation;
 import com.example.ITBook.admin.book.service.AdminBookService;
 import com.example.ITBook.common.domain.Bcategory;
 import com.example.ITBook.common.domain.Book;
+import com.example.ITBook.common.exception.BookIsbnDuplicationException;
+import com.example.ITBook.common.exception.BookIsbnNotFoundException;
+import com.example.ITBook.common.exception.FailedConnectionException;
 
 @Controller
 @RequestMapping("/admin/book")
 public class AdminBookWebRegister {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebRegister.class);
 	
+	@Autowired
 	private AdminBookService adminBookService;
-	
-	public AdminBookWebRegister(AdminBookService adminBookService) {
-		this.adminBookService = adminBookService;
-	}
 
+	/*
+	 * @info	: 책 등록 공통 부분인 부모 카테고리 리스트
+	 * 
+	 *  */
 	@ModelAttribute("categoryList_1")
 	public List<Bcategory> categoryList_1(ModelMap model) throws Exception {
 		return adminBookService.selectParentCategoryList();
 	}
 	
+	/*
+	 * @info	: 책 등록 메인 페이지
+	 * */
 	@RequestMapping(value= "/register")
 	public String adminBookRegister() throws Exception {
 		
@@ -52,11 +60,15 @@ public class AdminBookWebRegister {
 			@RequestParam long category1
 			,@RequestParam long category2
 			,@RequestParam(required=false) List<Long> hash
-			,Model model) throws Exception {
-
-		boolean bookCheck = adminBookService.insertBook(book,category1,category2,hash);
+			,Model model) throws Exception{
 		
-		return "redirect:adminBookMain?bookCheck="+bookCheck;
+		if (adminBookService.selectBookByIsbn(book).isPresent()) {
+			throw new BookIsbnDuplicationException(book.getIsbn().toString());
+		}
+		
+		adminBookService.insertBook(book,category1,category2,hash);
+		
+		return "redirect:adminBookMain";
 	}
 	
 	/**
@@ -67,11 +79,18 @@ public class AdminBookWebRegister {
 	 */
 	@RequestMapping(value= "/search", produces = "application/xml; charset=utf8")
 	@ResponseBody
-	public String adminBookSearch(@RequestParam String isbn) throws Exception {
-
+	public String adminBookSearch(@RequestParam String isbn) throws Exception{
+		
 		NaverClientInformation naverDocument = new NaverClientInformation(isbn);
 		
-        return naverDocument.getDocument();
+		/*
+		 * if (naverDocument.getDocument() == null) {
+		 * 
+		 * throw new BookIsbnNotFoundException(isbn); }
+		 */
+		
+		return naverDocument.getDocument();
+        
 	}
 	
 	/**
@@ -82,11 +101,12 @@ public class AdminBookWebRegister {
 	 */
 	@RequestMapping(value= "/search/detail", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String adminBookSearchDetail(@RequestParam String url) throws Exception {
+	public String adminBookSearchDetail(@RequestParam String url) throws Exception{
 		
 		BookInformation bookInfo = new BookInformation(url);
 		
 		return bookInfo.getBookJsonObject().toString();
+		
 	}
 	
 	

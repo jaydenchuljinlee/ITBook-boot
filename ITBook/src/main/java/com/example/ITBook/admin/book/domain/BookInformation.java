@@ -9,6 +9,9 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.JsonObject;
 
+/*
+ * isbn 크롤링 책 정보
+ * */
 public class BookInformation {
 
 	String url;
@@ -27,19 +30,30 @@ public class BookInformation {
 	
 	JsonObject jsonObject;
 	
+	/*
+	 * 가져온 url을 통해 크롤링 책 정보 생성
+	 * @parma : url
+	 * */
 	public BookInformation(String url) throws IOException {
 		this.url = url;
 		this.document = Jsoup.connect(this.url).timeout(10000).get();
 		
-		this.author  = new StringBuffer();	
+		this.author  = new StringBuffer();
 		
 		createBookInfo(this.document);
 	}
 	
+	/*
+	 * 
+	 * */
 	public JsonObject getBookJsonObject() {
 		return this.jsonObject;
 	}
 
+	/*
+	 * 도큐먼트 객체를 파싱하여 책 정보 생성
+	 * @param : 도큐먼트 객체
+	 * */
 	private void createBookInfo(Document document) throws IOException {
 		
 		Elements infoBox = document.select(".book_info_inner");
@@ -58,6 +72,9 @@ public class BookInformation {
 		
 	}
 
+	/*
+	 * 파싱한 도큐먼트 객체를 json 객체로 변환
+	 * */
 	private void createJsonObejct() {
 		
 		this.jsonObject = new JsonObject();
@@ -81,6 +98,10 @@ public class BookInformation {
 		return translator != null;
 	}
 
+	/*
+	 * 도큐먼트 객체를 파싱하여 info, contents,authorInfo 변수에 담아줌
+	 * @param : 도큐먼트 객체
+	 * */
 	private void creatBookContent(Document document) throws IOException {
 
 		Element content = document.getElementById("content");
@@ -91,10 +112,13 @@ public class BookInformation {
 		
 	}
 
+	/*
+	 * 도큐먼트 객체를 파싱하여 info, contents,authorInfo 변수에 담아줌
+	 * @param : originalTitleElements(원본 책 도큐먼트),infoBox(책 콘텐츠 정보)
+	 * */
 	private void checkForeignBooks(Elements originalTitleElements, Elements infoBox) {
 
 		//해외 책인지 아닌지 체크
-		
 		if (isPresent(originalTitleElements)) {
 			//원제
 			this.originalTitle = originalTitleElements.first().childNodes().get(1).toString().trim();
@@ -110,6 +134,10 @@ public class BookInformation {
 		
 	}
 
+	/*
+	 * 책 콘텐츠 정보 내에 역자 정보 파싱
+	 * @param : infoBox(책 콘텐츠 정보)
+	 * */
 	private void appendTranslatorLoog(Elements infoBox) {
 
 		//역자
@@ -132,6 +160,10 @@ public class BookInformation {
 		return originalTitleElements.size() > 0;
 	}
 
+	/*
+	 * 저자 정보를 stringBuffer에 ,를 구분자로해서 추가
+	 * @param : authors(저자 정보)
+	 * */
 	private void appendAuthorLoop(Elements authors) {
 
 		for (int i = 0,loop = authors.size(); i < loop; i++) {

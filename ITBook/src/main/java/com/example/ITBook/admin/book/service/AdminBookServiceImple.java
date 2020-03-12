@@ -132,6 +132,17 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 		return tagInfos;
 	}
+	
+	/*
+	 * @info	: 책 존재 여부 검사
+	 * @param 	: book(책 객체), hash(해시 태그 정보)
+	 * @return	: 해시태그 리스트	
+	 */
+	@Override
+	public Optional<Book> selectBookByIsbn(Book book) throws Exception {
+		
+		return adminBookRepository.findById(book.getIsbn());
+	}
 
 	private Bookcategory setBookCategory(Book book, Scategory child) {
 
@@ -154,6 +165,8 @@ public class AdminBookServiceImple implements AdminBookService {
 		
 		return list.isPresent();
 	}
+
+	
 
 	
 

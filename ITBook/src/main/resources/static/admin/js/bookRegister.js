@@ -52,11 +52,22 @@ $(function() {
 								CKEDITOR.instances.authorInfo.insertHtml(json.authorInfo);
 								$("#loader").hide();
 								window.scrollTo(0,0);
+							},
+							error		: function(error) {
+								console.log("adminBookSearchDetail 에 대한 에러");
+								console.log(error);
+								alert("데이터를 가져오는 중에 오류가 발생하였습니다.");
+								
 							}
 						});
 						
 					}
 					
+				},
+				error : function(error){
+					console.log("adminBookSearch에 대한 에러");
+					console.log(error);
+					alert("데이터를 가져오는 중에 오류가 발생하였습니다.");
 				}
 				
 			});
