@@ -11,20 +11,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Builder
 @Entity
-@Setter
-@Getter
+@Setter @Getter 
 @NoArgsConstructor
-public class User {
+public class User implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
+    @Column(name = "name",length = 50)
     private String name;
+    @Column(name = "password",length = 255)
     private String password;
+    @Column(name = "email",length = 255)
     private String email;
 
     @Column(name = "createddate")
@@ -33,23 +40,30 @@ public class User {
     private LocalDateTime updatedDate;
 
     // OAuth
+    @Column(name = "principal",length = 255)
     private String principal;
     @Column(name = "socialtype")
     private SocialType socialType;
     
+    @Column(name = "phone",length = 255)
     private String phone;
-    @Column(name = "address_1")
+    @Column(name = "address_1",length = 50)
     private String address1;
-    @Column(name = "address_2")
+    @Column(name = "address_2",length = 255)
     private String address2;
-    @Column(name = "address_3")
+    @Column(name = "address_3",length = 255)
     private String address3;
     
-    @Column(name = "mileage")
+    @Column(name = "mileage",length = 7)
     private int mileage;
 
     public User(Long index) {
     	this.idx = index;
+    }
+    
+    public User(String email, String password) {
+    	this.email 		= email;
+    	this.password	= password;
     }
     
     public User(Long index, String name, String password, String email, LocalDateTime createdDate

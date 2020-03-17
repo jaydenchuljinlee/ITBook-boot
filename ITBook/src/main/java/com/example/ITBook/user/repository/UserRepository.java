@@ -1,4 +1,4 @@
-package com.example.ITBook.repository;
+package com.example.ITBook.user.repository;
 
 import com.example.ITBook.common.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

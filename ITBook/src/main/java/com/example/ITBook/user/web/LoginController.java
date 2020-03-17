@@ -1,4 +1,4 @@
-package com.example.ITBook.controller;
+package com.example.ITBook.user.web;
 
 import com.example.ITBook.common.annotation.SocialUser;
 import com.example.ITBook.common.domain.User;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 
-	@RequestMapping("/login")
+	@GetMapping("/login")
     public String login() {
         return "login/login.tiles2";
     }

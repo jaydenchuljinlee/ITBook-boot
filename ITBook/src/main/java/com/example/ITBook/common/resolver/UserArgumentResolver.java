@@ -3,7 +3,7 @@ package com.example.ITBook.common.resolver;
 import com.example.ITBook.common.annotation.SocialUser;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.enums.SocialType;
-import com.example.ITBook.repository.UserRepository;
+import com.example.ITBook.user.repository.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.common.domain.Book;
@@ -14,22 +15,17 @@ import com.example.ITBook.common.domain.PaymentInformation;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.myPage.paymentList.repository.PayInfoRepository;
 import com.example.ITBook.myPage.paymentList.repository.PaymentRepository;
-import com.example.ITBook.repository.UserRepository;
+import com.example.ITBook.user.repository.UserRepository;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
 	
+	@Autowired
 	private PaymentRepository paymentRepository;
+	@Autowired
 	private PayInfoRepository payInfoRepository;
+	@Autowired
 	private UserRepository userRepository;
-	
-	public PaymentServiceImpl(PaymentRepository paymentRepository
-			,PayInfoRepository payInfoRepository
-			,UserRepository userRepository) {
-		this.paymentRepository = paymentRepository;
-		this.payInfoRepository = payInfoRepository;
-		this.userRepository = userRepository;
-	}
 
 	@Override
 	public List<PaymentInformation> insertpayInfo(Payment payment,PayInfo payInfo, HttpSession session) throws Exception {
