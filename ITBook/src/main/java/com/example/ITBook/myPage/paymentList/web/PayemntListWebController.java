@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,15 +24,13 @@ import com.example.ITBook.myPage.paymentList.service.PaymentService;
 
 
 @Controller
+@RequestMapping("/payment")
 public class PayemntListWebController {
 	
+	@Autowired
 	private PaymentService paymentService;
-	
-	public PayemntListWebController(PaymentService paymentService) {
-		this.paymentService = paymentService;
-	}
 
-	@RequestMapping(value = "payment")
+	@PostMapping(value = "/")
 	public String payment(@ModelAttribute PayInfo payInfo
 			,HttpSession session
 			,Model model) throws Exception {
@@ -63,7 +63,7 @@ public class PayemntListWebController {
 		return "myPage/payment.myPage-tiles";
 	}
 	
-	@RequestMapping(value="completePay", method = RequestMethod.POST)
+	@PostMapping(value="/completePay")
 	public String completePay(@ModelAttribute Payment payment
 			,@ModelAttribute PayInfo payInfo
 			,HttpSession session

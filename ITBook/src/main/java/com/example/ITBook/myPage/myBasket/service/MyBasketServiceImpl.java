@@ -30,23 +30,18 @@ public class MyBasketServiceImpl implements MyBasketService {
 		Map<String ,String> map = new HashMap<String, String>();
 		
 		Book book = new Book(isbn);
-		User user = new User(user_param.getIdx());
+		User user = new User(user_param.getUser_no());
 		
 		MyBasket myBasket = new MyBasket(book,user);
 		
-		try {
-			myBasketRepository.delete(myBasket);
-			map.put("result", "success");
-		} catch(Exception e) {
-			logger.debug(e.getMessage());
-		}
+		myBasketRepository.delete(myBasket);
+		map.put("result", "success");
 			
 		return map;
 	}
 	
 	@Override
 	public List<MyBasket> selectByUser(Long index) throws Exception {
-		
 		
 		return myBasketRepository.findAllByUser(new User(index));
 	}
@@ -56,16 +51,11 @@ public class MyBasketServiceImpl implements MyBasketService {
 		
 		Optional<MyBasket> chk = checkForExistence(isbn,userIdx);
 		
-		if(isPresent(chk)) return false;
+		if(chk.isPresent()) return false;
 		
 		insertMyBasketInDB(isbn,userIdx);
 		
 		return true;
-	}
-
-	private boolean isPresent(Optional<MyBasket> chk) {
-		
-		return chk.isPresent();
 	}
 
 	private Optional<MyBasket> checkForExistence(long isbn, long idx) {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,17 +23,15 @@ import com.example.ITBook.myPage.myBasket.service.MyBasketService;
 @Controller
 public class MyBasketWebController {
 	private static final Logger logger = LoggerFactory.getLogger(MyBasketWebController.class);
-	private MyBasketService myBasketService;
 	
-	public MyBasketWebController(MyBasketService myBasketService) {
-		this.myBasketService = myBasketService;
-	}
+	@Autowired
+	private MyBasketService myBasketService;
 
 	@RequestMapping(value = "myBasket")
 	public String mybascket(HttpSession session
 			,Model model) throws Exception {
 		
-		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getIdx());
+		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getUser_no());
 		
 		model.addAttribute("myBasketList", list);
 		

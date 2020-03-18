@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Transactional
 	@Override
 	public List<PaymentInformation> insertpayInfo(Payment payment,PayInfo payInfo, HttpSession session) throws Exception {
 
@@ -49,7 +51,6 @@ public class PaymentServiceImpl implements PaymentService {
 		user.setMileage(payInfo.getTotalMil());
 		payment.setUser(user);
 		
-		userRepository.save(user);
 		paymentRepository.save(payment);
 		
 		for (int i = 0; i < length; i++) {

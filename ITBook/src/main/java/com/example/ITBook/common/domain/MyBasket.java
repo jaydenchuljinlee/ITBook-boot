@@ -33,7 +33,7 @@ public class MyBasket {
 	private User user;
 	
 	public MyBasket(Book book,User user) {
-		this.myBasketPK = new MyBasketPK(book.getIsbn(),user.getIdx());
+		this.myBasketPK = new MyBasketPK(book.getIsbn(),user.getUser_no());
 		this.book = book;
 		this.user = user;
 		

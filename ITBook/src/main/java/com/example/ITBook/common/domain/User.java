@@ -25,7 +25,7 @@ public class User implements Serializable{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idx;
+    private Long user_no;
 
     @Column(name = "name",length = 50)
     private String name;
@@ -57,8 +57,8 @@ public class User implements Serializable{
     @Column(name = "mileage",length = 7)
     private int mileage;
 
-    public User(Long index) {
-    	this.idx = index;
+    public User(Long user_no) {
+    	this.user_no = user_no;
     }
     
     public User(String email, String password) {
@@ -66,10 +66,10 @@ public class User implements Serializable{
     	this.password	= password;
     }
     
-    public User(Long index, String name, String password, String email, LocalDateTime createdDate
+    public User(Long user_no, String name, String password, String email, LocalDateTime createdDate
     		, LocalDateTime updatedDate, String principal, SocialType socialType,String phone
     		, String address1, String address2, String address3,int mileage) {
-        this.idx = index;
+        this.user_no = user_no;
         this.name = name;
         this.password = password;
         this.email = email;

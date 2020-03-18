@@ -43,7 +43,7 @@ public class BookWebDetail {
 			Map<String, Object> rvMap = bookDetailService.selectReviewList(isbn);
 			
 			model.addAttribute("book", book.get());
-			model.addAttribute("userSession", ((User)session.getAttribute("user")).getIdx());
+			model.addAttribute("userSession", ((User)session.getAttribute("user")).getUser_no());
 			model.addAttribute("bookGrade", rvMap.get("grade"));
 			model.addAttribute("bookLength", rvMap.get("length"));
 			model.addAttribute("reviewList", rvMap.get("rvList"));

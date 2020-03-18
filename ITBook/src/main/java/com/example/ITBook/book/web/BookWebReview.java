@@ -40,7 +40,7 @@ public class BookWebReview {
 		
 		try {
 			
-			bookReviewService.updateBookReview(review,isbn,((User) session.getAttribute("user")).getIdx());
+			bookReviewService.updateBookReview(review,isbn,((User) session.getAttribute("user")).getUser_no());
 
 		} catch (Exception e) {
 			
@@ -64,7 +64,7 @@ public class BookWebReview {
 		
 		try {
 			
-			bookReviewService.deleteBookReview(review,isbn,((User) session.getAttribute("user")).getIdx());
+			bookReviewService.deleteBookReview(review,isbn,((User) session.getAttribute("user")).getUser_no());
 
 		} catch (Exception e) {
 			
@@ -88,7 +88,7 @@ public class BookWebReview {
 		
 		try {
 			
-			bookReviewService.insertBookReview(review,isbn,((User) session.getAttribute("user")).getIdx());
+			bookReviewService.insertBookReview(review,isbn,((User) session.getAttribute("user")).getUser_no());
 
 		} catch (Exception e) {
 			
