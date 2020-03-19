@@ -90,5 +90,13 @@ public class Book {
 		
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		
+		Book b = (Book) obj;
+		
+		if (this.isbn == b.isbn) return true;
+		
+		return false;
+	}
 }

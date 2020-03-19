@@ -1,5 +1,6 @@
 package com.example.ITBook.myPage.myBasket.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,6 @@ public interface MyBasketService {
 
 	List<MyBasket> selectByUser(Long index) throws Exception;
 
-	Map<String ,String> deleteMyBasket(long param, User user) throws Exception;
+	HashMap<String ,Object> deleteMyBasket(long param, User user) throws Exception;
 
 }

@@ -25,17 +25,23 @@ public class MyBasketServiceImpl implements MyBasketService {
 	}
 	
 	@Override
-	public Map<String ,String> deleteMyBasket(long isbn, User user_param) throws Exception {
+	public HashMap<String ,Object> deleteMyBasket(long isbn, User user_param) throws Exception {
 
-		Map<String ,String> map = new HashMap<String, String>();
+		HashMap<String ,Object> map = new HashMap<>();
 		
 		Book book = new Book(isbn);
 		User user = new User(user_param.getUser_no());
 		
 		MyBasket myBasket = new MyBasket(book,user);
 		
-		myBasketRepository.delete(myBasket);
-		map.put("result", "success");
+		try {
+			myBasketRepository.delete(myBasket);
+			map.put("result", "success");
+		} catch(Exception e) {
+			map.put("result", "failed");
+			map.put("error", e.getMessage());
+			return map;
+		}
 			
 		return map;
 	}

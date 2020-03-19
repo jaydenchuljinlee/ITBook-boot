@@ -22,7 +22,6 @@ import com.example.ITBook.common.domain.PaymentInformation;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.myPage.paymentList.service.PaymentService;
 
-
 @Controller
 @RequestMapping("/payment")
 public class PayemntListWebController {
@@ -37,20 +36,7 @@ public class PayemntListWebController {
 		
 		List<Book> list = new ArrayList<Book>();
 		
-		int length = payInfo.getIsbn().size();
-		
-		for(int i = 0; i < length; i++) {
-			
-			Book book = new Book();
-			
-			book.setIsbn(payInfo.getIsbn().get(i));
-			book.setTheme(payInfo.getTheme().get(i));
-			book.setImage(payInfo.getThumb().get(i));
-			book.setQuantity(payInfo.getQuantity().get(i));
-			book.setPrice(payInfo.getPrice().get(i));
-			
-			list.add(book);
-		}
+		setBookList(list,payInfo);//책 정보 세팅
 		
 		model.addAttribute("session", ((User)session.getAttribute("user")));
 		model.addAttribute("bookList", list);
@@ -74,5 +60,27 @@ public class PayemntListWebController {
 		model.addAttribute("payInfoList", payInfoList);
 		
 		return "myPage/completePay.myPage-tiles";
+	}
+	
+	/*
+	 * 결제 정보에 대한 책 정보 리스트 세팅
+	 * */
+	private void setBookList(List<Book> list, PayInfo payInfo) {
+
+		int length = payInfo.getIsbn().size();
+		
+		for(int i = 0; i < length; i++) {
+			
+			Book book = new Book();
+			
+			book.setIsbn(payInfo.getIsbn().get(i));
+			book.setTheme(payInfo.getTheme().get(i));
+			book.setImage(payInfo.getThumb().get(i));
+			book.setQuantity(payInfo.getQuantity().get(i));
+			book.setPrice(payInfo.getPrice().get(i));
+			
+			list.add(book);
+		}
+		
 	}
 }

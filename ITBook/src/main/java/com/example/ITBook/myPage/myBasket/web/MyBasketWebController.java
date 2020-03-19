@@ -1,5 +1,6 @@
 package com.example.ITBook.myPage.myBasket.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ITBook.common.domain.MyBasket;
 import com.example.ITBook.common.domain.User;
+import com.example.ITBook.common.utils.JsonUtil;
 import com.example.ITBook.myPage.myBasket.service.MyBasketService;
 
 @Controller
@@ -27,6 +29,9 @@ public class MyBasketWebController {
 	@Autowired
 	private MyBasketService myBasketService;
 
+	/*
+	 * 장바구니 메인
+	 * */
 	@RequestMapping(value = "myBasket")
 	public String mybascket(HttpSession session
 			,Model model) throws Exception {
@@ -38,6 +43,9 @@ public class MyBasketWebController {
 		return "myPage/myBasket.myPage-tiles";
 	}
 	
+	/*
+	 * 장바구니 추가
+	 * */
 	@RequestMapping(value = "addMyBasket",method = RequestMethod.POST)
 	public String addMyBasket(@RequestParam long isbn
 			,@RequestParam long userIdx
@@ -50,13 +58,16 @@ public class MyBasketWebController {
 		return "redirect:/book";
 	}
 	
+	/*
+	 * 장바구니 삭제
+	 * */
 	@RequestMapping(value = "deleteMyBasket",method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String ,String> deleteMyBasket(@RequestParam(required=false) long isbn
+	public String deleteMyBasket(@RequestParam(required=false) long isbn
 			,HttpSession session) throws Exception {
 		
-		Map<String ,String> map = myBasketService.deleteMyBasket(isbn,((User)session.getAttribute("user")));
+		HashMap<String ,Object> map = myBasketService.deleteMyBasket(isbn,((User)session.getAttribute("user")));
 		
-		return map;
+		return JsonUtil.HashMapToJson(map);
 	}
 }
