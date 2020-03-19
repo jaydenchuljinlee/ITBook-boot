@@ -11,9 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@Setter
-@Getter
+/*
+ * 자식 카테고리 테이블
+ * */
+
+@Getter @Setter @NoArgsConstructor
 @Entity
 public class Scategory {
 

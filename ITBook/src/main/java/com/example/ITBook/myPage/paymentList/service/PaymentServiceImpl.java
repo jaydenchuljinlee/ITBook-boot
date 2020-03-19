@@ -25,9 +25,13 @@ public class PaymentServiceImpl implements PaymentService {
 	private PaymentRepository paymentRepository;
 	@Autowired
 	private PayInfoRepository payInfoRepository;
-	@Autowired
-	private UserRepository userRepository;
 
+	/*
+	 * 결제
+	 * @param 	: payment(결제 객체), payInfo(결제정보-다중구매 리스트)
+	 * @return	: 
+	 * @throws	: exception
+	 * */
 	@Transactional
 	@Override
 	public List<PaymentInformation> insertpayInfo(Payment payment,PayInfo payInfo, HttpSession session) throws Exception {
@@ -40,7 +44,7 @@ public class PaymentServiceImpl implements PaymentService {
 		for(int i = 0; i < length; i++) {
 			
 			Book book = new Book();
-			System.out.println(payInfo.getIsbn().get(i));
+			
 			book.setIsbn(payInfo.getIsbn().get(i));
 			book.setQuantity(payInfo.getQuantity().get(i));
 			

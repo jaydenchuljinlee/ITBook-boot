@@ -8,6 +8,10 @@ import javax.persistence.Embeddable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/*
+ * ∏Æ∫‰ ∫π«’≈∞ PK ∞¥√º
+ * */
+
 @NoArgsConstructor
 @Getter
 @Embeddable
@@ -18,11 +22,11 @@ public class ReviewPK  implements Serializable{
 	@Column(name = "isbn")
 	private long isbn;
 	
-	@Column(name = "idx")
-	private long index;
+	@Column(name = "user_no")
+	private long user_no;
 	
-	public ReviewPK(long isbn,long index) {
+	public ReviewPK(long isbn,long user_no) {
 		this.isbn = isbn;
-		this.index = index;
+		this.user_no = user_no;
 	}
 }

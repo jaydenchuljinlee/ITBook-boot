@@ -6,9 +6,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
+import com.example.ITBook.common.domain.pk.BookCategoryPK;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/*
+ * 책 카테고리 테이블
+ * */
 
 @NoArgsConstructor
 @Getter
@@ -16,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Bookcategory {
 	
 	@EmbeddedId
-	private BookCategoryPK pk;
+	private BookCategoryPK pk;// 책 카테고리 복합 키 객체
 	
 	@ManyToOne
 	@MapsId("isbn")

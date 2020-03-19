@@ -18,7 +18,7 @@ import com.example.ITBook.admin.book.repository.AdminBookRepository;
 import com.example.ITBook.admin.book.repository.AdminSmallCategoryRepository;
 import com.example.ITBook.common.domain.Bcategory;
 import com.example.ITBook.common.domain.Book;
-import com.example.ITBook.common.domain.BookCategoryPK;
+import com.example.ITBook.common.domain.pk.BookCategoryPK;
 import com.example.ITBook.common.domain.Bookcategory;
 import com.example.ITBook.common.domain.Scategory;
 import com.example.ITBook.common.domain.pk.CategoryPK;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.ITBook.common.domain.Bookcategory;
 import com.example.ITBook.common.domain.Book;
-import com.example.ITBook.common.domain.BookCategoryPK;
+import com.example.ITBook.common.domain.pk.BookCategoryPK;
 
 public interface AdminBookCategoryRepository extends JpaRepository<Bookcategory, BookCategoryPK>{
 

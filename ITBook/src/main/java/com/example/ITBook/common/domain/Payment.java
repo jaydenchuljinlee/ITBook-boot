@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.example.ITBook.common.domain.User.UserBuilder;
 import com.example.ITBook.common.enums.SocialType;
@@ -19,60 +20,63 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
+
+/*
+ * 결제 테이블
+ * */
+
+@Getter @Setter @NoArgsConstructor @Builder
 @Entity
-@Setter
-@Getter
-@NoArgsConstructor
+@Table(name = "payment")
 public class Payment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idx;
+	private long pay_no;
 	
 	@ManyToOne(fetch =  FetchType.LAZY)
 	@JoinColumn(name ="user_no")
     private User user;
 	
-	@Column(name = "price")
+	@Column(name = "price",length = 10)
 	private int totalPrice;
-	@Column(name = "quantity")
+	@Column(name = "quantity",length = 10)
 	private int totalquantity;
-	@Column(name = "state")
+	@Column(name = "state",length = 10)
 	private int state;
 	
-	@Column(name = "pay_date")
+	@Column(name = "pay_date",columnDefinition = "DATETIME")
 	private LocalDateTime payDate;
 	
-	@Column(name = "name")
+	@Column(name = "name",columnDefinition = "VARCHAR",length = 50)
 	private String name;
-	@Column(name = "phone")
+	@Column(name = "phone",columnDefinition = "VARCHAR",length = 50)
 	private String phone;
-	@Column(name = "house_phone")
+	@Column(name = "house_phone",columnDefinition = "VARCHAR",length = 50)
 	private String call;
-	@Column(name = "message")
+	@Column(name = "message",columnDefinition = "VARCHAR",length = 50)
 	private String message;
-	@Column(name = "address_1")
+	@Column(name = "address_1",columnDefinition = "VARCHAR",length = 50)
 	private String address1;
-	@Column(name = "address_2")
+	@Column(name = "address_2",columnDefinition = "VARCHAR",length = 50)
 	private String address2;
-	@Column(name = "address_3")
+	@Column(name = "address_3",columnDefinition = "VARCHAR",length = 50)
 	private String address3;
-	@Column(name = "method")
+	@Column(name = "method",columnDefinition = "VARCHAR",length = 50)
 	private String method;
-	@Column(name = "apply_mileage")
+	@Column(name = "apply_mileage",length = 10)
 	private int mileage;
 	
-	public Payment(long idx, User user) {
-		this.idx = idx;
+	public Payment(long pay_no, User user) {
+		this.pay_no = pay_no;
 		this.user = user;
 		
 	}
 	
-	public Payment(long idx,User user,int totalPrice,int totalquantity,int state,LocalDateTime payDate
+	public Payment(long pay_no,User user,int totalPrice,int totalquantity,int state,LocalDateTime payDate
 			,String name,String phone,String call,String message,String address1,String address2
 			,String address3,String method,int mileage) {
-		this.idx = idx;
+		this.pay_no = pay_no;
 		this.user = user;
 		this.totalPrice = totalPrice;
 		this.totalquantity = totalquantity;

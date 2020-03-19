@@ -8,6 +8,10 @@ import javax.persistence.Embeddable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/*
+ * 카테고리 복합키 PK 객체
+ * */
+
 @NoArgsConstructor
 @Getter
 @Embeddable

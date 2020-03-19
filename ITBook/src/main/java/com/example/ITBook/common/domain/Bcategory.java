@@ -9,6 +9,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/*
+ * 상위 카테고리 테이블
+ * */
+
 @NoArgsConstructor
 @Getter
 @Entity

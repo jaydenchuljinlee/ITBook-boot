@@ -13,6 +13,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
+/*
+ * 장바구니 테이블
+ * */
+
 @NoArgsConstructor
 @Getter
 @Entity
@@ -28,8 +32,8 @@ public class MyBasket {
 	private Book book;
 	
 	@ManyToOne
-	@MapsId("idx")
-	@JoinColumn(name = "idx")
+	@MapsId("user_no")
+	@JoinColumn(name = "user_no")
 	private User user;
 	
 	public MyBasket(Book book,User user) {

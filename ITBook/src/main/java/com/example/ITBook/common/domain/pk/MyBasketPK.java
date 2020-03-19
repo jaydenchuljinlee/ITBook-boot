@@ -18,12 +18,12 @@ public class MyBasketPK  implements Serializable{
 	@Column(name = "isbn")
 	private long isbn;
 	
-	@Column(name = "idx")
-	private long index;
+	@Column(name = "user_no")
+	private long user_no;
 	
-	public MyBasketPK(long isbn,long index) {
+	public MyBasketPK(long isbn,long user_no) {
 		this.isbn = isbn;
-		this.index = index;
+		this.user_no = user_no;
 	}
 	
 }

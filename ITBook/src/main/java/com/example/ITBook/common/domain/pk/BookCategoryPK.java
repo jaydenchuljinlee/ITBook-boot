@@ -1,4 +1,4 @@
-package com.example.ITBook.common.domain;
+package com.example.ITBook.common.domain.pk;
 
 import java.io.Serializable;
 
@@ -7,6 +7,10 @@ import javax.persistence.Embeddable;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+/*
+ * 책 카테고리 복합 키 객체
+ * */
 
 @NoArgsConstructor
 @Getter

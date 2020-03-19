@@ -16,9 +16,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@Setter
-@Getter
+/*
+ * 책 리뷰 테이블
+ * */
+
+@Getter @Setter @NoArgsConstructor
 @Entity
 @Table(name = "review")
 public class Review {

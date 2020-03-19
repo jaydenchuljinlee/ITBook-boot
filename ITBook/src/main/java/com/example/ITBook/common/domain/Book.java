@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /*
- * 책 정보 DB 객체
+ * 책 정보 DB 테이블
  * */
 @NoArgsConstructor
 @Setter

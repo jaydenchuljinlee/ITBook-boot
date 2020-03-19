@@ -4,6 +4,10 @@ import java.util.List;
 
 import lombok.Data;
 
+/*
+ * 다중 건  결제 정보
+ * */
+
 @Data
 public class PayInfo {
 	

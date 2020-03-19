@@ -2,6 +2,7 @@ package com.example.ITBook.common.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -15,8 +16,11 @@ import com.example.ITBook.common.domain.pk.PaymentInformationPK;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@Getter
+/*
+ * 결제 정보 테이블
+ * */
+
+@Getter @NoArgsConstructor
 @Entity
 @Table(name = "pay_info")
 public class PaymentInformation {
@@ -34,10 +38,11 @@ public class PaymentInformation {
 	@JoinColumn(name = "isbn")
 	private Book book;
 	
+	@Column(columnDefinition = "INT",length = 11)
 	private int quantity;
 	
 	public PaymentInformation(Payment payment,Book book,int quantity) {
-		this.PK = new PaymentInformationPK(payment.getIdx(),book.getIsbn());
+		this.PK = new PaymentInformationPK(payment.getPay_no(),book.getIsbn());
 		this.payment = payment;
 		this.book = book;
 		this.quantity = quantity;

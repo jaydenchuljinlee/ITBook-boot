@@ -15,10 +15,13 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/*
+ * 회원 테이블
+ * */
+
 @Builder
 @Entity
-@Setter @Getter 
-@NoArgsConstructor
+@Setter @Getter @NoArgsConstructor
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
