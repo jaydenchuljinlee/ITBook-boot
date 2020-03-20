@@ -14,9 +14,14 @@ import javax.transaction.Transactional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    public Optional<User> findByEmail(String email);
+    public Optional<User> findByEmail(String email) throws Exception;
     
-    public Optional<User> findByEmailAndPassword(String email,String password);
+    public Optional<User> findByEmailAndPassword(String email,String password) throws Exception;
+    
+    @Modifying
+    @Transactional
+    @Query(value = "insert into User values(:#{#user})", nativeQuery = false)
+    Optional<User> insert(@Param("user") User user) throws Exception;
     
     @Modifying
     @Transactional
@@ -29,6 +34,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     		+ ", u.address_2 = :#{#user.address2}"
     		+ ", u.address_3 = :#{#user.address3}"
     		+ ", u.mileage = :#{#user.mileage} where u.user_no = :#{#user.user_no}",nativeQuery = false)
-    int update(@Param("user") User user);
+    Optional<User> update(@Param("user") User user) throws Exception;
     
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.common.domain.Book;
@@ -18,14 +19,12 @@ import com.example.ITBook.myPage.myBasket.repository.MyBasketRepository;
 @Service
 public class MyBasketServiceImpl implements MyBasketService {
 	private static final Logger logger = LoggerFactory.getLogger(MyBasketServiceImpl.class);
+	
+	@Autowired
 	private MyBasketRepository myBasketRepository;
 	
-	public MyBasketServiceImpl(MyBasketRepository myBasketRepository) {
-		this.myBasketRepository = myBasketRepository;
-	}
-	
 	@Override
-	public HashMap<String ,Object> deleteMyBasket(long isbn, User user_param) throws Exception {
+	public Optional<MyBasket> deleteMyBasket(long isbn, User user_param) throws Exception {
 
 		HashMap<String ,Object> map = new HashMap<>();
 		
@@ -33,17 +32,8 @@ public class MyBasketServiceImpl implements MyBasketService {
 		User user = new User(user_param.getUser_no());
 		
 		MyBasket myBasket = new MyBasket(book,user);
-		
-		try {
-			myBasketRepository.delete(myBasket);
-			map.put("result", "success");
-		} catch(Exception e) {
-			map.put("result", "failed");
-			map.put("error", e.getMessage());
-			return map;
-		}
 			
-		return map;
+		return myBasketRepository.remove(myBasket);
 	}
 	
 	@Override
@@ -53,15 +43,13 @@ public class MyBasketServiceImpl implements MyBasketService {
 	}
 	
 	@Override
-	public boolean insertMyBasket(long isbn,long userIdx) throws Exception {
+	public Optional<MyBasket> insertMyBasket(long isbn,long userIdx) throws Exception {
 		
 		Optional<MyBasket> chk = checkForExistence(isbn,userIdx);
 		
-		if(chk.isPresent()) return false;
+		if(chk.isPresent()) return null;
 		
-		insertMyBasketInDB(isbn,userIdx);
-		
-		return true;
+		return insertMyBasketInDB(isbn,userIdx);
 	}
 
 	private Optional<MyBasket> checkForExistence(long isbn, long idx) {
@@ -70,15 +58,14 @@ public class MyBasketServiceImpl implements MyBasketService {
 		return myBasketRepository.findById(pk);
 	}
 
-	private void insertMyBasketInDB(long isbn, long idx) {
+	private Optional<MyBasket> insertMyBasketInDB(long isbn, long idx) throws Exception{
 		Book book = new Book(isbn);
 		
 		User user = new User(idx);
 		
 		MyBasket myBasket = new MyBasket(book,user);
 		
-		myBasketRepository.save(myBasket);	
-		
+		return myBasketRepository.insert(myBasket);	
 	}
 
 	

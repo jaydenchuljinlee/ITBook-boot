@@ -16,6 +16,7 @@ import com.example.ITBook.common.domain.PayInfo;
 import com.example.ITBook.common.domain.Payment;
 import com.example.ITBook.common.domain.PaymentInformation;
 import com.example.ITBook.common.domain.User;
+import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.common.exception.OveredBookQuantityException;
 import com.example.ITBook.common.exception.PamentSizeException;
 import com.example.ITBook.myPage.paymentList.repository.PayInfoRepository;
@@ -52,7 +53,7 @@ public class PaymentServiceImpl implements PaymentService {
 		user.setMileage(payInfo.getTotalMil());
 		payment.setUser(user);
 		
-		paymentRepository.save(payment);
+		if (!paymentRepository.insert(payment).isPresent()) throw new DoNotUpdateOrInsertException();
 		
 		paymentInfoSaveInRepository(payInfo,payment,list,paymentInfoList);// 결제 정보 리스트 insert
 		

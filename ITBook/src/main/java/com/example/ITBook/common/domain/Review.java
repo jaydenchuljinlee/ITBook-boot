@@ -34,22 +34,25 @@ public class Review {
 	private Book book;
 	
 	@ManyToOne
-	@MapsId("idx")
-	@JoinColumn(name = "idx")
+	@MapsId("user_no")
+	@JoinColumn(name = "user_no")
 	private User user;
 	
+	@Column(name = "career",columnDefinition = "INT",length = 11)
 	private int career;
+	@Column(name = "star",columnDefinition = "INT",length = 11)
 	private int star;
 	
+	@Column(name = "title",columnDefinition = "VARCHAR",length = 50)
 	private String title;
 	
-	@Column(name = "created_date")
+	@Column(name = "created_date",columnDefinition = "DATETIME")
 	private LocalDateTime createdDate;
 	
-	@Column(name = "updated_date")
+	@Column(name = "updated_date",columnDefinition = "DATETIME")
 	private LocalDateTime updatedDate;
 	
-	@Column(columnDefinition="TEXT")
+	@Column(name = "contents",columnDefinition="TEXT")
 	private String contents;
 	
 	public Review(Book book,User user,int career,int star,String title,String contents) {

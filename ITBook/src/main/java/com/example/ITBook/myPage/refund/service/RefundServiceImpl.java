@@ -24,7 +24,6 @@ public class RefundServiceImpl implements RefundService {
 	@Override
 	public Optional<Payment> updatePaymentStateOnRefund(long pay_no, long user_no) throws Exception {
 		
-		
 		return paymentRepository.updatePaymentStateOnFalse(pay_no, user_no);
 	}
 }

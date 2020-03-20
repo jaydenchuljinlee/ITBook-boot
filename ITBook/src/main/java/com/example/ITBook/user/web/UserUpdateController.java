@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ITBook.common.domain.User;
+import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.user.service.UserUpdateService;
 
 @Controller
@@ -24,7 +25,7 @@ public class UserUpdateController {
 		
 		if (isTrue) {
 			
-			userUpdateService.updateUser(user);
+			if (!userUpdateService.updateUser(user).isPresent()) throw new DoNotUpdateOrInsertException();
 			
 			return "myPage/modifyInfo";
 			
@@ -41,7 +42,7 @@ public class UserUpdateController {
 		
 		if (isTrue) {
 			
-			userUpdateService.deleteUser(user);
+			if (!userUpdateService.deleteUser(user).isPresent()) throw new DoNotUpdateOrInsertException();
 			
 			return "myPage/modifyInfo";
 			

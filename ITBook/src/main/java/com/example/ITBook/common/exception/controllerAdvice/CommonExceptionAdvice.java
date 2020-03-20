@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.ITBook.common.exception.BookIsbnDuplicationException;
 import com.example.ITBook.common.exception.BookIsbnNotFoundException;
 import com.example.ITBook.common.exception.BookNotFoundException;
+import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.common.exception.FailedConnectionException;
 import com.example.ITBook.common.exception.OveredBookQuantityException;
 import com.example.ITBook.common.exception.PamentSizeException;
@@ -106,5 +107,15 @@ public class CommonExceptionAdvice {
 		logger.info("구매 수량 : "+e1.toString());
 		
 		return "redirect:/common/error";
+	}
+	
+	@ExceptionHandler(DoNotUpdateOrInsertException.class)
+	public String doNotUpdateOrInsertExceptionHandler() {
+	
+		String error = "alert('알 수 없는 오류로 데이터가 반영되지 않았습니다.');";
+		
+		rtnMap.put("error", error);
+		
+		return JsonUtil.HashMapToJson(rtnMap);
 	}
 }

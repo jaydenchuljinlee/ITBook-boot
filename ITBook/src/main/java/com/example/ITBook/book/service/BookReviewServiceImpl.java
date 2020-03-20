@@ -26,7 +26,7 @@ public class BookReviewServiceImpl implements BookReviewService {
 	 * @return	: 등록 여부
 	 * */
 	@Override
-	public boolean insertBookReview(Review review, long isbn, long idx) throws Exception {
+	public Optional<Review> insertBookReview(Review review, long isbn, long idx) throws Exception {
 		
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
@@ -37,9 +37,9 @@ public class BookReviewServiceImpl implements BookReviewService {
 		review.setUser(user);
 		review.setReviewPK(pk);
 		
-		bookReviewRepository.save(review);
+		//bookReviewRepository.save(review);
 		
-		return true;
+		return bookReviewRepository.insert(review);
 	}
 
 	/*
@@ -48,7 +48,7 @@ public class BookReviewServiceImpl implements BookReviewService {
 	 * @return	: 등록 여부
 	 * */
 	@Override
-	public void updateBookReview(Review review, long isbn, Long idx) {
+	public Optional<Review> updateBookReview(Review review, long isbn, Long idx) throws Exception{
 
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
@@ -58,9 +58,8 @@ public class BookReviewServiceImpl implements BookReviewService {
 		review.setBook(book);
 		review.setUser(user);
 		review.setReviewPK(pk);
-		
-		bookReviewRepository.delete(review);
-		bookReviewRepository.save(review);
+
+		return bookReviewRepository.update(review);
 		
 	}
 
@@ -70,7 +69,7 @@ public class BookReviewServiceImpl implements BookReviewService {
 	 * @return	: 등록 여부
 	 * */
 	@Override
-	public void deleteBookReview(Review review, long isbn, Long idx) {
+	public Optional<Review> deleteBookReview(Review review, long isbn, Long idx) throws Exception{
 
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
@@ -81,8 +80,9 @@ public class BookReviewServiceImpl implements BookReviewService {
 		review.setUser(user);
 		review.setReviewPK(pk);
 		
-		bookReviewRepository.delete(review);
+		//bookReviewRepository.delete(review);
 		
+		return bookReviewRepository.remove(review);
 	}
 
 }

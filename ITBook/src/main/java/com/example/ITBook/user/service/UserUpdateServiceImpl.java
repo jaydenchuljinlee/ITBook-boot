@@ -1,5 +1,7 @@
 package com.example.ITBook.user.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,19 +34,19 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 	 * 유저 활성 상태값 변화
 	 * */
 	@Override
-	public void deleteUser(User user) throws Exception {
+	public Optional<User> deleteUser(User user) throws Exception {
 
-		userRepository.update(user);
+		return userRepository.update(user);
 	}
 
 	@Override
-	public void updateUser(User user) throws Exception {
+	public Optional<User> updateUser(User user) throws Exception {
 
 		String password = encoder.encode(user.getPassword());
 		
 		user.setPassword(password);
 		
-		userRepository.update(user);
+		return userRepository.update(user);
 		
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.enums.SocialType;
+import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.user.service.JoinService;
 
 @Controller
@@ -32,7 +33,7 @@ public class JoinController {
 		
 		user.setSocialType(SocialType.valueOf(social));
 		
-		joinService.insertUser(user);
+		if (!joinService.insertUser(user).isPresent()) throw new DoNotUpdateOrInsertException();
 		
 		return "login/login.tiles2";
 	}

@@ -18,6 +18,11 @@ public interface PaymentRepository extends JpaRepository<Payment, Long>{
 
 	@Modifying
 	@Transactional
+	@Query(value = "insert into Payment values(:#{#payment})",nativeQuery = false)
+	Optional<Payment> insert(@Param("payment") Payment payment);
+	
+	@Modifying
+	@Transactional
 	@Query(value = "update payment p set p.state = 0 "
 					+ "where p.user_no = :#{#user_no} and p.pay_no = :#{#pay_no}",nativeQuery = false)
 	Optional<Payment> updatePaymentStateOnFalse(@Param("pay_no") long pay_no, @Param("user_no") long user_no);
