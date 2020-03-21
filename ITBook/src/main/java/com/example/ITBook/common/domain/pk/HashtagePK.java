@@ -1,5 +1,7 @@
 package com.example.ITBook.common.domain.pk;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -14,7 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Embeddable
-public class HashtagePK {
+public class HashtagePK  implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name = "isbn")

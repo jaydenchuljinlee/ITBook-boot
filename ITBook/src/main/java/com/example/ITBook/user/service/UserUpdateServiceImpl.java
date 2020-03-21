@@ -2,7 +2,10 @@ package com.example.ITBook.user.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,41 +15,46 @@ import com.example.ITBook.user.repository.UserRepository;
 @Service
 public class UserUpdateServiceImpl implements UserUpdateService {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserUpdateServiceImpl.class);
+	
 	@Autowired
 	private UserRepository userRepository;//유저 객체 리파지토리
 	
 	@Autowired
 	private PasswordEncoder encoder;// 패스워드 암호화 객체
 
+	/*
+	 * 비밀번호 체크
+	 * */
 	@Override
-	public boolean checkIdAndPassword(User user) throws Exception {
+	public Optional<User> checkIdAndPassword(User user) throws Exception {
 		
-		String password = encoder.encode(user.getPassword());
+		Optional<User> stored = userRepository.findByIdentity(user.getIdentity());
 		
-		user.setPassword(password);
+		if (!stored.isPresent()) throw new UsernameNotFoundException(user.getIdentity());
 		
-		boolean isTrue = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()).isPresent();
+		boolean isTrue = encoder.matches(user.getPassword(), stored.get().getPassword());
 		
-		return isTrue;
+		return stored;
 	}
 
 	/*
 	 * 유저 활성 상태값 변화
 	 * */
 	@Override
-	public Optional<User> deleteUser(User user) throws Exception {
+	public boolean deleteUser(User user) throws Exception {
 
-		return userRepository.update(user);
+		return userRepository.update(user) == 1 ? true : false;
 	}
 
 	@Override
-	public Optional<User> updateUser(User user) throws Exception {
+	public boolean updateUser(User user) throws Exception {
 
 		String password = encoder.encode(user.getPassword());
 		
 		user.setPassword(password);
 		
-		return userRepository.update(user);
+		return userRepository.update(user) == 1 ? true : false;
 		
 	}
 }

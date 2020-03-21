@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.book.service.BookReviewService;
 import com.example.ITBook.common.domain.Review;
@@ -24,6 +25,7 @@ import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 
 @Controller
+@SessionAttributes("sessionId")
 @RequestMapping("/book/review")
 public class BookWebReview {
 	private static final Logger logger = LoggerFactory.getLogger(BookWebReview.class);
@@ -43,9 +45,9 @@ public class BookWebReview {
 			,HttpSession session
 			,Model model) throws Exception{
 		
-		Optional<Review> isSuccess = bookReviewService.updateBookReview(review,isbn,((User) session.getAttribute("user")).getUser_no());
+		boolean isSuccess = bookReviewService.updateBookReview(review,isbn,((User) session.getAttribute("user")).getUserNo());
 		
-		if (!isSuccess.isPresent()) throw new DoNotUpdateOrInsertException();
+		if (!isSuccess) throw new DoNotUpdateOrInsertException();
 		
 		return "redirect:bookDetail?isbn="+isbn;
 	}
@@ -61,9 +63,9 @@ public class BookWebReview {
 			,HttpSession session
 			,Model model) throws Exception{
 		
-		Optional<Review> isSuccess = bookReviewService.deleteBookReview(review,isbn,((User) session.getAttribute("user")).getUser_no());
+		boolean isSuccess = bookReviewService.deleteBookReview(review,isbn,((User) session.getAttribute("user")).getUserNo());
 		
-		if (!isSuccess.isPresent()) throw new DoNotUpdateOrInsertException();
+		if (!isSuccess) throw new DoNotUpdateOrInsertException();
 		
 		return "redirect:bookDetail?isbn="+isbn;
 	}
@@ -79,9 +81,9 @@ public class BookWebReview {
 			,HttpSession session
 			,Model model) throws Exception{
 		
-		Optional<Review> isSuccess = bookReviewService.insertBookReview(review,isbn,((User) session.getAttribute("user")).getUser_no());
+		boolean isSuccess = bookReviewService.insertBookReview(review,isbn,((User) session.getAttribute("user")).getUserNo());
 		
-		if (!isSuccess.isPresent()) throw new DoNotUpdateOrInsertException();
+		if (!isSuccess) throw new DoNotUpdateOrInsertException();
 		
 		return "redirect:bookDetail?isbn="+isbn;
 	}

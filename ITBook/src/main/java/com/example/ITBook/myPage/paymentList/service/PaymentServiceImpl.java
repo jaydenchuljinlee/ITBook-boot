@@ -53,7 +53,9 @@ public class PaymentServiceImpl implements PaymentService {
 		user.setMileage(payInfo.getTotalMil());
 		payment.setUser(user);
 		
-		if (!paymentRepository.insert(payment).isPresent()) throw new DoNotUpdateOrInsertException();
+		paymentRepository.save(payment);
+		
+		if (!paymentRepository.existsById(payment.getPay_no())) throw new DoNotUpdateOrInsertException();
 		
 		paymentInfoSaveInRepository(payInfo,payment,list,paymentInfoList);// 결제 정보 리스트 insert
 		
@@ -69,7 +71,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public List<PaymentInformation> selectList(Long user_no) throws Exception {
 		
-		return payInfoRepository.findAllByUserNo(user_no);
+		return paymentRepository.findByUser(new User(user_no));
 	}
 	
 	/*

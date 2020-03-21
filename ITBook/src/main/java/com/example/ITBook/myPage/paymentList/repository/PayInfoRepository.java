@@ -11,5 +11,4 @@ import com.example.ITBook.common.domain.pk.PaymentInformationPK;
 @Repository
 public interface PayInfoRepository extends JpaRepository<PaymentInformation, PaymentInformationPK>{
 
-	List<PaymentInformation> findAllByUserNo(long user_no); 
 }

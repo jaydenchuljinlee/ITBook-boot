@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.book.service.BookDetailService;
 import com.example.ITBook.common.domain.Book;
@@ -20,6 +21,7 @@ import com.example.ITBook.common.domain.Review;
 import com.example.ITBook.common.domain.User;
 
 @Controller
+@SessionAttributes("sessionId")
 @RequestMapping("/book/detail")
 public class BookWebDetail {
 	private static final Logger logger = LoggerFactory.getLogger(BookWebDetail.class);
@@ -43,7 +45,7 @@ public class BookWebDetail {
 			Map<String, Object> rvMap = bookDetailService.selectReviewList(isbn);
 			
 			model.addAttribute("book", book.get());
-			model.addAttribute("userSession", ((User)session.getAttribute("user")).getUser_no());
+			model.addAttribute("userSession", ((User)session.getAttribute("user")).getUserNo());
 			model.addAttribute("bookGrade", rvMap.get("grade"));
 			model.addAttribute("bookLength", rvMap.get("length"));
 			model.addAttribute("reviewList", rvMap.get("rvList"));

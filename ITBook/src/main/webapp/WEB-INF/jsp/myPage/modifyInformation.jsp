@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" type="text/css" href="/ITBook/css/mypage/mypage.css">
 
@@ -46,17 +47,14 @@
 					
 						<div class="register_li">
 							<div class="i_tit"><strong>아이디</strong></div>														
+							<input id="identity_input" class="form-control col-4 mx-1 necessary" type="text" name="identity" value="<c:out value='${user.identity}' />	" pattern="[A-Za-z0-9]{4,10}" maxlength="10" style="display:inline;" readOnly>
 							
-							<div class="i_con">
-								asdf1234	
-								
-							</div>
 						</div>	
 						
 						<div class="register_li">
 							<div class="i_tit"><strong>비밀번호<span>* </span></strong></div>
 							<div class="i_con">
-									<input type="password" name="m_passwd" id="m_passwd" class="i_text" value="" >
+									<input id="input_pwd" class="form-control col-4 mx-1 necessary" type="password" name="password">
 									<br>
 									<span id="pw_tip">8~20자리의 영문, 숫자 조합(영문, 숫자, 특수 기호 조합을 권장합니다.)</span>	
 									<!--pan>8자리 이상의 영문, 숫자 조합(영문, 숫자, 특수 기호 조합을 권장합니다)</span-->	
@@ -67,77 +65,57 @@
 						<div class="register_li">
 							<div class="i_tit"><strong>비밀번호 확인<span>* </span></strong></div>
 							<div class="i_con">
-									<input type="password" name="m_passwd_chk" id="m_passwd_chk" class="i_text">	
-									<span id="pwchk_tip" ></span><span id="pw_same_tip" class="f_red"></span>
+									<input class="form-control col-4 mx-1 necessary" type="password" id="confirm_pwd">
+							
+								<span id="alert-danger" class="join-added-info text-danger" >비밀번호가 일치하지 않습니다.</span>
+								<span id="alert-success" class="join-added-info text-primary" >비밀번호가 일치합니다.</span>
 							</div>
 						</div>
 						
 						<div class="register_li">
 							<div class="i_tit"><strong>이름</strong></div>
-							<div class="i_con">김자바</div>
+							<input id="identity_input" class="form-control col-4 mx-1 necessary" type="text" name="name" maxlength="10" style="display:inline;">
+							<div class="i_con"><c:out value="${user.name}" /></div>
 						</div>
-						
 						<div class="register_li">
-							<div class="i_tit"><strong>성별</strong></div>													
-							<div class="i_con">남</div>
-						</div>
-						
-						<div class="register_li">
-							<div class="i_tit"><strong>생년월일<span>* </span></strong></div>
-							<div class="i_con">
-								
-							1990년&nbsp;08월&nbsp;06일		
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="m_birth_type" id="m_birth_type_s"  value="s"  class="i_radio"  checked>	
-									<span>양력</span>
-									<input type="radio" name="m_birth_type" id="m_birth_type_l"  value="l" class="i_radio"   >	
-									<span>음력</span>								
-							</div>
-						</div>
-						
-						<div class="register_li">
-							<div class="i_tit"><strong>이메일<span>* </span></strong></div>
-							<div class="i_con">								
-								<INPUT type="hidden" name="m_email" id="m_email"  value="">
-									<input type="text" name="m_email_1" id="m_email_1" class="i_text2" value="abcd123">	
-									@
-									<input type="text" name="m_email_2" id="m_email_2" class="i_text2" value="naver.com">	
-								
-									<select id="m_email_addr" name="m_email_addr" class="i_select2">																	
-										<option value="">직접입력</option>																
-										<option value="naver.com">naver.com</option>		
-										<option value="daum.net">daum.net</option>		
-										<option value="nate.com">nate.com</option>		
-										<option value="gmail.com">gmail.com</option>		
-										<option value="hotmail.com">hotmail.com</option>		
-										<option value="yahoo.co.kr">yahoo.co.kr</option>										
-									</select>    														
-									<span id="email_tip" color="red"></span>		
-								
-									<p class="tit_modify">이메일 수신동의 시, 신상품/할인혜택/이벤트 등의 정보를 받아보실 수 있습니다.<br>
-                                                                                                                        수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다.</p>																	
-									<input type="radio" name="m_agree_email" id="m_agree_email_y" value="Y" checked='checked'  class="i_radio">
-									<span>예</span>
-									<input type="radio" name="m_agree_email" id="m_agree_email_n" value="N"  class="i_radio">
-									<span>아니오</span>
-							</div>
+						    <label for="id">이메일</label>
+						    <input type="hidden" id="email_input" name="email">
+						    <input class="form-control col-3 mx-1 necessary" type="text" id="email_id">
+							@
+							<input class="form-control col-4 mx-1 necessary" type="text" id="email_address" readonly>
+							<select id="email_select" class="sabang-select" name="mail" style="height:38px;">
+								<option value="naver.com">naver.com</option>
+								<option value="gmail.com">gmail.com</option>
+								<option value="hanmail.net">hanmail.net</option>
+								<option value="daum.net">daum.net</option>
+								<option value="nate.com">nate.com</option>
+								<option value="gmail.com">gmail.com</option>
+							</select>
 						</div>
 						
 						<div class="register_li">
 							<div class="i_tit"><strong>휴대전화<span>* </span></strong></div>
-							<div class="i_con">
-									<input type="text" name="m_mobile_1" id="m_mobile_1" class="i_text3" value="010" maxlength="4" >	
-								
-								- <input type="text" name="m_mobile_2" id="m_mobile_2" class="i_text3" value="1234"maxlength="4" >	
-							
-								- <input type="text" name="m_mobile_3" id="m_mobile_3" class="i_text3" value="5678"maxlength="4" >	
-							
-									<p class="tit_modify">할인혜택과 이벤트 등의 소식 안내를 SMS로 받으실 수 있습니다.<br>
-									                수신동의 거부 시에도 기본서비스는 발송됩니다.</p>															
-									<input type="radio" name="m_agree_sms" id="m_agree_sms_y" value="Y" checked='checked'  class="i_radio">
-									<span>예</span>
-									<input type="radio" name="m_agree_sms" id="m_agree_sms_n" value="N"  class="i_radio">
-									<span>아니오</span>
+							<div class="form-group">
+							   <input type="hidden" id="manager_call_input" name="phone">
+							   <input class="form-control col-1 mx-1 necessary" type="number" id="manager_call_input1" maxlength="5" oninput="maxLengthCheck(this)">
+							-
+							<input class="form-control col-1 mx-1 necessary" type="number" id="manager_call_input2" maxlength="4" oninput="maxLengthCheck(this)">
+							-
+							<input class="form-control col-1 mx-1 necessary" type="number" id="manager_call_input3" maxlength="4" oninput="maxLengthCheck(this)">
+							</div>
+						</div>
+						<div class="register_li">
+							<div class="i_tit"><strong>주소<span>* </span></strong></div>
+							<div class="form-inline">
+								<input class="form-control col-3 mx-1 necessary" type="text" id="search_zonecode" name="address1" readonly>
+
+								<div id="search" class="col-2 p-2 mx-2 text-center address_btn" style="font-size:13px;">
+									<span>주소검색</span>
+								</div>
+								<input class="form-control col-5 mx-1 necessary" type="text" id="search_address" name="address2" readonly>
+							</div>
+							<div class="mt-1">	
+								<input class="form-control col-7 mx-1 necessary" type="text" id="address_details" name="address3">
 							</div>
 						</div>
 					</div>

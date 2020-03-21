@@ -1,5 +1,6 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -22,8 +23,10 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class Book {
+public class Book  implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(columnDefinition = "BIGINT",length = 21)
 	private Long isbn;

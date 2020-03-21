@@ -1,5 +1,7 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -18,7 +20,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Bookcategory {
+public class Bookcategory  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
 	private BookCategoryPK pk;// 책 카테고리 복합 키 객체

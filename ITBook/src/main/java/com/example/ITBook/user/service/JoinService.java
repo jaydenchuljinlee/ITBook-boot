@@ -6,6 +6,8 @@ import com.example.ITBook.common.domain.User;
 
 public interface JoinService {
 
-	Optional<User> insertUser(User user) throws Exception;
+	boolean insertUser(User user) throws Exception;
+
+	boolean findByEmail(String identity) throws Exception;
 
 }

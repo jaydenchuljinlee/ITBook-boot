@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Entity
+@Table(name = "user")
 @Setter @Getter @NoArgsConstructor
 public class User implements Serializable{
 	
@@ -28,8 +30,11 @@ public class User implements Serializable{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_no;
-
+    @Column(name = "user_no")
+    private Long userNo;
+    
+    @Column(name = "identity",length = 255)
+    private String identity;
     @Column(name = "name",length = 50)
     private String name;
     @Column(name = "password",length = 255)
@@ -37,15 +42,15 @@ public class User implements Serializable{
     @Column(name = "email",length = 255)
     private String email;
 
-    @Column(name = "createddate")
+    @Column(name = "created_date",nullable = true)
     private LocalDateTime createdDate;
-    @Column(name = "updateddate")
+    @Column(name = "updated_date",nullable = true)
     private LocalDateTime updatedDate;
 
     // OAuth
     @Column(name = "principal",length = 255)
     private String principal;
-    @Column(name = "socialtype")
+    @Column(name = "social_type")
     private SocialType socialType;
     
     @Column(name = "phone",length = 255)
@@ -60,19 +65,35 @@ public class User implements Serializable{
     @Column(name = "mileage",length = 7)
     private int mileage;
 
-    public User(Long user_no) {
-    	this.user_no = user_no;
+    public User(Long userNo) {
+    	this.userNo = userNo;
     }
     
-    public User(String email, String password) {
-    	this.email 		= email;
+    public User(String identity, String password) {
+    	this.identity 		= identity;
     	this.password	= password;
     }
     
-    public User(Long user_no, String name, String password, String email, LocalDateTime createdDate
+    public User(Long userNo, String name, String password, String email,String phone
+    		, String address1, String address2, String address3) {
+        this.userNo = userNo;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.principal = "0";
+        this.socialType = SocialType.DEFAULT;
+        this.phone = phone;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.address3 = address3;
+        this.mileage = 0;
+    }
+    
+    public User(Long userNo,String identity, String name, String password, String email, LocalDateTime createdDate
     		, LocalDateTime updatedDate, String principal, SocialType socialType,String phone
     		, String address1, String address2, String address3,int mileage) {
-        this.user_no = user_no;
+        this.userNo = userNo;
+        this.identity	= identity;
         this.name = name;
         this.password = password;
         this.email = email;

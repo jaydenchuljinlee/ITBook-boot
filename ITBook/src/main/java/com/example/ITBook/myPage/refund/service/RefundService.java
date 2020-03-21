@@ -7,5 +7,5 @@ import com.example.ITBook.common.domain.PaymentInformation;
 
 public interface RefundService {
 
-	public Optional<Payment> updatePaymentStateOnRefund(long pay_no, long user_no) throws Exception;
+	public boolean updatePaymentStateOnRefund(long pay_no, long user_no) throws Exception;
 }

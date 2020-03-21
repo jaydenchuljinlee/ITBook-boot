@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.common.domain.MyBasket;
 import com.example.ITBook.common.domain.User;
@@ -26,6 +27,7 @@ import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.common.utils.JsonUtil;
 import com.example.ITBook.myPage.myBasket.service.MyBasketService;
 
+@SessionAttributes("sessionId")
 @Controller
 public class MyBasketWebController {
 	private static final Logger logger = LoggerFactory.getLogger(MyBasketWebController.class);
@@ -40,7 +42,7 @@ public class MyBasketWebController {
 	public String mybascket(HttpSession session
 			,Model model) throws Exception {
 		
-		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getUser_no());
+		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getUserNo());
 		
 		model.addAttribute("myBasketList", list);
 		
@@ -55,9 +57,9 @@ public class MyBasketWebController {
 			,@RequestParam long userIdx
 			,Model model) throws Exception {
 		
-		Optional<MyBasket> isTure = myBasketService.insertMyBasket(isbn,userIdx);
+		boolean isSuccess = myBasketService.insertMyBasket(isbn,userIdx);
 
-		if (!isTure.isPresent()) new DoNotUpdateOrInsertException();
+		if (!isSuccess) new DoNotUpdateOrInsertException();
 		
 		return "redirect:/book";
 	}
@@ -70,9 +72,9 @@ public class MyBasketWebController {
 	public String deleteMyBasket(@RequestParam(required=false) long isbn
 			,HttpSession session) throws Exception {
 		
-		Optional<MyBasket> isTure = myBasketService.deleteMyBasket(isbn,((User)session.getAttribute("user")));
+		boolean isSuccess = myBasketService.deleteMyBasket(isbn,((User)session.getAttribute("user")));
 
-		if (!isTure.isPresent()) new DoNotUpdateOrInsertException();
+		if (!isSuccess) new DoNotUpdateOrInsertException();
 		
 		HashMap<String, Object> map = new HashMap<>();
 		

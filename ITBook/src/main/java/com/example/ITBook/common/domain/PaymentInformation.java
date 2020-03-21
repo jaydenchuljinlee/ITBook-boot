@@ -23,7 +23,9 @@ import lombok.NoArgsConstructor;
 @Getter @NoArgsConstructor
 @Entity
 @Table(name = "pay_info")
-public class PaymentInformation {
+public class PaymentInformation  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
 	private PaymentInformationPK PK;

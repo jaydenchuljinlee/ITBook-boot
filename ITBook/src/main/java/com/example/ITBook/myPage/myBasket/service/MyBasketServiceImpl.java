@@ -14,6 +14,7 @@ import com.example.ITBook.common.domain.Book;
 import com.example.ITBook.common.domain.MyBasket;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.domain.pk.MyBasketPK;
+import com.example.ITBook.common.exception.DuplicatedMyBasketException;
 import com.example.ITBook.myPage.myBasket.repository.MyBasketRepository;
 
 @Service
@@ -24,16 +25,16 @@ public class MyBasketServiceImpl implements MyBasketService {
 	private MyBasketRepository myBasketRepository;
 	
 	@Override
-	public Optional<MyBasket> deleteMyBasket(long isbn, User user_param) throws Exception {
+	public boolean deleteMyBasket(long isbn, User user_param) throws Exception {
 
 		HashMap<String ,Object> map = new HashMap<>();
 		
 		Book book = new Book(isbn);
-		User user = new User(user_param.getUser_no());
+		User user = new User(user_param.getUserNo());
 		
 		MyBasket myBasket = new MyBasket(book,user);
 			
-		return myBasketRepository.remove(myBasket);
+		return myBasketRepository.remove(myBasket) == 1 ? true : false;
 	}
 	
 	@Override
@@ -43,11 +44,11 @@ public class MyBasketServiceImpl implements MyBasketService {
 	}
 	
 	@Override
-	public Optional<MyBasket> insertMyBasket(long isbn,long userIdx) throws Exception {
+	public boolean insertMyBasket(long isbn,long userIdx) throws Exception {
 		
 		Optional<MyBasket> chk = checkForExistence(isbn,userIdx);
 		
-		if(chk.isPresent()) return null;
+		if(chk.isPresent()) throw new DuplicatedMyBasketException(isbn);
 		
 		return insertMyBasketInDB(isbn,userIdx);
 	}
@@ -58,14 +59,16 @@ public class MyBasketServiceImpl implements MyBasketService {
 		return myBasketRepository.findById(pk);
 	}
 
-	private Optional<MyBasket> insertMyBasketInDB(long isbn, long idx) throws Exception{
+	private boolean insertMyBasketInDB(long isbn, long idx) throws Exception{
 		Book book = new Book(isbn);
 		
 		User user = new User(idx);
 		
 		MyBasket myBasket = new MyBasket(book,user);
 		
-		return myBasketRepository.insert(myBasket);	
+		myBasketRepository.save(myBasket);	
+		
+		return myBasketRepository.existsById(myBasket.getMyBasketPK());
 	}
 
 	

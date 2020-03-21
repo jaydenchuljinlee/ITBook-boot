@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" type="text/css" href="/ITBook/css/mypage/mypage.css">
-
+<c:if test="${not empty check}">
+	<script>alert("아이디나 비밀번호를 확인해 주세요!");</script>	
+</c:if>
 <div class="product-grid-holder tc-padding2">
 	<div class="row">
 		<div class="myItbook_wrap">
@@ -32,26 +35,27 @@
 
 			<div class="member_register">
 				<fieldset>
+				
 					<legend>회원정보 필수입력</legend>
-
-					<div class="register_essential">
-						<div class="register_li">
-							<div class="i_tit"><strong>아이디</strong></div>														
-							<div class="i_con">asdf1234</div>
-						</div>	
-						
-						<div class="register_li">
-							<div class="i_tit"><strong>비밀번호</strong></div>
-							<div class="i_con">
-								<input type="password" name="m_passwd" id="m_passwd" class="i_text" value="" >
+					<form id="modifyingCheck">
+						<div class="register_essential">
+							<div class="register_li">
+								<div class="i_tit"><strong>아이디</strong></div>														
+								<input type="text" name="identity" id="id" class="i_text" value="" >
+							</div>	
+							
+							<div class="register_li">
+								<div class="i_tit"><strong>비밀번호</strong></div>
+								<div class="i_con">
+									<input type="password" name="password" id="pwd" class="i_text" value="" >
+								</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</fieldset>
 				
 		        <div class="btn_label_default">
-					<button type="button" class="btn_leave">확인</button>
-					<button type="button" class="btn_change">취소</button>
+					<button id="re_login" type="button" class="btn_leave">확인</button>
 				</div>
 			</div>
 		</div>
@@ -60,12 +64,14 @@
 
 <script type="text/javascript">
 $(function() {
-	$(".btn_leave").click(function() {
-		location.href = "modifyInformation.do";
-	});
+
 	
-	$(".btn_change").click(function() {
-		location.href = "myPage.do";
+
+	$("#re_login").on("click",function() {
+
+		$("#modifyingCheck").attr("action","/mypage/modify/check");
+		$("#modifyingCheck").attr("method","post");
+		$("#modifyingCheck").submit();
 	});
 });
 </script>

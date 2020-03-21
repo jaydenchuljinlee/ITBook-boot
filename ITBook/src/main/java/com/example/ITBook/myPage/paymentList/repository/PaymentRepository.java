@@ -12,19 +12,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.ITBook.common.domain.Payment;
+import com.example.ITBook.common.domain.PaymentInformation;
+import com.example.ITBook.common.domain.User;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
 
-	@Modifying
-	@Transactional
-	@Query(value = "insert into Payment values(:#{#payment})",nativeQuery = false)
-	Optional<Payment> insert(@Param("payment") Payment payment);
+	List<PaymentInformation> findByUser(User user); 
 	
 	@Modifying
 	@Transactional
-	@Query(value = "update payment p set p.state = 0 "
-					+ "where p.user_no = :#{#user_no} and p.pay_no = :#{#pay_no}",nativeQuery = false)
-	Optional<Payment> updatePaymentStateOnFalse(@Param("pay_no") long pay_no, @Param("user_no") long user_no);
+	@Query(value = "UPDATE Payment SET state = 0 "
+					+ "WHERE user_no = :#{#user_no} and pay_no = :#{#pay_no}",nativeQuery = false)
+	long updatePaymentStateOnFalse(@Param("pay_no") long pay_no, @Param("user_no") long user_no);
 	
 }

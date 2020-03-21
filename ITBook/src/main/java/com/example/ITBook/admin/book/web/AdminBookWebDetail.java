@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.admin.book.service.AdminBookDetailService;
 import com.example.ITBook.common.domain.Book;
 import com.example.ITBook.common.exception.BookNotFoundException;
 
 @Controller
+@SessionAttributes("sessionId")
 @RequestMapping("/admin/book")
 public class AdminBookWebDetail {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebDetail.class);

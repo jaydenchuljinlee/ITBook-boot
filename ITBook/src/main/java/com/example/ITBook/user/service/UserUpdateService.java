@@ -6,10 +6,10 @@ import com.example.ITBook.common.domain.User;
 
 public interface UserUpdateService {
 
-	boolean checkIdAndPassword(User user) throws Exception;
+	Optional<User> checkIdAndPassword(User user) throws Exception;
 
-	Optional<User> deleteUser(User user) throws Exception;
+	boolean deleteUser(User user) throws Exception;
 
-	Optional<User> updateUser(User user) throws Exception;
+	boolean updateUser(User user) throws Exception;
 
 }

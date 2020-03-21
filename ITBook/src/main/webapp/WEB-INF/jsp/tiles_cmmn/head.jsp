@@ -26,7 +26,7 @@
 
 <!-- JavaScripts -->
 <!-- <script src="js/vendor/modernizr.js"></script> -->
-<script src="/admin/js/cmmn/jquery.js"></script>
+<script type="text/javaScript" src="/admin/js/cmmn/jquery.js"></script>
 <script>
 $(function(){
 	 // 화면 상단 검색어 부부

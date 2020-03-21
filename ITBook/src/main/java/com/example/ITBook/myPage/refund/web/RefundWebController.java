@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.common.domain.Payment;
 import com.example.ITBook.common.domain.PaymentInformation;
@@ -23,6 +24,7 @@ import com.example.ITBook.myPage.paymentList.service.PaymentService;
 import com.example.ITBook.myPage.refund.service.RefundService;
 
 @Controller
+@SessionAttributes("sessionId")
 @RequestMapping("/refund")
 public class RefundWebController {
 
@@ -39,7 +41,7 @@ public class RefundWebController {
 		
 		User user = (User) session.getAttribute("user");
 		
-		List<PaymentInformation> payInfoList = paymentService.selectList(user.getUser_no());
+		List<PaymentInformation> payInfoList = paymentService.selectList(user.getUserNo());
 		
 		model.addAttribute("payInfoList", payInfoList);
 		
@@ -55,11 +57,11 @@ public class RefundWebController {
 		
 		User user = (User) session.getAttribute("user");
 		
-		Optional<Payment> payStateCheck = refundService.updatePaymentStateOnRefund(pay_no,user.getUser_no());
+		boolean isSuccess = refundService.updatePaymentStateOnRefund(pay_no,user.getUserNo());
 		
 		HashMap<String, Object> rtnMap = new HashMap<>();
 		
-		if (payStateCheck.isPresent()) rtnMap.put("RESULT", "SUCCESS");
+		if (isSuccess) rtnMap.put("RESULT", "SUCCESS");
 		else rtnMap.put("RESULT", "FAILED");
 		
 		return JsonUtil.HashMapToJson(rtnMap);

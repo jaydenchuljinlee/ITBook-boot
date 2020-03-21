@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.example.ITBook.book.repository.BookReviewRepository;
@@ -26,7 +27,7 @@ public class BookReviewServiceImpl implements BookReviewService {
 	 * @return	: 등록 여부
 	 * */
 	@Override
-	public Optional<Review> insertBookReview(Review review, long isbn, long idx) throws Exception {
+	public boolean insertBookReview(Review review, long isbn, long idx) throws Exception {
 		
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
@@ -37,9 +38,9 @@ public class BookReviewServiceImpl implements BookReviewService {
 		review.setUser(user);
 		review.setReviewPK(pk);
 		
-		//bookReviewRepository.save(review);
+		bookReviewRepository.save(review);
 		
-		return bookReviewRepository.insert(review);
+		return bookReviewRepository.existsById(pk);
 	}
 
 	/*
@@ -48,7 +49,7 @@ public class BookReviewServiceImpl implements BookReviewService {
 	 * @return	: 등록 여부
 	 * */
 	@Override
-	public Optional<Review> updateBookReview(Review review, long isbn, Long idx) throws Exception{
+	public boolean updateBookReview(Review review, long isbn, Long idx) throws Exception{
 
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
@@ -58,8 +59,8 @@ public class BookReviewServiceImpl implements BookReviewService {
 		review.setBook(book);
 		review.setUser(user);
 		review.setReviewPK(pk);
-
-		return bookReviewRepository.update(review);
+		
+		return bookReviewRepository.update(review) == 1 ? true : false;
 		
 	}
 
@@ -69,7 +70,7 @@ public class BookReviewServiceImpl implements BookReviewService {
 	 * @return	: 등록 여부
 	 * */
 	@Override
-	public Optional<Review> deleteBookReview(Review review, long isbn, Long idx) throws Exception{
+	public boolean deleteBookReview(Review review, long isbn, Long idx) throws Exception{
 
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
@@ -82,7 +83,8 @@ public class BookReviewServiceImpl implements BookReviewService {
 		
 		//bookReviewRepository.delete(review);
 		
-		return bookReviewRepository.remove(review);
+		
+		return bookReviewRepository.remove(review) == 1 ? true : false;
 	}
 
 }

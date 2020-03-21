@@ -19,14 +19,9 @@ import com.example.ITBook.common.domain.pk.MyBasketPK;
 public interface MyBasketRepository extends JpaRepository<MyBasket, MyBasketPK>{
 
 	List<MyBasket> findAllByUser(User user)throws Exception;
-
-	@Modifying
-	@Transactional
-	@Query(value = "insert into MyBasket values(:#{#myBasket})",nativeQuery = false)
-	Optional<MyBasket> insert(@Param("myBasket") MyBasket myBasket) throws Exception;
 	
 	@Modifying
 	@Transactional
-	@Query(value = "delete from MyBasket mb where mb.isbn = :#{#myBasket.isbn} and mb.user_no = :#{#myBasket.user_no}",nativeQuery = false)
-	Optional<MyBasket> remove(@Param("myBasket") MyBasket myBasket) throws Exception;
+	@Query(value = "DELETE FROM MyBasket WHERE isbn = :#{#myBasket.isbn} and user_no = :#{#myBasket.user_no}",nativeQuery = false)
+	long remove(@Param("myBasket") MyBasket myBasket) throws Exception;
 }

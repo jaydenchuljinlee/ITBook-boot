@@ -1,5 +1,7 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -16,7 +18,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Bcategory {
+public class Bcategory  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private long code;

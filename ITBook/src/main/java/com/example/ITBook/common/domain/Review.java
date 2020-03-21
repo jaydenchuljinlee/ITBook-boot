@@ -1,5 +1,6 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -23,7 +24,9 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Entity
 @Table(name = "review")
-public class Review {
+public class Review  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private ReviewPK reviewPK;
@@ -56,7 +59,7 @@ public class Review {
 	private String contents;
 	
 	public Review(Book book,User user,int career,int star,String title,String contents) {
-		this.reviewPK = new ReviewPK(book.getIsbn(),user.getUser_no());
+		this.reviewPK = new ReviewPK(book.getIsbn(),user.getUserNo());
 		this.book = book;
 		this.user = user;
 		this.career = career;

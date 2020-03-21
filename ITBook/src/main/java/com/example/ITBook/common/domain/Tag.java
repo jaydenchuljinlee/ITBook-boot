@@ -1,5 +1,7 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,9 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Entity
 @Table(name = "tag")
-public class Tag {
+public class Tag  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id

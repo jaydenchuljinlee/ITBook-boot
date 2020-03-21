@@ -3,10 +3,12 @@ package com.example.ITBook.common.resolver;
 import com.example.ITBook.common.annotation.SocialUser;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.enums.SocialType;
+import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.user.repository.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -31,14 +33,12 @@ import java.util.Optional;
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 	private static final Logger logger = LoggerFactory.getLogger(UserArgumentResolver.class);
 	
-    private final UserRepository userRepository;
-
-    public UserArgumentResolver(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+	@Autowired
+    private UserRepository userRepository;
 
     @Override
-    public boolean supportsParameter(MethodParameter parameter) {//?ñ¥?ñ§Í≤ÉÏùÑ ?†Å?ö©?ï†Ïß? Ïß??†ï
+    public boolean supportsParameter(MethodParameter parameter){
+    	
         return (parameter.getParameterAnnotation(SocialUser.class) != null) &&
                 parameter.getParameterType().equals(User.class);
     }
@@ -52,8 +52,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return  getUser(user, session);
     }
 
-    private User getUser(User user, HttpSession session){
-    	logger.info("≈Ω");
+    private User getUser(User user, HttpSession session) throws Exception{
     	
         OAuth2AuthenticationToken auth2AuthenticationToken =
                 (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
@@ -62,14 +61,17 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
         User convertUser = convertUser(auth2AuthenticationToken.getAuthorizedClientRegistrationId(), attributes);
         
-        Optional<User> email = userRepository.findByEmail(convertUser.getEmail());
+        Optional<User> identity = userRepository.findByIdentity(convertUser.getIdentity());
         
-        if (email.isPresent()) {
-        	System.out.println(email.isPresent());
-        	user = email.get();
-        } else {
-        	System.out.println(email.isPresent());
-        	user = userRepository.save(convertUser);
+        logger.info(""+identity.get().getUserNo());
+        
+        if (identity.isPresent()) user = identity.get();
+        else {
+        	
+        	 user = userRepository.save(convertUser);
+        	
+        	if (user == null) throw new DoNotUpdateOrInsertException();
+        	
         }
 
         setRoleIfNotSame(user, auth2AuthenticationToken, attributes);
@@ -78,7 +80,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return user;
     }
 
-    private User convertUser(String authority, Map<String, Object> attributes) {
+    private User convertUser(String authority, Map<String, Object> attributes) throws Exception{
         if (SocialType.FACEBOOK.isEuqals(authority)) {
             return getModernUser(SocialType.FACEBOOK,attributes);
         } else if (SocialType.GOOGLE.isEuqals(authority)) {
@@ -89,7 +91,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return null;
     }
 
-    private User getModernUser(SocialType socialType, Map<String, Object> attributes) {
+    private User getModernUser(SocialType socialType, Map<String, Object> attributes) throws Exception{
         return User.builder()
                 .name(String.valueOf(attributes.get("name")))
                 .email(String.valueOf(attributes.get("email")))

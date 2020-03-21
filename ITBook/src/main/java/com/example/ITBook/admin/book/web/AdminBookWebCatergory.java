@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.admin.book.service.AdminBookService;
 import com.example.ITBook.common.domain.Bcategory;
@@ -18,6 +19,7 @@ import com.example.ITBook.common.domain.Scategory;
 import com.example.ITBook.common.utils.JsonUtil;
 
 @Controller
+@SessionAttributes("sessionId")
 @RequestMapping("/admin/book")
 public class AdminBookWebCatergory {
 	

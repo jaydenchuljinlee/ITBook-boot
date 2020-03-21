@@ -1,5 +1,6 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.EmbeddedId;
@@ -25,7 +26,9 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Entity
 @Table(name = "hashtag")
-public class Hashtag {
+public class Hashtag  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private HashtagePK pk;// 해시태그 복합 키 객체

@@ -1,5 +1,7 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,7 +23,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @Table(name = "mybasket")
-public class MyBasket {
+public class MyBasket  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
 	private MyBasketPK myBasketPK;
@@ -37,7 +41,7 @@ public class MyBasket {
 	private User user;
 	
 	public MyBasket(Book book,User user) {
-		this.myBasketPK = new MyBasketPK(book.getIsbn(),user.getUser_no());
+		this.myBasketPK = new MyBasketPK(book.getIsbn(),user.getUserNo());
 		this.book = book;
 		this.user = user;
 		

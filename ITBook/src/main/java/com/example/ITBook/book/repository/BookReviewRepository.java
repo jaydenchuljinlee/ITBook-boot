@@ -22,17 +22,12 @@ public interface BookReviewRepository extends JpaRepository<Review, ReviewPK>{
 	
 	@Modifying
 	@Transactional
-	@Query(value = "insert into Review values(:#{#review})",nativeQuery = false)
-	Optional<Review> insert(@Param("review") Review review) throws Exception;
-	
-	@Modifying
-	@Transactional
-	@Query(value = "Update review rv from review rv where rv.isbn = :#{#review.isbn} and rv.user_no = :#{#review.user_no}",nativeQuery = false)
-	Optional<Review> update(@Param("review") Review review) throws Exception;
-	
-	@Modifying
-	@Transactional
-	@Query(value = "delete from Review rv where rv.user_no = :#{#review.user_no} and rv.isbn = :#{#review.isbn}",nativeQuery = false)
-	Optional<Review> remove(@Param("review") Review review) throws Exception;
+	@Query(value = "UPDATE Review SET career = :#{review.career}"
+			+ " WHERE isbn = :#{#review.isbn} AND user_no = :#{#review.user_no}",nativeQuery = false)
+	long update(@Param("review") Review review) throws Exception;
 
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM Review WHERE isbn = :#{#review.isbn} AND user_no = :#{#review.user_no} ",nativeQuery = false)
+	long remove(@Param("review") Review review) throws Exception;
 }

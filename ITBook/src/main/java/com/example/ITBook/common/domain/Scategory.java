@@ -1,5 +1,7 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -17,7 +19,9 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
 @Entity
-public class Scategory {
+public class Scategory  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private long code;

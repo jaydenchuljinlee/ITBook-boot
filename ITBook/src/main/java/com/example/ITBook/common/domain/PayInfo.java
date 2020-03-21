@@ -1,5 +1,6 @@
 package com.example.ITBook.common.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Data;
@@ -9,7 +10,9 @@ import lombok.Data;
  * */
 
 @Data
-public class PayInfo {
+public class PayInfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	private List<Long> isbn;
 	private List<Integer> quantity;

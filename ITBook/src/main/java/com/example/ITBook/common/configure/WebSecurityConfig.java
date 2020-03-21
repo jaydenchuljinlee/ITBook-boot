@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 */
 
         http.authorizeRequests()
-                .antMatchers("/", "/oauth2/**", "/login/**","/css/**", "/images/**", "/js/**", "/console/**")
+                .antMatchers("/", "/oauth2/**", "/login/**","/join/**","/css/**", "/images/**", "/js/**", "/console/**","/admin/css/**","/admin/images/**","/admin/js/**")
                     .permitAll()
                 .antMatchers("/admin/**")
                 	.hasAnyAuthority(Authority.ADMIN.getRoleType())

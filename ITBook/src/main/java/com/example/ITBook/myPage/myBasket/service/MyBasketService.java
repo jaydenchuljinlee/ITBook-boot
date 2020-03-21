@@ -10,10 +10,10 @@ import com.example.ITBook.common.domain.User;
 
 public interface MyBasketService {
 
-	Optional<MyBasket> insertMyBasket(long isbn,long userIdx) throws Exception;
+	boolean insertMyBasket(long isbn,long userIdx) throws Exception;
 
 	List<MyBasket> selectByUser(Long index) throws Exception;
 
-	Optional<MyBasket> deleteMyBasket(long param, User user) throws Exception;
+	boolean deleteMyBasket(long param, User user) throws Exception;
 
 }

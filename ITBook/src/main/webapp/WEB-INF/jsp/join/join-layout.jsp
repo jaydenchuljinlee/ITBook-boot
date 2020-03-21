@@ -6,23 +6,20 @@
 <tiles:insertAttribute name="head" />
 </head>
 <body>
+	<tiles:insertAttribute name="loading" />
 	<div class="wrapper push-wrapper">
-		<tiles:insertAttribute name="loading" />
 		<!-- Header start-->
 		<tiles:insertAttribute name="header" />
-		<tiles:insertAttribute name="search_bar" />
-		
-		<tiles:insertAttribute name="flowting_menu" />
 		<!-- Header end-->
 		<!-- 메인 컨텐츠 -->
-			<tiles:insertAttribute name="content" />
+		<tiles:insertAttribute name="content" />
 		<!-- 메인 컨텐츠// -->
 		<tiles:insertAttribute name="footer" />
 	</div>
-
-	<tiles:insertAttribute name="login_modal" />
-	<tiles:insertAttribute name="link_js" />
 	
+	<!-- 실행에 필요한 자바스크립트 파일들 -->
+	<!--                                   -->
+
 	<!-- 다음주소api -->
 	<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	
@@ -63,6 +60,19 @@
 			}).open();
 		});
 
+		$("#confirm_overlap").on("click",function() {
+
+			if (overLapCheck()) {
+				alert("이미 있는 아이디 입니다.");
+				return;
+			} else {
+				alert("사용할 수 있는 아이디 입니다.");
+				$("#confirm_overlap").addClass("overlap-check");
+				$("#confirmed").val($("#identity_input").val());
+			}
+
+		});
+
 
 		/********************** 
 		*기본정보 전송
@@ -83,7 +93,7 @@
 				$("#manager_call_input").val(manager_phone);
 				$("#email_input").val(email);
 
-			$("#default_frm").attr("action","/mypage/modify/update");
+			$("#default_frm").attr("action","/join/joinSuccess");
 			$("#default_frm").submit();
 			
 		});
@@ -169,6 +179,43 @@
 		return 1;
 	}
 
+	/********************** 
+	*아이디 중복 체크
+	*@identity	: 아이디 태그의 값
+	*@rtnVal	: 0이면 정상 종료, 1이면 비정상 종료
+	***********************/
+	function overLapCheck() {
+		
+		var identity	= $("#identity_input").val(),
+			rtnVal		= 0;
+		
+		$.ajax({
+			url			: "/join/identityCheck",
+			type		: "post",
+			async		:false,
+			data		: "identity="+identity,
+			success		: function(data){
+				
+				if (data == 0) {
+					console.log("값이 비어있음");
+					rtnVal = 0;
+
+				} else {
+					console.log(data);
+					rtnVal = 1;
+
+				}
+			},
+			error		: function (request, status, error){    
+				console.log(request);
+				console.log(status);
+				console.log(error);
+			}
+
+		  });
+
+		  return rtnVal;
+	}
 
 	/********************** 
 	*아이디,비밀번호 확인 체크
@@ -181,8 +228,17 @@
 	***********************/
 	function accountCheck() {
 		
-		var pwd_input		= $("#input_pwd").val(),
+		var id_confirm		= $("#confirm_overlap").attr("class"),
+			id_input		= $("#identity_input").val(),
+			compare_input	= $("#confirmed").val(),
+			pwd_input		= $("#input_pwd").val(),
 			pwd_confirm		= $("#confirm_pwd").val();
+
+		if (id_confirm.indexOf("overlap-check") == -1 || id_input !== compare_input) {
+			alert("아이디 중복확인을 해주세요.");
+			$("#confirm_overlap").focus();
+			return 0;
+		}
 		
 		if (pwd_input !== pwd_confirm) {
 			alert("비밀번호를 확인해 주세요.");
@@ -227,5 +283,7 @@
 		}    
 	}
 	</script>
+	
+	 <tiles:insertAttribute name="link_js" />
 </body>
 </html>
