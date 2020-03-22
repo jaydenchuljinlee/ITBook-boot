@@ -34,6 +34,11 @@
 			
 				<!-- 회원가입 개인정보 입력 -->
 		<div class="member_register">
+			<form id="user_update">
+				<input type="hidden" name="createdDate" value="<c:out value='${user.createdDate}'/>">
+				<input type="hidden" name="principal" value="<c:out value='${user.principal}'/>">
+				<input type="hidden" name="socialType" value="<c:out value='${user.socialType}'/>">
+				<input type="hidden" name="mileage" value="<c:out value='${user.mileage}'/>">
 				<!-- 필수입력 -->
 				<fieldset>
 					<legend>회원정보 필수입력</legend>
@@ -44,12 +49,11 @@
 					<p class="register_cap"><span>* </span>는 필수 입력 사항입니다.</p>
 					</div>
 					
-					
-						<div class="register_li">
-							<div class="i_tit"><strong>아이디</strong></div>														
-							<input id="identity_input" class="form-control col-4 mx-1 necessary" type="text" name="identity" value="<c:out value='${user.identity}' />	" pattern="[A-Za-z0-9]{4,10}" maxlength="10" style="display:inline;" readOnly>
-							
-						</div>	
+					<div class="register_li">
+						<div class="i_tit"><strong>아이디</strong></div>														
+						<input id="identity_input" class="form-control col-4 mx-1 necessary" type="text" name="identity" value="<c:out value='${user.identity}' />	" pattern="[A-Za-z0-9]{4,10}" maxlength="10" style="display:inline;" readOnly>
+						
+					</div>	
 						
 						<div class="register_li">
 							<div class="i_tit"><strong>비밀번호<span>* </span></strong></div>
@@ -74,8 +78,8 @@
 						
 						<div class="register_li">
 							<div class="i_tit"><strong>이름</strong></div>
-							<input id="identity_input" class="form-control col-4 mx-1 necessary" type="text" name="name" maxlength="10" style="display:inline;">
-							<div class="i_con"><c:out value="${user.name}" /></div>
+							<input id="identity_input" class="form-control col-4 mx-1 necessary" type="text" name="name" value="<c:out value="${user.name}" />" maxlength="10" style="display:inline;">
+							
 						</div>
 						<div class="register_li">
 						    <label for="id">이메일</label>
@@ -107,25 +111,25 @@
 						<div class="register_li">
 							<div class="i_tit"><strong>주소<span>* </span></strong></div>
 							<div class="form-inline">
-								<input class="form-control col-3 mx-1 necessary" type="text" id="search_zonecode" name="address1" readonly>
+								<input class="form-control col-3 mx-1 necessary" type="text" id="search_zonecode" name="address1" value="<c:out value='${user.address1}'/>" readonly>
 
 								<div id="search" class="col-2 p-2 mx-2 text-center address_btn" style="font-size:13px;">
 									<span>주소검색</span>
 								</div>
-								<input class="form-control col-5 mx-1 necessary" type="text" id="search_address" name="address2" readonly>
+								<input class="form-control col-5 mx-1 necessary" type="text" id="search_address" name="address2" value="<c:out value='${user.address2}'/>" readonly>
 							</div>
 							<div class="mt-1">	
-								<input class="form-control col-7 mx-1 necessary" type="text" id="address_details" name="address3">
+								<input class="form-control col-7 mx-1 necessary" type="text" id="address_details" name="address3" value="<c:out value='${user.address3}'/>">
 							</div>
 						</div>
 					</div>
 				</fieldset>
 				<!-- 필수입력 -->		
-				
+				</form>
 		        <div class="btn_label_default">
-					<button type="button" class="btn_leave">회원 탈퇴하기</button>
+					<button type="button" class="page_move" data-type="secession">회원 탈퇴하기</button>
 			
-					<button name="" type="button" value="다음단계" class="btn_change">변경</button>
+					<button name="" type="button" value="다음단계" class="page_move" data-type="update">변경</button>
 								
 				</div>
 		
@@ -136,10 +140,18 @@
 
 <script type="text/javascript">
 $(function() {
-	$(".btn_leave").click(function() {
-		var width = window.innerWidth*2/5;
-		var height = window.innerHeight;
-		window.open("memberLeave.do", "leaveForm", "width=" + width + ", height=" + height);
-	});
+
+	var email = '<c:out value="${user.email}"/>'.split("@"),
+		phone = '<c:out value="${user.phone}"/>'.split("-");
+		
+	console.log(email);
+	console.log(phone);
+
+	$("#email_id").val(email[0]);
+	$("#email_address").val(email[1]);
+
+	$("#manager_call_input1").val(phone[0]);
+	$("#manager_call_input2").val(phone[1]);
+	$("#manager_call_input3").val(phone[2]);
 });
 </script>

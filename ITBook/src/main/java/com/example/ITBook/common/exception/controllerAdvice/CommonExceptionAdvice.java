@@ -32,7 +32,8 @@ public class CommonExceptionAdvice {
 	 * */
 	@ExceptionHandler(Exception.class)
 	public String commonException(Exception e) {
-	
+		
+		logger.info(e.getStackTrace().toString());
 		logger.info(e.toString());
 		
 		return "redirect:/common/error";
@@ -44,6 +45,7 @@ public class CommonExceptionAdvice {
 	@ExceptionHandler(BookIsbnDuplicationException.class)
 	public String bookIsbnDuplicationExceptionHandler(BookIsbnDuplicationException e) {
 	
+		logger.info(e.getStackTrace().toString());
 		logger.info(e.toString() + "에 대한 isbn 중복");
 		
 		return "redirect:/common/error";
@@ -56,6 +58,7 @@ public class CommonExceptionAdvice {
 	@ResponseBody
 	public String bookIsbnNotFoundExceptionHandler(BookIsbnNotFoundException e) {
 	
+		logger.info(e.getStackTrace().toString());
 		String error = e.toString() + "에 대한 책 정보를 찾지 못했습니다.";
 		
 		rtnMap.put("error", error);
@@ -69,6 +72,7 @@ public class CommonExceptionAdvice {
 	@ExceptionHandler(FailedConnectionException.class)
 	public String failedConnectionsExceptionHandler(FailedConnectionException e) {
 	
+		logger.info(e.getStackTrace().toString());
 		logger.info(e.toString() + "에 대한 연결 에러가 발생하였습니다.");
 		
 		return "redirect:/common/error";

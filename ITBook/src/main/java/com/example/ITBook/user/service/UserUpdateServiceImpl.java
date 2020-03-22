@@ -1,5 +1,6 @@
 package com.example.ITBook.user.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -44,6 +45,9 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 	@Override
 	public boolean deleteUser(User user) throws Exception {
 
+		user.setUpdatedDate(LocalDateTime.now());
+		user.setPrincipal("0");
+		
 		return userRepository.update(user) == 1 ? true : false;
 	}
 
@@ -53,6 +57,7 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 		String password = encoder.encode(user.getPassword());
 		
 		user.setPassword(password);
+		user.setUpdatedDate(LocalDateTime.now());
 		
 		return userRepository.update(user) == 1 ? true : false;
 		

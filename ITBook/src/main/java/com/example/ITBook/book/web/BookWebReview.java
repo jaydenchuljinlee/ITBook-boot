@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.book.service.BookReviewService;
+import com.example.ITBook.common.annotation.Session;
 import com.example.ITBook.common.domain.Review;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
@@ -39,13 +40,14 @@ public class BookWebReview {
 	 * @return		: 기존 클릭했던 상세 페이지
 	 * @Exception	: DoNotUpdateOrInsertException(데이터 반영 예외)
 	 */
+	@Session(name = "user")
 	@PostMapping(value = "/insert")
 	public String bookReview(@ModelAttribute Review review
 			,@RequestParam long isbn
-			,HttpSession session
+			,User user
 			,Model model) throws Exception{
 		
-		boolean isSuccess = bookReviewService.updateBookReview(review,isbn,((User) session.getAttribute("user")).getUserNo());
+		boolean isSuccess = bookReviewService.updateBookReview(review,isbn,user.getUserNo());
 		
 		if (!isSuccess) throw new DoNotUpdateOrInsertException();
 		
@@ -57,13 +59,14 @@ public class BookWebReview {
 	 * @param 	: isbn(책 번호), session(세션), model
 	 * @return	: 기존 클릭했던 상세 페이지
 	 */
+	@Session(name = "user")
 	@PostMapping(value = "/update")
 	public String bookReviewUpdate(@ModelAttribute Review review
 			,@RequestParam long isbn
-			,HttpSession session
+			,User user
 			,Model model) throws Exception{
 		
-		boolean isSuccess = bookReviewService.deleteBookReview(review,isbn,((User) session.getAttribute("user")).getUserNo());
+		boolean isSuccess = bookReviewService.deleteBookReview(review,isbn,user.getUserNo());
 		
 		if (!isSuccess) throw new DoNotUpdateOrInsertException();
 		
@@ -75,13 +78,14 @@ public class BookWebReview {
 	 * @param 	: isbn(책 번호), session(세션), model
 	 * @return	: 기존 클릭했던 상세 페이지
 	 */
+	@Session(name = "user")
 	@RequestMapping(value = "/delete",method = RequestMethod.POST)
 	public String bookReviewDelete(@ModelAttribute Review review
 			,@RequestParam long isbn
-			,HttpSession session
+			,User user
 			,Model model) throws Exception{
 		
-		boolean isSuccess = bookReviewService.insertBookReview(review,isbn,((User) session.getAttribute("user")).getUserNo());
+		boolean isSuccess = bookReviewService.insertBookReview(review,isbn,user.getUserNo());
 		
 		if (!isSuccess) throw new DoNotUpdateOrInsertException();
 		

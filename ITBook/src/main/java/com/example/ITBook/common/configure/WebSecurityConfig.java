@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 */
 
         http.authorizeRequests()
-                .antMatchers("/", "/oauth2/**", "/login/**","/join/**","/css/**", "/images/**", "/js/**", "/console/**","/admin/css/**","/admin/images/**","/admin/js/**")
+                .antMatchers("/", "/oauth2/**", "/login/**","/join/**","/webapp/**","/css/**", "/images/**", "/js/**", "/console/**","/admin/css/**","/admin/images/**","/admin/js/**","/itbook/js/**","/itbook/js/images","/itbook/css/**")
                     .permitAll()
                 .antMatchers("/admin/**")
                 	.hasAnyAuthority(Authority.ADMIN.getRoleType())
@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
             .and()
                 .formLogin()
+                	
                     .successForwardUrl("/main")
             .and()
                 .logout()
@@ -69,7 +70,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)
             .and()
                 .addFilterBefore(filter, CsrfFilter.class)
-                .csrf().disable();
+                .csrf().disable()
+                .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true);
     }
 
     @Bean

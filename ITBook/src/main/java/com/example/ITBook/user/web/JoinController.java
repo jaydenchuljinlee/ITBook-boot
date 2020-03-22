@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.ITBook.common.annotation.Session;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.enums.SocialType;
 import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;

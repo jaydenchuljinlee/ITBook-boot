@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="css/customer_center/customer_common.css">
 
 <div class="container">
 	<div class="join_wrap modal-content">
@@ -63,7 +62,7 @@
 							<span >이름</span>
 						</th>
 						<td>
-							<input id="identity_input" class="form-control col-4 mx-1 necessary" type="text" name="name" maxlength="10" style="display:inline;">
+							<input id="name_input" class="form-control col-4 mx-1 necessary" type="text" name="name" maxlength="10" style="display:inline;">
 						</td>
 					</tr>
 					<tr>

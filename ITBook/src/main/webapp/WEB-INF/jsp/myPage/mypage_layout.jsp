@@ -69,7 +69,7 @@
 		*@arr		: 필수항목 클래스를 가진 태그
 		*@return	: 0은 비정상 종료,1은 정상 종료
 		***********************/
-		$("#btnJoin").on("click",function() {
+		$(".page_move").on("click",function() {
 
 			if (!necessaryCheck()) return;
 			
@@ -77,14 +77,20 @@
 
 			if (!regexCheck()) return;
 
+			var type = $(this).data("type");
+
+			$("#user_update").attr("method","post");
+			
+			if (type == "secession") $("#user_update").attr("action","/mypage/modify/update");
+			else $("#user_update").attr("action","/mypage/modify/delete");
+
 			var manager_phone	= $("#manager_call_input1").val() + "-" + $("#manager_call_input2").val() + "-" + $("#manager_call_input3").val(),
 				email			= $("#email_id").val() + "@" + $("#email_address").val();
 
-				$("#manager_call_input").val(manager_phone);
-				$("#email_input").val(email);
+			$("#manager_call_input").val(manager_phone);
+			$("#email_input").val(email);
 
-			$("#default_frm").attr("action","/mypage/modify/update");
-			$("#default_frm").submit();
+			$("#user_update").submit();
 			
 		});
 
@@ -190,6 +196,8 @@
 			return 0;
 		}
 
+		if (pwd_input == 0) $("#input_pwd").val('<c:out value="${user.password}"/>');
+		
 		return 1;
 	}
 

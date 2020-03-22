@@ -23,5 +23,5 @@ public interface MyBasketRepository extends JpaRepository<MyBasket, MyBasketPK>{
 	@Modifying
 	@Transactional
 	@Query(value = "DELETE FROM MyBasket WHERE isbn = :#{#myBasket.isbn} and user_no = :#{#myBasket.user_no}",nativeQuery = false)
-	long remove(@Param("myBasket") MyBasket myBasket) throws Exception;
+	int remove(@Param("myBasket") MyBasket myBasket) throws Exception;
 }

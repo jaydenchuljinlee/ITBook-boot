@@ -48,7 +48,7 @@ public class User implements Serializable{
     private LocalDateTime updatedDate;
 
     // OAuth
-    @Column(name = "principal",length = 255)
+    @Column(name = "principal",length = 255,nullable = true)
     private String principal;
     @Column(name = "social_type")
     private SocialType socialType;
@@ -62,7 +62,7 @@ public class User implements Serializable{
     @Column(name = "address_3",length = 255)
     private String address3;
     
-    @Column(name = "mileage",length = 7)
+    @Column(name = "mileage",length = 7,nullable = true)
     private int mileage;
 
     public User(Long userNo) {
@@ -70,17 +70,30 @@ public class User implements Serializable{
     }
     
     public User(String identity, String password) {
-    	this.identity 		= identity;
+    	this.identity 	= identity;
     	this.password	= password;
     }
     
-    public User(Long userNo, String name, String password, String email,String phone
+    public User(String identity, String name, String email,SocialType socialType) {
+    	this.identity = identity;
+        this.name = name;
+        this.password = "non";
+        this.email = email;
+        this.principal = "1";
+        this.socialType = socialType;
+        this.phone = "non";
+        this.address1 = "non";
+        this.address2 = "non";
+        this.address3 = "non";
+        this.mileage = 0;
+    }
+    
+    public User( String name, String password, String email,String phone
     		, String address1, String address2, String address3) {
-        this.userNo = userNo;
         this.name = name;
         this.password = password;
         this.email = email;
-        this.principal = "0";
+        this.principal = "1";
         this.socialType = SocialType.DEFAULT;
         this.phone = phone;
         this.address1 = address1;

@@ -41,7 +41,7 @@ public class PaymentServiceImpl implements PaymentService {
 	 * */
 	@Transactional
 	@Override
-	public List<PaymentInformation> insertpayInfo(Payment payment,PayInfo payInfo, HttpSession session) throws Exception {
+	public List<PaymentInformation> insertpayInfo(Payment payment,PayInfo payInfo, User user) throws Exception {
 
 		List<PaymentInformation> paymentInfoList = new ArrayList<PaymentInformation>();
 		
@@ -49,7 +49,6 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		checkPayment(list,payInfo);// 결제 건수, 재고 유무 처리
 		
-		User user = ((User) session.getAttribute("user"));
 		user.setMileage(payInfo.getTotalMil());
 		payment.setUser(user);
 		

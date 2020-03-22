@@ -24,6 +24,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Long>{
 	@Transactional
 	@Query(value = "UPDATE Payment SET state = 0 "
 					+ "WHERE user_no = :#{#user_no} and pay_no = :#{#pay_no}",nativeQuery = false)
-	long updatePaymentStateOnFalse(@Param("pay_no") long pay_no, @Param("user_no") long user_no);
+	int updatePaymentStateOnFalse(@Param("pay_no") long pay_no, @Param("user_no") long user_no);
 	
 }

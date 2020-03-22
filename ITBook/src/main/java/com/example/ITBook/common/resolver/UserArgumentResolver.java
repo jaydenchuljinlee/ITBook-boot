@@ -36,6 +36,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 	@Autowired
     private UserRepository userRepository;
 
+	/*
+	 * 메서드의 파라미터 검사
+	 * */
     @Override
     public boolean supportsParameter(MethodParameter parameter){
     	
@@ -43,6 +46,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 parameter.getParameterType().equals(User.class);
     }
 
+    /*
+     * 메서드 파라미터를 가져와 검사 후 세션에 담음
+     * */
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
@@ -52,19 +58,23 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return  getUser(user, session);
     }
 
+    /*
+     * user 객체를 검사하여 세션에 담음
+     * */
     private User getUser(User user, HttpSession session) throws Exception{
     	
+    	//oauth2 토큰의 컨텍스트에서 인증 정보를 가져옴
         OAuth2AuthenticationToken auth2AuthenticationToken =
                 (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
+        //인증정보는 key,value형의 map타입을 반환
         Map<String, Object> attributes = auth2AuthenticationToken.getPrincipal().getAttributes();
-
+        
         User convertUser = convertUser(auth2AuthenticationToken.getAuthorizedClientRegistrationId(), attributes);
         
         Optional<User> identity = userRepository.findByIdentity(convertUser.getIdentity());
         
-        logger.info(""+identity.get().getUserNo());
-        
+        //존재하는 user라면 user 객체에 가져온 정보를 담는다
         if (identity.isPresent()) user = identity.get();
         else {
         	
@@ -95,13 +105,13 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return User.builder()
                 .name(String.valueOf(attributes.get("name")))
                 .email(String.valueOf(attributes.get("email")))
-                .principal(String.valueOf(attributes.get("id")))
+                .identity(String.valueOf(attributes.get("id")))
                 .socialType(socialType)
-                .createdDate(LocalDateTime.now())
                 .build();
 
     }
 
+    //카카오 타입은 제공해주는 정보가 다름
     private User getKakaoUser(Map<String, Object> attributes) {
         Map<String, String> propertiesMap =
                 (HashMap<String, String>) attributes.get("properties");
@@ -118,6 +128,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
 
+    //인증 정보가 권한 리스트를 포함하고 있으면, 인증 정보에 권한 리스트를 넣어준다.
     private void setRoleIfNotSame(User user, OAuth2AuthenticationToken auth2AuthenticationToken, Map<String, Object> attributes) {
         if (auth2AuthenticationToken.getAuthorities().contains(new SimpleGrantedAuthority(user.getSocialType().getRoleType()))) {
 

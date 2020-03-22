@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.ITBook.book.service.BookDetailService;
+import com.example.ITBook.common.annotation.Session;
 import com.example.ITBook.common.domain.Book;
 import com.example.ITBook.common.domain.Review;
 import com.example.ITBook.common.domain.User;
@@ -33,29 +34,20 @@ public class BookWebDetail {
 	 * @param 	: isbn(책 번호), session(세션), model
 	 * @return	: 디테일 페이지
 	 */
+	@Session(name ="user")
 	@RequestMapping(value = "/")
 	private String bookDetail(@RequestParam Long isbn
-			,HttpSession session
-			,Model model) {
+			,User user
+			,Model model) throws Exception{
 		
-		try {
-			
-			Optional<Book> book = bookDetailService.selectOneBook(isbn);
-			
-			Map<String, Object> rvMap = bookDetailService.selectReviewList(isbn);
-			
-			model.addAttribute("book", book.get());
-			model.addAttribute("userSession", ((User)session.getAttribute("user")).getUserNo());
-			model.addAttribute("bookGrade", rvMap.get("grade"));
-			model.addAttribute("bookLength", rvMap.get("length"));
-			model.addAttribute("reviewList", rvMap.get("rvList"));
-			
-		} catch(Exception e) {
-			
-			logger.error(e.getMessage());
-			
-			throw new RuntimeException();
-		}
+		Optional<Book> book = bookDetailService.selectOneBook(isbn);
+		
+		Map<String, Object> rvMap = bookDetailService.selectReviewList(isbn);
+		
+		model.addAttribute("book", book.get());
+		model.addAttribute("bookGrade", rvMap.get("grade"));
+		model.addAttribute("bookLength", rvMap.get("length"));
+		model.addAttribute("reviewList", rvMap.get("rvList"));
 		
 		return "book_detail/bookDetail.book-main";
 	}

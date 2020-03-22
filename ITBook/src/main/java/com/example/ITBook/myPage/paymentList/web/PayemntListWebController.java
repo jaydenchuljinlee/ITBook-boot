@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.ITBook.common.annotation.Session;
 import com.example.ITBook.common.domain.Book;
 import com.example.ITBook.common.domain.PayInfo;
 import com.example.ITBook.common.domain.Payment;
 import com.example.ITBook.common.domain.PaymentInformation;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.myPage.paymentList.service.PaymentService;
+
+/*
+ * 결제 관련 컨트롤러
+ * */
 
 @Controller
 @SessionAttributes("sessionId")
@@ -31,16 +36,17 @@ public class PayemntListWebController {
 	@Autowired
 	private PaymentService paymentService;
 
+	/*
+	 * 장바구니 -> 결제 페이지
+	 * */
 	@PostMapping(value = "/")
 	public String payment(@ModelAttribute PayInfo payInfo
-			,HttpSession session
 			,Model model) throws Exception {
 		
 		List<Book> list = new ArrayList<Book>();
 		
 		setBookList(list,payInfo);//책 정보 세팅
 		
-		model.addAttribute("session", ((User)session.getAttribute("user")));
 		model.addAttribute("bookList", list);
 		model.addAttribute("genreCnt", payInfo.getGenreCnt());
 		model.addAttribute("totalFee", payInfo.getTotalFee());
@@ -51,13 +57,17 @@ public class PayemntListWebController {
 		return "myPage/payment.myPage-tiles";
 	}
 	
+	/*
+	 * 결제 완료
+	 * */
+	@Session(name = "user")
 	@PostMapping(value="/completePay")
 	public String completePay(@ModelAttribute Payment payment
 			,@ModelAttribute PayInfo payInfo
-			,HttpSession session
+			,User user
 			,Model model) throws Exception {
 	
-		List<PaymentInformation> payInfoList = paymentService.insertpayInfo(payment,payInfo,session);
+		List<PaymentInformation> payInfoList = paymentService.insertpayInfo(payment,payInfo,user);
 		
 		model.addAttribute("payInfoList", payInfoList);
 		

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.ITBook.common.annotation.Session;
 import com.example.ITBook.common.domain.MyBasket;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
@@ -38,11 +39,12 @@ public class MyBasketWebController {
 	/*
 	 * 장바구니 메인
 	 * */
+	@Session(name = "user")
 	@GetMapping(value = "myBasket")
-	public String mybascket(HttpSession session
+	public String mybascket(User user
 			,Model model) throws Exception {
 		
-		List<MyBasket> list = myBasketService.selectByUser(((User)session.getAttribute("user")).getUserNo());
+		List<MyBasket> list = myBasketService.selectByUser(user.getUserNo());
 		
 		model.addAttribute("myBasketList", list);
 		
@@ -67,12 +69,13 @@ public class MyBasketWebController {
 	/*
 	 * 장바구니 삭제
 	 * */
+	@Session(name = "user")
 	@PostMapping(value = "deleteMyBasket")
 	@ResponseBody
 	public String deleteMyBasket(@RequestParam(required=false) long isbn
-			,HttpSession session) throws Exception {
+			,User user) throws Exception {
 		
-		boolean isSuccess = myBasketService.deleteMyBasket(isbn,((User)session.getAttribute("user")));
+		boolean isSuccess = myBasketService.deleteMyBasket(isbn,user);
 
 		if (!isSuccess) new DoNotUpdateOrInsertException();
 		

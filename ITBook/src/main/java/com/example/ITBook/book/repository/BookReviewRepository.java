@@ -24,10 +24,10 @@ public interface BookReviewRepository extends JpaRepository<Review, ReviewPK>{
 	@Transactional
 	@Query(value = "UPDATE Review SET career = :#{review.career}"
 			+ " WHERE isbn = :#{#review.isbn} AND user_no = :#{#review.user_no}",nativeQuery = false)
-	long update(@Param("review") Review review) throws Exception;
+	int update(@Param("review") Review review) throws Exception;
 
 	@Modifying
 	@Transactional
 	@Query(value = "DELETE FROM Review WHERE isbn = :#{#review.isbn} AND user_no = :#{#review.user_no} ",nativeQuery = false)
-	long remove(@Param("review") Review review) throws Exception;
+	int remove(@Param("review") Review review) throws Exception;
 }
