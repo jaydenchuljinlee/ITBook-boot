@@ -10,11 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.example.ITBook.common.domain.Payment.PaymentBuilder;
-import com.example.ITBook.common.domain.pk.CategoryPK;
 import com.example.ITBook.common.domain.pk.HashtagePK;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

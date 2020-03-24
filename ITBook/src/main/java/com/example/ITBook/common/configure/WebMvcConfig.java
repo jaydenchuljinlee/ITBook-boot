@@ -20,8 +20,8 @@ import java.util.List;
 @EnableAutoConfiguration
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-	
-	@Autowired
+
+    @Autowired
     private UserArgumentResolver userArgumentResolver;
 
     @Override

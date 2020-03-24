@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.example.ITBook.common.domain.Scategory.ScategoryBuilder;
 
 import lombok.Builder;
 import lombok.Getter;

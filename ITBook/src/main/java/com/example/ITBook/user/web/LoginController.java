@@ -6,9 +6,9 @@ import com.example.ITBook.common.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+@SessionAttributes("user")
 @Controller
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -18,9 +18,14 @@ public class LoginController {
         return "login/login.tiles2";
     }
 
+    @PostMapping("/loginCheck")
+    public String loginCheck(@RequestParam String identity,@RequestParam String password) {
+        return "login/login.tiles2";
+    }
+
 	@RequestMapping("/loginSuccess")
     public String loginSuccess(@SocialUser User user) {
-		logger.info("loginSuccess");
+        logger.info("loginSuccess");
         return "redirect:/main";
     }
 }

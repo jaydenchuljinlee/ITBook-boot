@@ -37,7 +37,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     private UserRepository userRepository;
 
 	/*
-	 * ¸Þ¼­µåÀÇ ÆÄ¶ó¹ÌÅÍ °Ë»ç
+	 * ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 	 * */
     @Override
     public boolean supportsParameter(MethodParameter parameter){
@@ -47,7 +47,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     /*
-     * ¸Þ¼­µå ÆÄ¶ó¹ÌÅÍ¸¦ °¡Á®¿Í °Ë»ç ÈÄ ¼¼¼Ç¿¡ ´ãÀ½
+     * ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½
      * */
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
@@ -59,22 +59,22 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     /*
-     * user °´Ã¼¸¦ °Ë»çÇÏ¿© ¼¼¼Ç¿¡ ´ãÀ½
+     * user ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½
      * */
     private User getUser(User user, HttpSession session) throws Exception{
     	
-    	//oauth2 ÅäÅ«ÀÇ ÄÁÅØ½ºÆ®¿¡¼­ ÀÎÁõ Á¤º¸¸¦ °¡Á®¿È
+    	//oauth2 ï¿½ï¿½Å«ï¿½ï¿½ ï¿½ï¿½ï¿½Ø½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         OAuth2AuthenticationToken auth2AuthenticationToken =
                 (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
-        //ÀÎÁõÁ¤º¸´Â key,valueÇüÀÇ mapÅ¸ÀÔÀ» ¹ÝÈ¯
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ key,valueï¿½ï¿½ï¿½ï¿½ mapÅ¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         Map<String, Object> attributes = auth2AuthenticationToken.getPrincipal().getAttributes();
         
         User convertUser = convertUser(auth2AuthenticationToken.getAuthorizedClientRegistrationId(), attributes);
         
         Optional<User> identity = userRepository.findByIdentity(convertUser.getIdentity());
         
-        //Á¸ÀçÇÏ´Â user¶ó¸é user °´Ã¼¿¡ °¡Á®¿Â Á¤º¸¸¦ ´ã´Â´Ù
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ userï¿½ï¿½ï¿½ user ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â´ï¿½
         if (identity.isPresent()) user = identity.get();
         else {
         	
@@ -111,7 +111,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     }
 
-    //Ä«Ä«¿À Å¸ÀÔÀº Á¦°øÇØÁÖ´Â Á¤º¸°¡ ´Ù¸§
+    //Ä«Ä«ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½
     private User getKakaoUser(Map<String, Object> attributes) {
         Map<String, String> propertiesMap =
                 (HashMap<String, String>) attributes.get("properties");
@@ -128,7 +128,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
 
-    //ÀÎÁõ Á¤º¸°¡ ±ÇÇÑ ¸®½ºÆ®¸¦ Æ÷ÇÔÇÏ°í ÀÖÀ¸¸é, ÀÎÁõ Á¤º¸¿¡ ±ÇÇÑ ¸®½ºÆ®¸¦ ³Ö¾îÁØ´Ù.
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
     private void setRoleIfNotSame(User user, OAuth2AuthenticationToken auth2AuthenticationToken, Map<String, Object> attributes) {
         if (auth2AuthenticationToken.getAuthorities().contains(new SimpleGrantedAuthority(user.getSocialType().getRoleType()))) {
 

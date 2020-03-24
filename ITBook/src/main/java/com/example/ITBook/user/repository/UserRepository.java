@@ -1,6 +1,7 @@
 package com.example.ITBook.user.repository;
 
 import com.example.ITBook.common.domain.User;
+import com.example.ITBook.common.enums.UserStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -8,14 +9,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    public Optional<User> findByIdentity(String identity) throws Exception;
-    
+    public Optional<User> findByIdentity(String identity);
+
+    List<User> findByUpdatedDateBeforeAndStatusEquals(LocalDateTime localDateTime, UserStatus status);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE User SET name = :#{#user.name}"

@@ -2,12 +2,18 @@ package com.example.ITBook.common.configure;
 
 import com.example.ITBook.common.enums.Authority;
 import com.example.ITBook.common.enums.SocialType;
+import com.example.ITBook.common.filter.JwtAuthenticationFilter;
+import com.example.ITBook.common.filter.JwtAuthorizationFilter;
+import com.example.ITBook.common.provider.CustomAuthenticationProvider;
 import com.example.ITBook.oauth2.CustomOAuth2Provider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,8 +31,20 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Configuration
-@EnableWebSecurity // ?õπ?ãú?ÅêÎ¶¨Ìã∞ ?Ç¨?ö©?ïòÍ≤†Îã§?äî ?ñ¥?Ö∏?Öå?ù¥?Öò
+@EnableWebSecurity // ¿• Ω√≈•∏Æ∆º
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+   /* @Autowired
+    private AuthenticationProvider authenticationProvier;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.authenticationProvider(authenticationProvier);
+
+        super.configure(auth);
+    }*/
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
@@ -36,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 */
 
         http.authorizeRequests()
-                .antMatchers("/", "/oauth2/**", "/login/**","/join/**","/webapp/**","/css/**", "/images/**", "/js/**", "/console/**","/admin/css/**","/admin/images/**","/admin/js/**","/itbook/js/**","/itbook/js/images","/itbook/css/**")
+                .antMatchers("/","/loginCheck","/oauth2/**", "/login/**","/join/**","/webapp/**","/css/**", "/images/**", "/js/**", "/console/**","/admin/css/**","/admin/images/**","/admin/js/**","/itbook/js/**","/itbook/js/images","/itbook/css/**","/itbook/fonts/**")
                     .permitAll()
                 .antMatchers("/admin/**")
                 	.hasAnyAuthority(Authority.ADMIN.getRoleType())
@@ -60,7 +78,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
             .and()
                 .formLogin()
-                	
                     .successForwardUrl("/main")
             .and()
                 .logout()
@@ -69,12 +86,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID")
                     .invalidateHttpSession(true)
             .and()
-                .addFilterBefore(filter, CsrfFilter.class)
+               .addFilterBefore(filter, CsrfFilter.class)
                 .csrf().disable()
+            /*.addFilter(jwtAuthenticationFilter())
+            .addFilter(jwtAuthorizationFilter())*/
                 .sessionManagement()
                 .maximumSessions(1)
-                .maxSessionsPreventsLogin(true);
+                .maxSessionsPreventsLogin(true)
+            ;
     }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+
+        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
+        jwtAuthenticationFilter.setFilterProcessesUrl("/loginCheck");
+        jwtAuthenticationFilter.setUsernameParameter("identity");
+        jwtAuthenticationFilter.setPasswordParameter("password");
+
+        /*jwtAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+        jwtAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler());*/
+
+        jwtAuthenticationFilter.afterPropertiesSet();
+
+        return jwtAuthenticationFilter;
+
+    }
+
+    @Bean
+    public JwtAuthorizationFilter jwtAuthorizationFilter() throws Exception {
+        JwtAuthorizationFilter jwtAuthorizationFilter = new JwtAuthorizationFilter(authenticationManager());
+        return jwtAuthorizationFilter;
+    }
+
 
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository(OAuth2ClientProperties oAuth2ClientProperties, @Value("${custom.oauth2.kakao.client-id}") String kakaoClientId) {

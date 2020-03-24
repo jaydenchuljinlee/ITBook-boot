@@ -17,7 +17,7 @@ import com.example.ITBook.common.domain.Book;
 import lombok.Getter;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping(value = "/book")
 public class BookWebController {
 	private static final Logger logger = LoggerFactory.getLogger(BookWebController.class);

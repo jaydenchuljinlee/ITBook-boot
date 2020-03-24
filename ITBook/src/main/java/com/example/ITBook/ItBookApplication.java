@@ -18,7 +18,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.example.ITBook"})
 public class ItBookApplication {
 
 	public static void main(String[] args) {

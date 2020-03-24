@@ -10,173 +10,173 @@ import org.jsoup.select.Elements;
 import com.google.gson.JsonObject;
 
 /*
- * isbn Å©·Ñ¸µ Ã¥ Á¤º¸
+ * isbn í¬ë¡¤ë§ ì±… ì •ë³´
  * */
 public class BookInformation {
 
 	String url;
-	
+
 	Document document;
-	
+
 	String originalTitle;
 	StringBuffer translator;
 	String page;
 	StringBuffer author;
-	
+
 	Element content;
 	String info;
 	String contents;
 	String authorInfo;
-	
+
 	JsonObject jsonObject;
-	
+
 	/*
-	 * °¡Á®¿Â urlÀ» ÅëÇØ Å©·Ñ¸µ Ã¥ Á¤º¸ »ı¼º
+	 * ê°€ì ¸ì˜¨ urlì„ í†µí•´ í¬ë¡¤ë§ ì±… ì •ë³´ ìƒì„±
 	 * @parma : url
 	 * */
 	public BookInformation(String url) throws IOException {
 		this.url = url;
 		this.document = Jsoup.connect(this.url).timeout(10000).get();
-		
+
 		this.author  = new StringBuffer();
-		
+
 		createBookInfo(this.document);
 	}
-	
+
 	/*
-	 * 
+	 *
 	 * */
 	public JsonObject getBookJsonObject() {
 		return this.jsonObject;
 	}
 
 	/*
-	 * µµÅ¥¸ÕÆ® °´Ã¼¸¦ ÆÄ½ÌÇÏ¿© Ã¥ Á¤º¸ »ı¼º
-	 * @param : µµÅ¥¸ÕÆ® °´Ã¼
+	 * ë„íë¨¼íŠ¸ ê°ì²´ë¥¼ íŒŒì‹±í•˜ì—¬ ì±… ì •ë³´ ìƒì„±
+	 * @param : ë„íë¨¼íŠ¸ ê°ì²´
 	 * */
 	private void createBookInfo(Document document) throws IOException {
-		
+
 		Elements infoBox = document.select(".book_info_inner");
 		Elements originalTitleElements = infoBox.select(".tit_ori");
-		
-		//ÀúÀÚ
+
+		//ì €ì
 		Elements authors = infoBox.select("[class^='N=a:bil.author']");
-		
+
 		appendAuthorLoop(authors);
-		
+
 		checkForeignBooks(originalTitleElements,infoBox);
-		
+
 		creatBookContent(document);
-		
+
 		createJsonObejct();
-		
+
 	}
 
 	/*
-	 * ÆÄ½ÌÇÑ µµÅ¥¸ÕÆ® °´Ã¼¸¦ json °´Ã¼·Î º¯È¯
+	 * íŒŒì‹±í•œ ë„íë¨¼íŠ¸ ê°ì²´ë¥¼ json ê°ì²´ë¡œ ë³€í™˜
 	 * */
 	private void createJsonObejct() {
-		
+
 		this.jsonObject = new JsonObject();
-		
+
 		jsonObject.addProperty("author"			, author.toString());
 		jsonObject.addProperty("originalTitle"	, originalTitle);
 		jsonObject.addProperty("page"			, page);
 		jsonObject.addProperty("info"			, info);
 		jsonObject.addProperty("contents"		, contents);
 		jsonObject.addProperty("authorInfo"		, authorInfo);
-		
-				
+
+
 		if (isTranslatorNull()) {
 			jsonObject.addProperty("translator", translator.toString());
 		}
-		
+
 	}
 
 	private boolean isTranslatorNull() {
-		
+
 		return translator != null;
 	}
 
 	/*
-	 * µµÅ¥¸ÕÆ® °´Ã¼¸¦ ÆÄ½ÌÇÏ¿© info, contents,authorInfo º¯¼ö¿¡ ´ã¾ÆÁÜ
-	 * @param : µµÅ¥¸ÕÆ® °´Ã¼
+	 * ë„íë¨¼íŠ¸ ê°ì²´ë¥¼ íŒŒì‹±í•˜ì—¬ info, contents,authorInfo ë³€ìˆ˜ì— ë‹´ì•„ì¤Œ
+	 * @param : ë„íë¨¼íŠ¸ ê°ì²´
 	 * */
 	private void creatBookContent(Document document) throws IOException {
 
 		Element content = document.getElementById("content");
-		
+
 		this.info 		= content.select("#bookIntroContent p").html();
 		this.contents 	= content.select("#tableOfContentsContent p").html();
 		this.authorInfo 	= content.select("#authorIntroContent p").html();
-		
+
 	}
 
 	/*
-	 * µµÅ¥¸ÕÆ® °´Ã¼¸¦ ÆÄ½ÌÇÏ¿© info, contents,authorInfo º¯¼ö¿¡ ´ã¾ÆÁÜ
-	 * @param : originalTitleElements(¿øº» Ã¥ µµÅ¥¸ÕÆ®),infoBox(Ã¥ ÄÜÅÙÃ÷ Á¤º¸)
+	 * ë„íë¨¼íŠ¸ ê°ì²´ë¥¼ íŒŒì‹±í•˜ì—¬ info, contents,authorInfo ë³€ìˆ˜ì— ë‹´ì•„ì¤Œ
+	 * @param : originalTitleElements(ì›ë³¸ ì±… ë„íë¨¼íŠ¸),infoBox(ì±… ì½˜í…ì¸  ì •ë³´)
 	 * */
 	private void checkForeignBooks(Elements originalTitleElements, Elements infoBox) {
 
-		//ÇØ¿Ü Ã¥ÀÎÁö ¾Æ´ÑÁö Ã¼Å©
+		//í•´ì™¸ ì±…ì¸ì§€ ì•„ë‹Œì§€ ì²´í¬
 		if (isPresent(originalTitleElements)) {
-			//¿øÁ¦
+			//ì›ì œ
 			this.originalTitle = originalTitleElements.first().childNodes().get(1).toString().trim();
-			
+
 			appendTranslatorLoog(infoBox);
-			
-			//ÆäÀÌÁö
+
+			//í˜ì´ì§€
 			this.page = infoBox.select(".tit_ori+div").first().childNodes().get(2).toString().trim();
 		} else {
-			//ÆäÀÌÁö
+			//í˜ì´ì§€
 			this.page = infoBox.select("div").get(4).childNodes().get(2).toString().trim();
 		}
-		
+
 	}
 
 	/*
-	 * Ã¥ ÄÜÅÙÃ÷ Á¤º¸ ³»¿¡ ¿ªÀÚ Á¤º¸ ÆÄ½Ì
-	 * @param : infoBox(Ã¥ ÄÜÅÙÃ÷ Á¤º¸)
+	 * ì±… ì½˜í…ì¸  ì •ë³´ ë‚´ì— ì—­ì ì •ë³´ íŒŒì‹±
+	 * @param : infoBox(ì±… ì½˜í…ì¸  ì •ë³´)
 	 * */
 	private void appendTranslatorLoog(Elements infoBox) {
 
-		//¿ªÀÚ
+		//ì—­ì
 		this.translator = new StringBuffer();
 		Elements translators = infoBox.select("[class^='N=a:bil.translator']");
-		
+
 		for (int i = 0; i < translators.size(); i++) {
-			
+
 			if (i != 0) {
 				this.translator.append(", ");
 			}
-			
+
 			this.translator.append(translators.get(i).text());
 		}
-		
+
 	}
 
 	private boolean isPresent(Elements originalTitleElements) {
-		
+
 		return originalTitleElements.size() > 0;
 	}
 
 	/*
-	 * ÀúÀÚ Á¤º¸¸¦ stringBuffer¿¡ ,¸¦ ±¸ºĞÀÚ·ÎÇØ¼­ Ãß°¡
-	 * @param : authors(ÀúÀÚ Á¤º¸)
+	 * ì €ì ì •ë³´ë¥¼ stringBufferì— ,ë¥¼ êµ¬ë¶„ìë¡œí•´ì„œ ì¶”ê°€
+	 * @param : authors(ì €ì ì •ë³´)
 	 * */
 	private void appendAuthorLoop(Elements authors) {
 
 		for (int i = 0,loop = authors.size(); i < loop; i++) {
-			
+
 			if (i != 0) {
 				this.author.append(", ");
 			}
-			
+
 			this.author.append(authors.get(i).text());
 		}
-		
+
 	}
-	
-	
-	
+
+
+
 }

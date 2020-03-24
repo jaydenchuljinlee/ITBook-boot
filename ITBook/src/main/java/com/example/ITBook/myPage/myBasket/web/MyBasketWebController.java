@@ -28,7 +28,8 @@ import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.common.utils.JsonUtil;
 import com.example.ITBook.myPage.myBasket.service.MyBasketService;
 
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
+@RequestMapping("/myBasket")
 @Controller
 public class MyBasketWebController {
 	private static final Logger logger = LoggerFactory.getLogger(MyBasketWebController.class);
@@ -40,7 +41,7 @@ public class MyBasketWebController {
 	 * 장바구니 메인
 	 * */
 	@Session(name = "user")
-	@GetMapping(value = "myBasket")
+	@GetMapping()
 	public String mybascket(User user
 			,Model model) throws Exception {
 		
@@ -54,7 +55,7 @@ public class MyBasketWebController {
 	/*
 	 * 장바구니 추가
 	 * */
-	@PostMapping(value = "addMyBasket")
+	@PostMapping(value = "/addMyBasket")
 	public String addMyBasket(@RequestParam long isbn
 			,@RequestParam long userIdx
 			,Model model) throws Exception {
@@ -70,7 +71,7 @@ public class MyBasketWebController {
 	 * 장바구니 삭제
 	 * */
 	@Session(name = "user")
-	@PostMapping(value = "deleteMyBasket")
+	@PostMapping(value = "/deleteMyBasket")
 	@ResponseBody
 	public String deleteMyBasket(@RequestParam(required=false) long isbn
 			,User user) throws Exception {

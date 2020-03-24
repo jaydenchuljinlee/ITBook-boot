@@ -26,7 +26,7 @@ import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/book/review")
 public class BookWebReview {
 	private static final Logger logger = LoggerFactory.getLogger(BookWebReview.class);

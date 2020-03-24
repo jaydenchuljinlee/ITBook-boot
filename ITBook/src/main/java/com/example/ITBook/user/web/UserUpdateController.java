@@ -16,7 +16,7 @@ import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.user.service.UserUpdateService;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/mypage/modify")
 public class UserUpdateController {
 

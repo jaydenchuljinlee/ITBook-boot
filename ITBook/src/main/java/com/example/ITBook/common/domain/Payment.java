@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.ITBook.common.domain.User.UserBuilder;
-import com.example.ITBook.common.enums.SocialType;
 
 import lombok.Builder;
 import lombok.Getter;

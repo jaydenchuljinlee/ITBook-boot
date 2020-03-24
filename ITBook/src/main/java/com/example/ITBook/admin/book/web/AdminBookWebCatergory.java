@@ -19,7 +19,7 @@ import com.example.ITBook.common.domain.Scategory;
 import com.example.ITBook.common.utils.JsonUtil;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/admin/book")
 public class AdminBookWebCatergory {
 	

@@ -22,7 +22,7 @@ import com.example.ITBook.common.domain.Review;
 import com.example.ITBook.common.domain.User;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/book/detail")
 public class BookWebDetail {
 	private static final Logger logger = LoggerFactory.getLogger(BookWebDetail.class);

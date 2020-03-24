@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+/*
+* 종민이 만든 게시판 공용 CSS
+* 여기 수정 하면 모든 게시판이 다 적용
+*/
+.mb30{margin-bottom: 30px;}
+.mb40{margin-bottom: 40px;}
+.mb50{margin-bottom: 50px;}
+.cf:after{display: block; content: ''; clear: both;}
+
+.hori_align_sec{}
+.hori_align_sec .lft_sec{float: left;}
+.txt_tab_menu{margin-left: 50px; height: 43px;}
+.txt_tab_menu li{float: left; line-height: 43px;}
+.txt_tab_menu li a{padding: 0 28px; line-height: 1; font-size: 16px; border-right: 2px solid #ccc;}
+.txt_tab_menu li:last-child a{border:0;}
+
+/*드랍다운 카테고리*/
+.dropdown_wrap{margin-bottom: 30px;}
+.dropdown_wrap .btn_category{min-width: 202px; padding: 8.5px 12px; border-radius: 0; border: 1px solid #1e293d;}
+.dropdown_wrap .dropdown-menu{min-width: 202px;}
+.dropdown_wrap .dropdown-menu > li > a{padding: 5px 20px;}
+.bar_ico{width: 24px; height: 24px; padding: 4px; background-color: #1e293d; transition: 0.3s;}
+.rotate_on{transform: rotate(90deg);}
+.bar_ico div{margin-bottom: 4px; height: 2px; background-color:#fff}
+
+/* 게시판 공통 */
+.table-responsive *{text-align: center;}
+.table-responsive .tit{text-align: left;}
+.table-responsive .form-control{display: inline-block; max-width: calc(100% - 60px);}
+.table > thead > .tr_th th, .table > tbody > .tr_th th{padding: 12px; background: #1e293d; color: #fff; font-size: 14px;}
+.btn_board_search{width: 25%; width: 100px;}
+
+

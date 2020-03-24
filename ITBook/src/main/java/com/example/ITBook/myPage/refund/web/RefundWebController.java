@@ -29,7 +29,7 @@ import com.example.ITBook.myPage.refund.service.RefundService;
  * */
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/refund")
 public class RefundWebController {
 

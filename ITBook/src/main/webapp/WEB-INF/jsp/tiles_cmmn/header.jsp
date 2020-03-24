@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -11,18 +11,23 @@
 			<!-- Cart Option -->
 			<div class="cart-option col-lg-7">
 				<ul>
-					<li class="add-cart">
-						<a href="myBasket.do">
-							<i class="fas fa-shopping-cart"></i>
-							<span style="right: -15px;">3</span>
-						</a>
-					</li>
-					<li class="add-cart">
-						<img class="wish_n" alt="" src="/itbook/images/store/wish_n.png"><a href="wishList.do">위시리스트</a>
-					</li>
-					<li class="user_i"><a href="myPage.do"><i class="far fa-user"></i>마이페이지</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#login-modal">
-					<i class="fas fa-sign-in-alt"></i>로그인 / 회원가입</a></li>
+					<c:if test="${empty user}">
+						<li><a href="#" data-toggle="modal" data-target="#login-modal">
+						<i class="fas fa-sign-in-alt"></i>로그인 / 회원가입</a></li>
+					</c:if>
+					<c:if test="${not empty user}">
+						<li class="add-cart pageMove" data-page="/myBasket">
+							<a href="#">
+								<i class="fas fa-shopping-cart"></i>
+								<span style="right: -15px;">3</span>
+							</a>
+						</li>
+						<li class="add-cart pageMove" data-page="/wishList">
+							<img class="wish_n" alt="" src="/itbook/images/store/wish_n.png"><a href="#">위시리스트</a>
+						</li>
+						<li class="user_i pageMove" data-page="/myPage"><a href="#"><i class="far fa-user"></i>마이페이지</a></li>
+						<li class="pageMove" data-page="/logout"><a href="#"><i class="fas fa-sign-in-alt"></i><a>로그아웃</a></li>
+					</c:if>
 				</ul>
 			</div>
 			<!-- Cart Option -->

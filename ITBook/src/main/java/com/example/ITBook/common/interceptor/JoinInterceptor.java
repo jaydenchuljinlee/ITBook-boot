@@ -23,7 +23,6 @@ public class JoinInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		
 		if (request.getSession(false) != null) {
 			
 			response.sendRedirect("/main");

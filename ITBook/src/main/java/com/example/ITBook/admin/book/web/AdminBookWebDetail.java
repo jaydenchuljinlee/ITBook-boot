@@ -19,7 +19,7 @@ import com.example.ITBook.common.domain.Book;
 import com.example.ITBook.common.exception.BookNotFoundException;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/admin/book")
 public class AdminBookWebDetail {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebDetail.class);

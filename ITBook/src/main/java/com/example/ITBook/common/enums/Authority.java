@@ -1,9 +1,10 @@
 package com.example.ITBook.common.enums;
 
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
 
 @Getter
-public enum Authority {
+public enum Authority implements GrantedAuthority {
 
 	USER("user"),
 	ADMIN("admin");
@@ -23,5 +24,11 @@ public enum Authority {
 		
 		return this.name.equals(authority);
 	};
-	
+
+	@Override
+	public String getAuthority() {
+		return this.getRoleType();
+	}
+
+
 }

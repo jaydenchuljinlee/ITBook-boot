@@ -29,7 +29,59 @@
 	<tiles:insertAttribute name="quick_view" />
 	<!-- Switcher  Panel -->
 	<tiles:insertAttribute name="link_js" />
-	
-	
+
+	<script type="text/javascript">
+		$(function() {
+			$(".btn_social").click(function() {
+				var socialType = $(this).data("social");
+				location.href = "/oauth2/authorization/" + socialType;
+			});
+
+			$(".pageMove").on("click",function() {
+				var page = $(this).data("page");
+
+				$("#pageMoveFrm").attr("action",page);
+				$("#pageMoveFrm").submit();
+
+			});
+
+			$("#loginBtn").on("click",function() {
+
+				var id	= $("#id_input").val(),
+					pwd = $("#pwd_input").val();
+
+				$("#loginFrm").attr("action","/main");
+				$("#loginFrm").attr("method","post");
+				$("#loginFrm").submit();
+
+				/*$.ajax({
+					url			: "/login",
+					data		: {"identity" : id, "password" : pwd},
+					dataType	: "json",
+					type		: "get",
+					success		: function(json) {
+						var page = json.page;
+						$("#author").val(json.author);
+						$("#page").val(json.page);
+						$("#originalTitle").val(json.originalTitle);
+						$("#translator").val(json.translator);
+						CKEDITOR.instances.info.insertHtml(json.info);
+						CKEDITOR.instances.contents.insertHtml(json.contents);
+						CKEDITOR.instances.authorInfo.insertHtml(json.authorInfo);
+						$("#loader").hide();
+						window.scrollTo(0,0);
+					},
+					error		: function(error) {
+						console.log("adminBookSearchDetail 에 대한 에러");
+						console.log(error);
+						alert("데이터를 가져오는 중에 오류가 발생하였습니다.");
+
+					}
+				});*/
+			});
+		})
+	</script>
+	<form id="pageMoveFrm">
+	</form>
 </body>
 </html>

@@ -13,7 +13,7 @@ import com.example.ITBook.admin.book.service.AdminBookService;
 import com.example.ITBook.common.domain.Book;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping(value = "/admin/book")
 public class AdminBookWebController {
 	

@@ -25,7 +25,7 @@ import com.example.ITBook.common.exception.BookIsbnNotFoundException;
 import com.example.ITBook.common.exception.FailedConnectionException;
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/admin/book")
 public class AdminBookWebRegister {
 	private static final Logger logger = LoggerFactory.getLogger(AdminBookWebRegister.class);

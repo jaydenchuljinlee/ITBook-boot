@@ -1,20 +1,22 @@
 package com.example.ITBook.common.domain;
 
+import com.example.ITBook.common.enums.Authority;
+import com.example.ITBook.common.enums.Grade;
 import com.example.ITBook.common.enums.SocialType;
+import com.example.ITBook.common.enums.UserStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /*
  * 회원 테이블
@@ -50,8 +52,15 @@ public class User implements Serializable{
     // OAuth
     @Column(name = "principal",length = 255,nullable = true)
     private String principal;
+
     @Column(name = "social_type")
     private SocialType socialType;
+
+    // Batch
+    @Column(name = "status")
+    private UserStatus status; // 추가
+    @Column(name = "grade")
+    private Grade grade; // 추가
     
     @Column(name = "phone",length = 255)
     private String phone;
@@ -64,6 +73,11 @@ public class User implements Serializable{
     
     @Column(name = "mileage",length = 7,nullable = true)
     private int mileage;
+
+    public User setInactive(){
+        this.status = UserStatus.INACTIVE;
+        return this;
+    }
 
     public User(Long userNo) {
     	this.userNo = userNo;
@@ -102,22 +116,26 @@ public class User implements Serializable{
         this.mileage = 0;
     }
     
-    public User(Long userNo,String identity, String name, String password, String email, LocalDateTime createdDate
-    		, LocalDateTime updatedDate, String principal, SocialType socialType,String phone
-    		, String address1, String address2, String address3,int mileage) {
-        this.userNo = userNo;
-        this.identity	= identity;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
-        this.principal = principal;
-        this.socialType = socialType;
-        this.phone = phone;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.address3 = address3;
-        this.mileage = mileage;
-    }
+
+	public User(Long userNo, String identity, String name, String password, String email, LocalDateTime createdDate,
+			LocalDateTime updatedDate, String principal, SocialType socialType, UserStatus status, Grade grade,
+			String phone, String address1, String address2, String address3, int mileage) {
+		super();
+		this.userNo = userNo;
+		this.identity = identity;
+		this.name = name;
+		this.password = password;
+		this.email = email;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+		this.principal = principal;
+		this.socialType = socialType;
+		this.status = status;
+		this.grade = grade;
+		this.phone = phone;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.address3 = address3;
+		this.mileage = mileage;
+	}
 }

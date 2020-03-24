@@ -29,7 +29,7 @@ import com.example.ITBook.myPage.paymentList.service.PaymentService;
  * */
 
 @Controller
-@SessionAttributes("sessionId")
+@SessionAttributes("user")
 @RequestMapping("/payment")
 public class PayemntListWebController {
 	
