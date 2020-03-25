@@ -47,6 +47,9 @@ dependencies {
 	implementation('org.springframework.security:spring-security-oauth2-jose') 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	/* Spring boot starter - jpa,jdbc,batch,web*/
+	implementation('org.springframework.data:spring-data-rest-hal-browser')
+	implementation'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation("commons-dbcp:commons-dbcp:1.4")

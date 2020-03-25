@@ -4,6 +4,7 @@ import com.example.ITBook.common.enums.Authority;
 import com.example.ITBook.common.enums.Grade;
 import com.example.ITBook.common.enums.SocialType;
 import com.example.ITBook.common.enums.UserStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "user")
-@Setter @Getter @AllArgsConstructor
+@Setter @Getter @AllArgsConstructor @NoArgsConstructor
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -36,6 +37,7 @@ public class User implements Serializable{
     private String identity;
     @Column(name = "name",length = 50)
     private String name;
+    @JsonIgnore
     @Column(name = "password",length = 255)
     private String password;
     @Column(name = "email",length = 255)
@@ -70,6 +72,14 @@ public class User implements Serializable{
     
     @Column(name = "mileage",length = 7,nullable = true)
     private int mileage;
+
+    public void setCreatedDate() {
+        this.createdDate = LocalDateTime.now();
+    }
+
+    public void setUpdatedDate() {
+        this.updatedDate = LocalDateTime.now();
+    }
 
     public User setInactive(){
         this.status = UserStatus.INACTIVE;
