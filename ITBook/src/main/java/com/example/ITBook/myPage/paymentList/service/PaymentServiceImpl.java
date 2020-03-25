@@ -100,7 +100,7 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		if (length == 0) throw new PamentSizeException();//결제 처리를 찾을 수 없음
 		
-		List<Book> original =  bookRepository.findByIsbn(payInfo.getIsbn());//재고
+		List<Book> original =  bookRepository.findByIsbnIn(payInfo.getIsbn());//재고
 		
 		for(int i = 0; i < length; i++) {// 결제 정보 리스트 분기문 체크 
 			

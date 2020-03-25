@@ -13,6 +13,7 @@ import com.example.ITBook.common.domain.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long>{
-	
-	List<Book> findByIsbn(List<Long> book);
+
+	@Transactional
+	List<Book> findByIsbnIn(List<Long> book);
 }

@@ -3,17 +3,11 @@ package com.example.ITBook.common.configure;
 import com.example.ITBook.common.enums.Authority;
 import com.example.ITBook.common.enums.SocialType;
 import com.example.ITBook.common.filter.JwtAuthenticationFilter;
-import com.example.ITBook.common.filter.JwtAuthorizationFilter;
-import com.example.ITBook.common.provider.CustomAuthenticationProvider;
 import com.example.ITBook.oauth2.CustomOAuth2Provider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -27,7 +21,6 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -94,29 +87,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(true)
             ;
-    }
-
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-
-        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
-        jwtAuthenticationFilter.setFilterProcessesUrl("/loginCheck");
-        jwtAuthenticationFilter.setUsernameParameter("identity");
-        jwtAuthenticationFilter.setPasswordParameter("password");
-
-        /*jwtAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
-        jwtAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler());*/
-
-        jwtAuthenticationFilter.afterPropertiesSet();
-
-        return jwtAuthenticationFilter;
-
-    }
-
-    @Bean
-    public JwtAuthorizationFilter jwtAuthorizationFilter() throws Exception {
-        JwtAuthorizationFilter jwtAuthorizationFilter = new JwtAuthorizationFilter(authenticationManager());
-        return jwtAuthorizationFilter;
     }
 
 

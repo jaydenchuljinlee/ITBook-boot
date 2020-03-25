@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 
 import javax.servlet.Filter;
 
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,10 +15,9 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-
-@EnableAutoConfiguration
+//EnableBatchProcessing 통해 자동 등록된 Bean인 JobBuilderFactory, StepBuilderFactory를 InactiveUserConfig에 주입할 수 있다.
+@EnableBatchProcessing
 @Configuration
-@ComponentScan
 @SpringBootApplication(scanBasePackages = {"com.example.ITBook"})
 public class ItBookApplication {
 

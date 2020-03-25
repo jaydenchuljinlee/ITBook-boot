@@ -1,9 +1,10 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'org.springframework.boot' version '2.2.0.RELEASE'
 	id 'java'
 }
 
 apply plugin: 'io.spring.dependency-management'
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -50,7 +51,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation("commons-dbcp:commons-dbcp:1.4")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc:2.0.1.RELEASE")
-	
+
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -59,4 +61,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.batch:spring-batch-test'
+
+	runtime("org.springframework.boot:spring-boot-properties-migrator")
 }

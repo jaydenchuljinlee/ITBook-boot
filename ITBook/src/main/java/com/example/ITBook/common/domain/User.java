@@ -4,10 +4,7 @@ import com.example.ITBook.common.enums.Authority;
 import com.example.ITBook.common.enums.Grade;
 import com.example.ITBook.common.enums.SocialType;
 import com.example.ITBook.common.enums.UserStatus;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -25,7 +22,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "user")
-@Setter @Getter @NoArgsConstructor
+@Setter @Getter @AllArgsConstructor
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -82,12 +79,12 @@ public class User implements Serializable{
     public User(Long userNo) {
     	this.userNo = userNo;
     }
-    
+
     public User(String identity, String password) {
     	this.identity 	= identity;
     	this.password	= password;
     }
-    
+
     public User(String identity, String name, String email,SocialType socialType) {
     	this.identity = identity;
         this.name = name;
@@ -101,7 +98,7 @@ public class User implements Serializable{
         this.address3 = "non";
         this.mileage = 0;
     }
-    
+
     public User( String name, String password, String email,String phone
     		, String address1, String address2, String address3) {
         this.name = name;
@@ -115,27 +112,5 @@ public class User implements Serializable{
         this.address3 = address3;
         this.mileage = 0;
     }
-    
 
-	public User(Long userNo, String identity, String name, String password, String email, LocalDateTime createdDate,
-			LocalDateTime updatedDate, String principal, SocialType socialType, UserStatus status, Grade grade,
-			String phone, String address1, String address2, String address3, int mileage) {
-		super();
-		this.userNo = userNo;
-		this.identity = identity;
-		this.name = name;
-		this.password = password;
-		this.email = email;
-		this.createdDate = createdDate;
-		this.updatedDate = updatedDate;
-		this.principal = principal;
-		this.socialType = socialType;
-		this.status = status;
-		this.grade = grade;
-		this.phone = phone;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.address3 = address3;
-		this.mileage = mileage;
-	}
 }
