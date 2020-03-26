@@ -4,19 +4,20 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /*
  * 상위 카테고리 테이블
  * */
 
-@NoArgsConstructor
-@Getter
+@Builder
+@NoArgsConstructor @AllArgsConstructor
+@Data
 @Entity
+@Table(name = "bcategory")
 public class Bcategory  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -25,14 +26,5 @@ public class Bcategory  implements Serializable{
 	private long code;
 	
 	private String name;
-	
-	public Bcategory(long code) {
-		this.code = code;
-	}
-	
-	@Builder
-	public Bcategory(long code,String name) {
-		this.code = code;
-		this.name = name;
-	}
+
 }

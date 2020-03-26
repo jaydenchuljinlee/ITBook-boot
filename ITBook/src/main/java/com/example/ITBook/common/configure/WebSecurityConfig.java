@@ -2,7 +2,6 @@ package com.example.ITBook.common.configure;
 
 import com.example.ITBook.common.enums.Authority;
 import com.example.ITBook.common.enums.SocialType;
-import com.example.ITBook.common.filter.JwtAuthenticationFilter;
 import com.example.ITBook.oauth2.CustomOAuth2Provider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
@@ -47,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 */
 
         http.authorizeRequests()
-                .antMatchers("/","/api/**","/loginCheck","/oauth2/**", "/login/**","/join/**","/webapp/**","/css/**", "/images/**", "/js/**", "/console/**","/admin/css/**","/admin/images/**","/admin/js/**","/itbook/js/**","/itbook/js/images","/itbook/css/**","/itbook/fonts/**")
+                .antMatchers("/","/api/**","/file/**","/loginCheck","/oauth2/**", "/login/**","/join/**","/webapp/**","/css/**", "/images/**", "/js/**", "/console/**","/admin/css/**","/admin/images/**","/admin/js/**","/itbook/js/**","/itbook/js/images","/itbook/css/**","/itbook/fonts/**")
                     .permitAll()
                 .antMatchers("/admin/**")
                 	.hasAnyAuthority(Authority.ADMIN.getRoleType())

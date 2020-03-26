@@ -14,17 +14,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 /*
  * 결제 테이블
  * */
 
-@Getter @Setter @NoArgsConstructor @Builder
+@Builder
+@NoArgsConstructor @AllArgsConstructor
+@Data
 @Entity
 @Table(name = "payment")
 public class Payment implements Serializable{
@@ -67,30 +66,5 @@ public class Payment implements Serializable{
 	private String method;
 	@Column(name = "apply_mileage",length = 10)
 	private int mileage;
-	
-	public Payment(long pay_no, User user) {
-		this.pay_no = pay_no;
-		this.user = user;
-		
-	}
-	
-	public Payment(long pay_no,User user,int totalPrice,int totalquantity,int state,LocalDateTime payDate
-			,String name,String phone,String call,String message,String address1,String address2
-			,String address3,String method,int mileage) {
-		this.pay_no = pay_no;
-		this.user = user;
-		this.totalPrice = totalPrice;
-		this.totalquantity = totalquantity;
-		this.state = state;
-		this.payDate = payDate;
-		this.name = name;
-		this.phone = phone;
-		this.call = call;
-		this.message = message;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.address3 = address3;
-		this.method = method;
-		this.mileage = mileage;
-	}
+
 }

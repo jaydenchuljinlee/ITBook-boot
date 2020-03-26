@@ -34,7 +34,9 @@ public class BookDetailServiceImpl implements BookDetailService {
 	@Override
 	public Map<String, Object> selectReviewList(Long isbn) throws Exception {
 		
-		Book book = new Book(isbn);
+		Book book = Book.builder()
+						.isbn(isbn)
+						.build();
 		
 		List<Review> rvList = bookReviewRepository.findByBook(book);
 		

@@ -11,12 +11,12 @@ import javax.persistence.Table;
 
 import com.example.ITBook.common.domain.pk.CategoryPK;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter @Setter @NoArgsConstructor
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "tag")
 public class Tag  implements Serializable{
@@ -29,15 +29,5 @@ public class Tag  implements Serializable{
 	
 	@Column(columnDefinition = "VARCHAR", length = 50)
 	private String name;
-	
-	public Tag(long code) {
-		this.code = code;
-	}
-	
-	@Builder
-	public Tag(long code,String name) {
-		this.code = code;
-		this.name = name;
-	}
 
 }

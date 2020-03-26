@@ -25,14 +25,18 @@ public class MyBasketServiceImpl implements MyBasketService {
 	private MyBasketRepository myBasketRepository;
 	
 	@Override
-	public boolean deleteMyBasket(long isbn, User user_param) throws Exception {
+	public boolean deleteMyBasket(long isbn, User user) throws Exception {
 
 		HashMap<String ,Object> map = new HashMap<>();
 		
-		Book book = new Book(isbn);
-		User user = new User(user_param.getUserNo());
+		Book book = Book.builder()
+						.isbn(isbn)
+						.build();
 		
-		MyBasket myBasket = new MyBasket(book,user);
+		MyBasket myBasket = MyBasket.builder()
+									.book(book)
+									.user(user)
+									.build();
 			
 		return myBasketRepository.remove(myBasket) == 1 ? true : false;
 	}
@@ -40,7 +44,11 @@ public class MyBasketServiceImpl implements MyBasketService {
 	@Override
 	public List<MyBasket> selectByUser(Long index) throws Exception {
 		
-		return myBasketRepository.findAllByUser(new User(index));
+		
+		
+		return myBasketRepository.findAllByUser(User.builder()
+													.userNo(index)
+													.build());
 	}
 	
 	@Override
@@ -60,12 +68,19 @@ public class MyBasketServiceImpl implements MyBasketService {
 	}
 
 	private boolean insertMyBasketInDB(long isbn, long idx) throws Exception{
-		Book book = new Book(isbn);
+		Book book = Book.builder()
+						.isbn(isbn)
+						.build();
 		
-		User user = new User(idx);
+		User user = User.builder()
+						.userNo(idx)
+						.build();
 		
-		MyBasket myBasket = new MyBasket(book,user);
-		
+		MyBasket myBasket = MyBasket.builder()
+									.book(book)
+									.user(user)
+									.build();
+							
 		myBasketRepository.save(myBasket);	
 		
 		return myBasketRepository.existsById(myBasket.getMyBasketPK());

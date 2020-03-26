@@ -70,7 +70,9 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public List<PaymentInformation> selectList(Long user_no) throws Exception {
 		
-		return paymentRepository.findByUser(new User(user_no));
+		return paymentRepository.findByUser(User.builder()
+												.userNo(user_no)
+												.build());
 	}
 	
 	/*
@@ -83,7 +85,11 @@ public class PaymentServiceImpl implements PaymentService {
 			
 			int quantity = payInfo.getQuantity().get(i);
 			
-			PaymentInformation paymentInformation = new PaymentInformation(payment,list.get(i),quantity);
+			PaymentInformation paymentInformation = PaymentInformation.builder()
+																		.payment(payment)
+																		.book(list.get(i))
+																		.quantity(quantity)
+																		.build();
 			
 			paymentInfoList.add(payInfoRepository.save(paymentInformation));
 		}
@@ -104,17 +110,20 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		for(int i = 0; i < length; i++) {// 결제 정보 리스트 분기문 체크 
 			
-			Book book = new Book();
+			
 			
 			long isbn 		= payInfo.getIsbn().get(i);
+			
+			Book book = Book.builder()
+							.isbn(isbn)
+							.quantity(payInfo.getQuantity().get(i))
+							.build();
+			
 			int currentCnt	= payInfo.getQuantity().get(i);
-			int originalCnt = original.get(original.indexOf(new Book(isbn))).getQuantity();
+			int originalCnt = original.get(original.indexOf(book)).getQuantity();
 			
 			if (originalCnt < currentCnt) //재고 범위 초과
 				throw new OveredBookQuantityException(currentCnt, originalCnt);
-			
-			book.setIsbn(payInfo.getIsbn().get(i));
-			book.setQuantity(payInfo.getQuantity().get(i));
 			
 			list.add(book);
 		}

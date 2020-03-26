@@ -86,41 +86,5 @@ public class User implements Serializable{
         return this;
     }
 
-    public User(Long userNo) {
-    	this.userNo = userNo;
-    }
-
-    public User(String identity, String password) {
-    	this.identity 	= identity;
-    	this.password	= password;
-    }
-
-    public User(String identity, String name, String email,SocialType socialType) {
-    	this.identity = identity;
-        this.name = name;
-        this.password = "non";
-        this.email = email;
-        this.principal = "1";
-        this.socialType = socialType;
-        this.phone = "non";
-        this.address1 = "non";
-        this.address2 = "non";
-        this.address3 = "non";
-        this.mileage = 0;
-    }
-
-    public User( String name, String password, String email,String phone
-    		, String address1, String address2, String address3) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.principal = "1";
-        this.socialType = SocialType.DEFAULT;
-        this.phone = phone;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.address3 = address3;
-        this.mileage = 0;
-    }
 
 }

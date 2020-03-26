@@ -12,15 +12,15 @@ import javax.persistence.Table;
 
 import com.example.ITBook.common.domain.pk.HashtagePK;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /*
  * 해시태그 객체
  * */
 
-@Getter @Setter @NoArgsConstructor
+@Builder
+@NoArgsConstructor @AllArgsConstructor
+@Data
 @Entity
 @Table(name = "hashtag")
 public class Hashtag  implements Serializable{
@@ -39,10 +39,4 @@ public class Hashtag  implements Serializable{
 	@MapsId("code")
 	@JoinColumn(name = "code")
 	private Tag tag;
-	
-	public Hashtag(Book book,Tag tag) {
-		this.pk = new HashtagePK(book.getIsbn(),tag.getCode());
-		this.book = book;
-		this.tag = tag;
-	}
 }

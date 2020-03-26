@@ -3,12 +3,18 @@ package com.example.ITBook.common.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /*
  * 다중 건  결제 정보
  * */
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class PayInfo implements Serializable{
 

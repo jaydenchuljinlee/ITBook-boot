@@ -43,7 +43,9 @@ public class AdminBookWebCatergory {
 			
 			param = Long.parseLong((String) resMap.get("param"));
 			
-			Bcategory parent = new Bcategory(param);
+			Bcategory parent = Bcategory.builder()
+										.code(param)
+										.build();
 			
 			List<Scategory> sCategory = adminBookService.selectChildCategoryList(parent);
 			

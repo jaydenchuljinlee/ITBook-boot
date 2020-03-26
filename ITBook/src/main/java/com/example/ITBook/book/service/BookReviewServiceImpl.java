@@ -31,8 +31,14 @@ public class BookReviewServiceImpl implements BookReviewService {
 		
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
-		Book book = new Book(isbn);
-		User user = new User(idx);
+		Book book = Book.builder()
+						.isbn(isbn)
+						.build();
+		
+		User user = User.builder()
+						.userNo(idx)
+						.build();
+		
 		
 		review.setBook(book);
 		review.setUser(user);
@@ -53,8 +59,13 @@ public class BookReviewServiceImpl implements BookReviewService {
 
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
-		Book book = new Book(isbn);
-		User user = new User(idx);
+		Book book = Book.builder()
+						.isbn(isbn)
+						.build();
+		
+		User user = User.builder()
+						.userNo(idx)
+						.build();
 		
 		review.setBook(book);
 		review.setUser(user);
@@ -74,8 +85,13 @@ public class BookReviewServiceImpl implements BookReviewService {
 
 		ReviewPK pk = new ReviewPK(isbn,idx);
 		
-		Book book = new Book(isbn);
-		User user = new User(idx);
+		Book book = Book.builder()
+						.isbn(isbn)
+						.build();
+		
+		User user = User.builder()
+						.userNo(idx)
+						.build();
 		
 		review.setBook(book);
 		review.setUser(user);

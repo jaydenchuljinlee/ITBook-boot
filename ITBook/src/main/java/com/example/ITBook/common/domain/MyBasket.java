@@ -11,16 +11,16 @@ import javax.persistence.Table;
 
 import com.example.ITBook.common.domain.pk.MyBasketPK;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 /*
  * 장바구니 테이블
  * */
 
-@NoArgsConstructor
-@Getter
+@Builder
+@NoArgsConstructor @AllArgsConstructor
+@Data
 @Entity
 @Table(name = "mybasket")
 public class MyBasket  implements Serializable{
@@ -39,11 +39,4 @@ public class MyBasket  implements Serializable{
 	@MapsId("user_no")
 	@JoinColumn(name = "user_no")
 	private User user;
-	
-	public MyBasket(Book book,User user) {
-		this.myBasketPK = new MyBasketPK(book.getIsbn(),user.getUserNo());
-		this.book = book;
-		this.user = user;
-		
-	}
 }

@@ -5,15 +5,15 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /*
  * 결제정보 복합키 PK 객체
  * */
-
+@Builder
 @NoArgsConstructor
-@Getter
+@AllArgsConstructor
+@Data
 @Embeddable
 public class PaymentInformationPK implements Serializable{
 
@@ -24,12 +24,7 @@ public class PaymentInformationPK implements Serializable{
 	
 	@Column(name = "isbn")
 	private long isbn;
-	
-	
-	public PaymentInformationPK(long payNo,long isbn) {
-		this.payNo = payNo;
-		this.isbn = isbn;
-	}
+
 	
 	
 }

@@ -5,15 +5,16 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /*
  * ∏Æ∫‰ ∫π«’≈∞ PK ∞¥√º
  * */
 
+@Builder
 @NoArgsConstructor
-@Getter
+@AllArgsConstructor
+@Data
 @Embeddable
 public class ReviewPK  implements Serializable{
 
@@ -24,9 +25,4 @@ public class ReviewPK  implements Serializable{
 	
 	@Column(name = "user_no")
 	private long user_no;
-	
-	public ReviewPK(long isbn,long user_no) {
-		this.isbn = isbn;
-		this.user_no = user_no;
-	}
 }

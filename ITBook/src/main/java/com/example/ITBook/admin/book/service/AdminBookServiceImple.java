@@ -126,8 +126,16 @@ public class AdminBookServiceImple implements AdminBookService {
 		List<Hashtag> tagInfos = new ArrayList<Hashtag>();
 		
 		for (long code : hash) {
-			Tag tag = new Tag(code);
-			tagInfos.add(new Hashtag(book,tag));
+			Tag tag = Tag.builder()
+						.code(code)
+						.build();
+			
+			Hashtag hashtag = Hashtag.builder()
+									.book(book)
+									.tag(tag)
+									.build();
+			
+			tagInfos.add(hashtag);
 		}
 		
 		return tagInfos;
@@ -153,9 +161,14 @@ public class AdminBookServiceImple implements AdminBookService {
 
 	private Scategory categoryCreate(long category1, long category2) {
 
-		Bcategory parent = new Bcategory(category1);
+		Bcategory parent = Bcategory.builder()
+									.code(category1)
+									.build();
 		
-		Scategory child = new Scategory(category2,parent);
+		Scategory child = Scategory.builder()
+									.bcategory(parent)
+									.code(category2)
+									.build();
 		
 		return child;
 		

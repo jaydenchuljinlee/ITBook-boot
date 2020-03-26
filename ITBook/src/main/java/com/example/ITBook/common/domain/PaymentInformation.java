@@ -13,14 +13,15 @@ import javax.persistence.Table;
 
 import com.example.ITBook.common.domain.pk.PaymentInformationPK;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /*
  * 결제 정보 테이블
  * */
 
-@Getter @NoArgsConstructor
+@Builder
+@NoArgsConstructor @AllArgsConstructor
+@Data
 @Entity
 @Table(name = "pay_info")
 public class PaymentInformation  implements Serializable{
@@ -42,13 +43,6 @@ public class PaymentInformation  implements Serializable{
 	
 	@Column(columnDefinition = "INT",length = 11)
 	private int quantity;
-	
-	public PaymentInformation(Payment payment,Book book,int quantity) {
-		this.PK = new PaymentInformationPK(payment.getPay_no(),book.getIsbn());
-		this.payment = payment;
-		this.book = book;
-		this.quantity = quantity;
-	}
 	
 	
 }

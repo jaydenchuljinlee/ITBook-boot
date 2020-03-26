@@ -5,16 +5,17 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 /*
  * 해시태그 복합키 PK 객체
  * */
 
+@Builder
 @NoArgsConstructor
-@Getter
+@AllArgsConstructor
+@Data
 @Embeddable
 public class HashtagePK  implements Serializable{
 
@@ -25,14 +26,6 @@ public class HashtagePK  implements Serializable{
 	
 	@Column(name = "code")
 	private long code;
-	
-	public HashtagePK(long isbn) {
-		this.isbn = isbn;
-	}
-	
-	public HashtagePK(long isbn,long code) {
-		this.isbn = isbn;
-		this.code = code;
-	}
+
 	
 }

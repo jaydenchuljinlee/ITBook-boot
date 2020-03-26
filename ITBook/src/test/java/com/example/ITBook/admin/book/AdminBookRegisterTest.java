@@ -43,8 +43,8 @@ public class AdminBookRegisterTest {
 		
 		naverDocument = new NaverClientInformation("20120099");
 		
-		bcategory = new Bcategory(1);
-		scategory = new Scategory(1,bcategory);
+		bcategory = Bcategory.builder().code(1).build();
+		scategory = Scategory.builder().bcategory(bcategory).code(1).build();
 		
 		
 		logger.info("set up ...");

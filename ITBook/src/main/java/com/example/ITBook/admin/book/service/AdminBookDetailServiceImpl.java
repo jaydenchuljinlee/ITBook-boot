@@ -169,7 +169,14 @@ public class AdminBookDetailServiceImpl implements AdminBookDetailService {
 
 	private Scategory categoryCreate(long category1, long category2) {
 		
-		return new Scategory(category2,new Bcategory(category1));
+		Bcategory bcategory = Bcategory.builder()
+										.code(category1)
+										.build();
+		
+		return Scategory.builder()
+						.code(category2)
+						.bcategory(bcategory)
+						.build();
 	}
 
 	

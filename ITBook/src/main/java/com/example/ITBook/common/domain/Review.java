@@ -13,15 +13,16 @@ import javax.persistence.Table;
 
 import com.example.ITBook.common.domain.pk.ReviewPK;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /*
  * 책 리뷰 테이블
  * */
 
-@Getter @Setter @NoArgsConstructor
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "review")
 public class Review  implements Serializable{
@@ -57,15 +58,6 @@ public class Review  implements Serializable{
 	
 	@Column(name = "contents",columnDefinition="TEXT")
 	private String contents;
-	
-	public Review(Book book,User user,int career,int star,String title,String contents) {
-		this.reviewPK = new ReviewPK(book.getIsbn(),user.getUserNo());
-		this.book = book;
-		this.user = user;
-		this.career = career;
-		this.star = star;
-		this.title = title;
-		this.contents = contents;
-	}
+
 	
 }
