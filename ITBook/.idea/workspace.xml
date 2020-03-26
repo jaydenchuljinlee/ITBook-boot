@@ -1,45 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3eeea446-41d1-4d62-8b64-9b53684cccd1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/FileVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/restApi/event/FileEventHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/restApi/repository/FileRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/restApi/repository/FileRestRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/restApi/web/FileApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/restApi/web/fileFrontController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/fileUpload/file.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/admin/book/service/AdminBookDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/admin/book/service/AdminBookDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/admin/book/service/AdminBookServiceImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/admin/book/service/AdminBookServiceImple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/admin/book/web/AdminBookWebCatergory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/admin/book/web/AdminBookWebCatergory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/book/service/BookDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/book/service/BookDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/book/service/BookReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/book/service/BookReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/configure/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/configure/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Bcategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Bcategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Hashtag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Hashtag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/MyBasket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/MyBasket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/PayInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/PayInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/PaymentInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/PaymentInformation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Refund.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Refund.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Scategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Scategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/BookCategoryPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/BookCategoryPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/CategoryPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/CategoryPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/HashtagePK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/HashtagePK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/MyBasketPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/MyBasketPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/PaymentInformationPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/PaymentInformationPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/ReviewPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/ReviewPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/projection/UserOnlyContainName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/projection/UserOnlyContainName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/myPage/myBasket/service/MyBasketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/myPage/myBasket/service/MyBasketServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ITBook/myPage/paymentList/service/PaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ITBook/myPage/paymentList/service/PaymentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/ITBook/admin/book/AdminBookRegisterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/ITBook/admin/book/AdminBookRegisterTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="3eeea446-41d1-4d62-8b64-9b53684cccd1" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -98,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/PaymentInformationPK.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="125">
+              <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -211,77 +173,6 @@
               <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
               <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ITBook" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ITBook" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ITBook" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="domain" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ITBook" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="domain" type="462c0819:PsiDirectoryNode" />
-              <item name="pk" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ITBook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ITBook" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -301,7 +192,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585209163007" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585209430755" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -416,12 +307,12 @@
       <option name="presentableId" value="Default" />
       <updated>1584941654701</updated>
       <workItem from="1584941658316" duration="1622000" />
-      <workItem from="1584943334110" duration="66325000" />
+      <workItem from="1584943334110" duration="66593000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67947000" />
+    <option name="totallyTimeSpent" value="68215000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -434,7 +325,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -882,8 +772,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ITBook/common/domain/pk/PaymentInformationPK.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="125">
+          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
         </state>
       </provider>
     </entry>
