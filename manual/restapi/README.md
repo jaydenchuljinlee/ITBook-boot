@@ -108,7 +108,7 @@ public interface UserRestRepository extends JpaRepository<User,Long> {
 ```
 - 아래는 **/api/user**로 접속하여 나온 결과물 입니다.
 
-![Alt text]()
+![Alt text](./rest_api_1.png)
 
 - 결과물 중에 노출하고싶지 않은 데이터가 있을 때에는 해당 필드에 **@JsonIgnore** 어노테이션을 붙입니다. * (아래 User 클래스 name필드 참조)
 
@@ -208,4 +208,4 @@ public class User implements Serializable{
 
 - **@JsonIgnore** 어노테이션을 이용해 결과 재 도출
 
-![Alt text]()
+![Alt text](./rest_api_1.png)
