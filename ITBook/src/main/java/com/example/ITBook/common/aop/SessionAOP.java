@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,15 +26,16 @@ import com.example.ITBook.common.domain.User;
  * session ¡÷¿‘ AOP
  * 
  * */
-
+@Slf4j
 @Component
 @Aspect
 public class SessionAOP {
-	private static final Logger logger = LoggerFactory.getLogger(SessionAOP.class);
 
 	@Around("@annotation(com.example.ITBook.common.annotation.Session)")
 	public Object sessionUser(final ProceedingJoinPoint pjp) throws Throwable {
-		
+
+		log.info("SessionAOP.sessionUser :::");
+
 		HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		
 		Object[] args = pjp.getArgs();

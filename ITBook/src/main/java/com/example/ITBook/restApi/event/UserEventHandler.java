@@ -15,7 +15,4 @@ public class UserEventHandler {
         user.setCreatedDate();
     }
 
-    public void beforeSaveUser(User user) {
-        user.setUpdatedDate();
-    }
 }

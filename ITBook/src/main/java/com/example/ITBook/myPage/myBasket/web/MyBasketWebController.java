@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,11 @@ import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.common.utils.JsonUtil;
 import com.example.ITBook.myPage.myBasket.service.MyBasketService;
 
+@Slf4j
 @SessionAttributes("user")
 @RequestMapping("/myBasket")
 @Controller
 public class MyBasketWebController {
-	private static final Logger logger = LoggerFactory.getLogger(MyBasketWebController.class);
 	
 	@Autowired
 	private MyBasketService myBasketService;
@@ -44,6 +45,8 @@ public class MyBasketWebController {
 	@GetMapping()
 	public String mybascket(User user
 			,Model model) throws Exception {
+
+		log.info("MyBasketWebController.mybascket :::");
 		
 		List<MyBasket> list = myBasketService.selectByUser(user.getUserNo());
 		
@@ -59,6 +62,8 @@ public class MyBasketWebController {
 	public String addMyBasket(@RequestParam long isbn
 			,@RequestParam long userIdx
 			,Model model) throws Exception {
+
+		log.info("MyBasketWebController.addMyBasket :::");
 		
 		boolean isSuccess = myBasketService.insertMyBasket(isbn,userIdx);
 
@@ -75,7 +80,9 @@ public class MyBasketWebController {
 	@ResponseBody
 	public String deleteMyBasket(@RequestParam(required=false) long isbn
 			,User user) throws Exception {
-		
+
+		log.info("MyBasketWebController.deleteMyBasket :::");
+
 		boolean isSuccess = myBasketService.deleteMyBasket(isbn,user);
 
 		if (!isSuccess) new DoNotUpdateOrInsertException();

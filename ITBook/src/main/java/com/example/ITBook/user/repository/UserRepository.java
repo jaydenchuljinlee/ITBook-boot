@@ -33,6 +33,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     		+ ", address_3 = :#{#user.address3}"
     		+ ", mileage = :#{#user.mileage} WHERE user_no = :#{#user.user_no}",nativeQuery = false)
     int update(@Param("user") User user) throws Exception;
-    
-    
 }

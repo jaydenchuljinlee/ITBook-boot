@@ -12,26 +12,26 @@ import lombok.*;
  * 책 정보 DB 테이블
  * */
 @NoArgsConstructor @AllArgsConstructor @Builder
-@Data @EqualsAndHashCode(callSuper = false)
+@Data @EqualsAndHashCode(callSuper = false,of = {"isbn"})
 @Entity @Table(name = "book")
 public class Book  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(columnDefinition = "BIGINT",length = 21)
+	@Column(columnDefinition = "BIGINT")
 	private Long isbn;
 	
-	@Column(columnDefinition = "INT",length = 11)
+	@Column(columnDefinition = "INT")
 	private int price;
-	@Column(columnDefinition = "INT",length = 11)
+	@Column(columnDefinition = "INT")
 	private int page;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "scode")
 	private Scategory s_category;
 	
-	@Size(max = 11)
+	@Column(columnDefinition = "INT")
 	private int quantity;
 	
 	@Column(columnDefinition = "VARCHAR",length = 50)

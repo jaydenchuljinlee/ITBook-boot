@@ -24,10 +24,12 @@ import com.example.ITBook.common.domain.Hashtag;
 import com.example.ITBook.common.domain.Scategory;
 import com.example.ITBook.common.domain.Tag;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Transactional
 @Service
 public class AdminBookServiceImple implements AdminBookService {
-	private static final Logger logger = LoggerFactory.getLogger(AdminBookServiceImple.class);
 	
 	@Autowired
 	private AdminBigCategoryRepository bCategoryRepository;
@@ -45,17 +47,23 @@ public class AdminBookServiceImple implements AdminBookService {
 	@Override
 	public List<Book> selectAllBooks() throws Exception {
 		
+		log.info("AdminBookServiceImple.selectAllBooks :::");
+		
 		return adminBookRepository.findAll();
 	}
 
 	@Override
 	public List<Bcategory> selectParentCategoryList() throws Exception {
 		
+		log.info("AdminBookServiceImple.selectParentCategoryList :::");
+		
 		return bCategoryRepository.findAll();
 	}
 
 	@Override
 	public List<Scategory> selectChildCategoryList(Bcategory parent) throws Exception {
+		
+		log.info("AdminBookServiceImple.selectChildCategoryList :::");
 		
 		return sCategoryRepository.findByBcategory(parent);
 	}
@@ -68,15 +76,17 @@ public class AdminBookServiceImple implements AdminBookService {
 	@Override
 	public boolean insertBook(Book book, long category1, long category2,List<Long> hash) throws Exception {
 		
+		log.info("AdminBookServiceImple.insertBook :::");
+		
 		Optional<Book> list =  bookRegisterRepository.findById(book.getIsbn());
 		
 		if (isBookPresent(list)) {
-			return true;
+			return false;
 		}
 		
 		bookAndCategoryAndhashSave(book,category1,category2,hash);
 		
-		return false;
+		return adminBookRepository.existsById(book.getIsbn()) ? true : false;
 		
 	}
 
@@ -88,6 +98,8 @@ public class AdminBookServiceImple implements AdminBookService {
 	 * @repositorySave()	: 디비에 저장
 	 */
 	private void bookAndCategoryAndhashSave(Book book, long category1, long category2,List<Long> hash) {
+		
+		log.info("AdminBookServiceImple.bookAndCategoryAndhashSave :::");
 		
 		Scategory child = categoryCreate(category1,category2);
 		
@@ -106,6 +118,7 @@ public class AdminBookServiceImple implements AdminBookService {
 	 */
 	private void repositorySave(Book book, Bookcategory categoryInfo, List<Hashtag> tagInfo) {
 		
+		log.info("AdminBookServiceImple.repositorySave :::");
 		
 		bookRegisterRepository.save(book);
 		
@@ -122,6 +135,8 @@ public class AdminBookServiceImple implements AdminBookService {
 	 * @return	: 해시태그 리스트	
 	 */
 	private List<Hashtag> setBookhashtag(Book book,List<Long> hash) {
+		
+		log.info("AdminBookServiceImple.setBookhashtag :::");
 		
 		List<Hashtag> tagInfos = new ArrayList<Hashtag>();
 		
@@ -149,11 +164,15 @@ public class AdminBookServiceImple implements AdminBookService {
 	@Override
 	public Optional<Book> selectBookByIsbn(Book book) throws Exception {
 		
+		log.info("AdminBookServiceImple.selectBookByIsbn :::");
+		
 		return adminBookRepository.findById(book.getIsbn());
 	}
 
 	private Bookcategory setBookCategory(Book book, Scategory child) {
 
+		log.info("AdminBookServiceImple.setBookCategory :::");
+		
 		book.setS_category(child);
 		
 		return new Bookcategory(book,child);
@@ -161,6 +180,8 @@ public class AdminBookServiceImple implements AdminBookService {
 
 	private Scategory categoryCreate(long category1, long category2) {
 
+		log.info("AdminBookServiceImple.categoryCreate :::");
+		
 		Bcategory parent = Bcategory.builder()
 									.code(category1)
 									.build();
@@ -175,6 +196,8 @@ public class AdminBookServiceImple implements AdminBookService {
 	}
 
 	private boolean isBookPresent(Optional<Book> list) {
+		
+		log.info("AdminBookServiceImple.isBookPresent :::");
 		
 		return list.isPresent();
 	}

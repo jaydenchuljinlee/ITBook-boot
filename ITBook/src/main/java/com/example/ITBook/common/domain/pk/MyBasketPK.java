@@ -7,6 +7,10 @@ import javax.persistence.Embeddable;
 
 import lombok.*;
 
+
+/*
+* 장바구니 Primary Key
+* */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

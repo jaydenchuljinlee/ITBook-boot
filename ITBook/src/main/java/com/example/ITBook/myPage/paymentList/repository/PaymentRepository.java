@@ -15,6 +15,9 @@ import com.example.ITBook.common.domain.Payment;
 import com.example.ITBook.common.domain.PaymentInformation;
 import com.example.ITBook.common.domain.User;
 
+/*
+* 결제 저장소
+* */
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
 

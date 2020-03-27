@@ -3,6 +3,7 @@ package com.example.ITBook.user.service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,9 @@ import org.springframework.stereotype.Service;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.user.repository.UserRepository;
 
+@Slf4j
 @Service
 public class UserUpdateServiceImpl implements UserUpdateService {
-
-	private static final Logger logger = LoggerFactory.getLogger(UserUpdateServiceImpl.class);
 	
 	@Autowired
 	private UserRepository userRepository;//유저 객체 리파지토리
@@ -29,6 +29,8 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 	 * */
 	@Override
 	public Optional<User> checkIdAndPassword(User user) throws Exception {
+
+		log.info("UserUpdateServiceImpl.checkIdAndPassword :::");
 		
 		Optional<User> stored = userRepository.findByIdentity(user.getIdentity());
 		
@@ -45,6 +47,8 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 	@Override
 	public boolean deleteUser(User user) throws Exception {
 
+		log.info("UserUpdateServiceImpl.deleteUser :::");
+
 		user.setUpdatedDate(LocalDateTime.now());
 		user.setPrincipal("0");
 		
@@ -53,6 +57,8 @@ public class UserUpdateServiceImpl implements UserUpdateService {
 
 	@Override
 	public boolean updateUser(User user) throws Exception {
+
+		log.info("UserUpdateServiceImpl.updateUser :::");
 
 		String password = encoder.encode(user.getPassword());
 		

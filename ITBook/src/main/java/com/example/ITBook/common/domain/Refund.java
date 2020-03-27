@@ -14,6 +14,9 @@ import javax.persistence.Table;
 
 import lombok.*;
 
+/*
+* 환불 테이블
+* */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,8 +32,8 @@ public class Refund  implements Serializable{
 	private long idx;
 	
 	@ManyToOne(fetch =  FetchType.LAZY)
-	@JoinColumn(name ="user_no")
-    private User user;
+	@JoinColumn(name ="pay_no")
+    private Payment payment;
 	
 	@Column(name = "state",columnDefinition = "INT",length = 11)
 	private int state;

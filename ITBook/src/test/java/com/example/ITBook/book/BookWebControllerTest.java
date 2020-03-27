@@ -27,6 +27,7 @@ import com.example.ITBook.common.domain.Bcategory;
 import com.example.ITBook.common.domain.Book;
 import com.example.ITBook.common.domain.Scategory;
 
+import lombok.extern.slf4j.Slf4j;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
@@ -34,18 +35,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc //need this in Spring Boot test
 public class BookWebControllerTest {
-	private static final Logger logger = LoggerFactory.getLogger(BookWebControllerTest.class);
 	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@Before
 	public void setUp() {
-		logger.info("set up....");
+		log.info("BookWebControllerTest.setUp :::");
 	}
 	
 	@Test

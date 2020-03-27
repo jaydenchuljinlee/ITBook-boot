@@ -24,6 +24,9 @@ import com.example.ITBook.common.exception.BookIsbnDuplicationException;
 import com.example.ITBook.common.exception.BookIsbnNotFoundException;
 import com.example.ITBook.common.exception.FailedConnectionException;
 
+/*
+* 책 등록 관련 컨트롤러
+* */
 @Controller
 @SessionAttributes("user")
 @RequestMapping("/admin/book")
@@ -34,45 +37,14 @@ public class AdminBookWebRegister {
 	private AdminBookService adminBookService;
 
 	/*
-	 * @info	: 책 등록 공통 부분인 부모 카테고리 리스트
-	 * 
-	 *  */
-	@ModelAttribute("categoryList_1")
-	public List<Bcategory> categoryList_1(ModelMap model) throws Exception {
-		return adminBookService.selectParentCategoryList();
-	}
-	
-	/*
 	 * @info	: 책 등록 메인 페이지
 	 * */
 	@RequestMapping(value= "/register")
 	public String adminBookRegister() throws Exception {
-		
+
 		return "book/bookRegister.adminTiles";
 	}
-	
-	/**
-	 * 책 검색 크롤링
-	 * @param book : 책 객체, category1 : 대분류, category2 : 소분류, hash : 해시태그
-	 * @return : 해당페이지 redirect + 등록 여부
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/register/success",method = RequestMethod.POST)
-	public String BookRegisterSuccess(@ModelAttribute Book book,
-			@RequestParam long category1
-			,@RequestParam long category2
-			,@RequestParam(required=false) List<Long> hash
-			,Model model) throws Exception{
-		
-		if (adminBookService.selectBookByIsbn(book).isPresent()) {
-			throw new BookIsbnDuplicationException(book.getIsbn().toString());
-		}
-		
-		adminBookService.insertBook(book,category1,category2,hash);
-		
-		return "redirect:adminBookMain";
-	}
-	
+
 	/**
 	 * 책 검색 크롤링
 	 * @param isbn : 검색한 isbn
@@ -82,19 +54,19 @@ public class AdminBookWebRegister {
 	@RequestMapping(value= "/search", produces = "application/xml; charset=utf8")
 	@ResponseBody
 	public String adminBookSearch(@RequestParam String isbn) throws Exception{
-		
+
 		NaverClientInformation naverDocument = new NaverClientInformation(isbn);
-		
+
 		/*
 		 * if (naverDocument.getDocument() == null) {
-		 * 
+		 *
 		 * throw new BookIsbnNotFoundException(isbn); }
 		 */
-		
+
 		return naverDocument.getDocument();
-        
+
 	}
-	
+
 	/**
 	 * 책 상세 정보 가져오기
 	 * @param url : 네이버 책 상세 페이지 url
@@ -104,12 +76,41 @@ public class AdminBookWebRegister {
 	@RequestMapping(value= "/search/detail", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String adminBookSearchDetail(@RequestParam String url) throws Exception{
-		
+
 		BookInformation bookInfo = new BookInformation(url);
-		
+
 		return bookInfo.getBookJsonObject().toString();
-		
+
 	}
-	
-	
+
+	/**
+	 * 책 검색 크롤링
+	 * @param book : 책 객체, category1 : 대분류, category2 : 소분류, hash : 해시태그
+	 * @return : 해당페이지 redirect + 등록 여부
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/register/success",method = RequestMethod.POST)
+	public String BookRegisterSuccess(@ModelAttribute Book book,
+									  @RequestParam long category1
+			,@RequestParam long category2
+			,@RequestParam(required=false) List<Long> hash
+			,Model model) throws Exception{
+
+		if (adminBookService.selectBookByIsbn(book).isPresent()) {
+			throw new BookIsbnDuplicationException(book.getIsbn().toString());
+		}
+
+		boolean isSucess = adminBookService.insertBook(book,category1,category2,hash);
+
+		return "redirect:adminBookMain?iisSucess="+isSucess;
+	}
+
+	/*
+	 * @info	: 책 등록 공통 부분인 부모 카테고리 리스트
+	 * 
+	 *  */
+	@ModelAttribute("categoryList_1")
+	public List<Bcategory> categoryList_1(ModelMap model) throws Exception {
+		return adminBookService.selectParentCategoryList();
+	}
 }

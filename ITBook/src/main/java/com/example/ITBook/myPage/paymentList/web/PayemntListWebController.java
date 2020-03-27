@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ import com.example.ITBook.myPage.paymentList.service.PaymentService;
 /*
  * 결제 관련 컨트롤러
  * */
-
+@Slf4j
 @Controller
 @SessionAttributes("user")
 @RequestMapping("/payment")
@@ -42,7 +43,9 @@ public class PayemntListWebController {
 	@PostMapping(value = "/")
 	public String payment(@ModelAttribute PayInfo payInfo
 			,Model model) throws Exception {
-		
+
+		log.info("PayemntListWebController.payment :::");
+
 		List<Book> list = new ArrayList<Book>();
 		
 		setBookList(list,payInfo);//책 정보 세팅
@@ -66,7 +69,9 @@ public class PayemntListWebController {
 			,@ModelAttribute PayInfo payInfo
 			,User user
 			,Model model) throws Exception {
-	
+
+		log.info("PayemntListWebController.completePay :::");
+
 		List<PaymentInformation> payInfoList = paymentService.insertpayInfo(payment,payInfo,user);
 		
 		model.addAttribute("payInfoList", payInfoList);
@@ -78,6 +83,8 @@ public class PayemntListWebController {
 	 * 결제 정보에 대한 책 정보 리스트 세팅
 	 * */
 	private void setBookList(List<Book> list, PayInfo payInfo) {
+
+		log.info("PayemntListWebController.setBookList :::");
 
 		int length = payInfo.getIsbn().size();
 		

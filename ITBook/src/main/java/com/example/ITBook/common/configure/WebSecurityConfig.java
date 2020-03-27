@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 @EnableWebSecurity // À¥ ½ÃÅ¥¸®Æ¼
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    // @toto: ÀÏ¹İ ·Î±×ÀÎ provider ±¸Çö
    /* @Autowired
     private AuthenticationProvider authenticationProvier;
 
@@ -125,7 +126,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             return CommonOAuth2Provider.FACEBOOK.getBuilder(client)
                     .clientId(registration.getClientId())
                     .clientSecret(registration.getClientSecret())
-                    // ?˜ë¶ì˜ graph API?Š” scopeë¡œëŠ” ?•„?š”?•œ ?•„?“œë¥? ë°˜í™˜?•´ì£¼ì? ?•Š?•„ idm name, email, linkë¥? ?ŒŒ?¼ë¯¸í„°ë¡? ?„£?–´ ?š”ì²??•˜?„ë¡? ?„¤? •
+
                     .userInfoUri("https://graph.facebook.com/me?fields=id,name,email,link")
                     .scope("email")
                     .build();

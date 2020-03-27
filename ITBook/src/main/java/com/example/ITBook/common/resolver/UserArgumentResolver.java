@@ -6,6 +6,7 @@ import com.example.ITBook.common.enums.SocialType;
 import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.user.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,52 +30,46 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
-	private static final Logger logger = LoggerFactory.getLogger(UserArgumentResolver.class);
 	
 	@Autowired
     private UserRepository userRepository;
 
-	/*
-	 * �޼����� ����� �˻�
-	 * */
     @Override
     public boolean supportsParameter(MethodParameter parameter){
-    	
+
+        log.info("UserArgumentResolver.supportsParameter :::");
+
         return (parameter.getParameterAnnotation(SocialUser.class) != null) &&
                 parameter.getParameterType().equals(User.class);
     }
 
-    /*
-     * �޼��� �Ķ���͸� ������ �˻� �� ���ǿ� ����
-     * */
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
+
+        log.info("UserArgumentResolver.resolveArgument :::");
 
         User user = (User) session.getAttribute("user");
 
         return  getUser(user, session);
     }
 
-    /*
-     * user ��ü�� �˻��Ͽ� ���ǿ� ����
-     * */
     private User getUser(User user, HttpSession session) throws Exception{
-    	
-    	//oauth2 ��ū�� ���ؽ�Ʈ���� ���� ������ ������
+
+        log.info("UserArgumentResolver.getUser :::");
+
         OAuth2AuthenticationToken auth2AuthenticationToken =
                 (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
-        //���������� key,value���� mapŸ���� ��ȯ
         Map<String, Object> attributes = auth2AuthenticationToken.getPrincipal().getAttributes();
         
         User convertUser = convertUser(auth2AuthenticationToken.getAuthorizedClientRegistrationId(), attributes);
         
         Optional<User> identity = userRepository.findByIdentity(convertUser.getIdentity());
-        
-        //�����ϴ� user��� user ��ü�� ������ ������ ��´�
+
         if (identity.isPresent()) user = identity.get();
         else {
         	
@@ -91,6 +86,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     private User convertUser(String authority, Map<String, Object> attributes) throws Exception{
+
+        log.info("UserArgumentResolver.convertUser :::");
+
         if (SocialType.FACEBOOK.isEuqals(authority)) {
             return getModernUser(SocialType.FACEBOOK,attributes);
         } else if (SocialType.GOOGLE.isEuqals(authority)) {
@@ -102,6 +100,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     private User getModernUser(SocialType socialType, Map<String, Object> attributes) throws Exception{
+
+        log.info("UserArgumentResolver.getModernUser :::");
+
         return User.builder()
                 .name(String.valueOf(attributes.get("name")))
                 .email(String.valueOf(attributes.get("email")))
@@ -111,8 +112,10 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     }
 
-    //īī�� Ÿ���� �������ִ� ������ �ٸ�
     private User getKakaoUser(Map<String, Object> attributes) {
+
+        log.info("UserArgumentResolver.getKakaoUser :::");
+
         Map<String, String> propertiesMap =
                 (HashMap<String, String>) attributes.get("properties");
 
@@ -128,8 +131,10 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
 
-    //���� ������ ���� ����Ʈ�� �����ϰ� ������, ���� ������ ���� ����Ʈ�� �־��ش�.
-    private void setRoleIfNotSame(User user, OAuth2AuthenticationToken auth2AuthenticationToken, Map<String, Object> attributes) {
+     private void setRoleIfNotSame(User user, OAuth2AuthenticationToken auth2AuthenticationToken, Map<String, Object> attributes) {
+
+         log.info("UserArgumentResolver.setRoleIfNotSame :::");
+
         if (auth2AuthenticationToken.getAuthorities().contains(new SimpleGrantedAuthority(user.getSocialType().getRoleType()))) {
 
             SecurityContextHolder.getContext().setAuthentication(

@@ -6,15 +6,11 @@ import com.example.ITBook.common.enums.SocialType;
 import com.example.ITBook.common.enums.UserStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /*
  * 회원 테이블
@@ -23,7 +19,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "user")
-@Setter @Getter @AllArgsConstructor @NoArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

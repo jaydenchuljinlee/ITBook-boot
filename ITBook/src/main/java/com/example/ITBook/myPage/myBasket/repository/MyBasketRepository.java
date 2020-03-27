@@ -15,11 +15,18 @@ import com.example.ITBook.common.domain.MyBasket;
 import com.example.ITBook.common.domain.User;
 import com.example.ITBook.common.domain.pk.MyBasketPK;
 
+/*
+* 장바구니 관련 repository
+* */
 @Repository
 public interface MyBasketRepository extends JpaRepository<MyBasket, MyBasketPK>{
 
 	List<MyBasket> findAllByUser(User user)throws Exception;
-	
+
+
+	/*
+	* 환불
+	* */
 	@Modifying
 	@Transactional
 	@Query(value = "DELETE FROM MyBasket WHERE isbn = :#{#myBasket.isbn} and user_no = :#{#myBasket.user_no}",nativeQuery = false)

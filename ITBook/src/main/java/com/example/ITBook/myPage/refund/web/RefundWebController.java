@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import com.example.ITBook.myPage.refund.service.RefundService;
  * 환불 관련 컨트롤러
  * */
 
+@Slf4j
 @Controller
 @SessionAttributes("user")
 @RequestMapping("/refund")
@@ -44,7 +46,9 @@ public class RefundWebController {
 	@Session(name = "user")
 	@GetMapping(value = "/")
 	public String refundHome(User user,Model model) throws Exception {
-		
+
+		log.info("RefundWebController.refundHome :::");
+
 		List<PaymentInformation> payInfoList = paymentService.selectList(user.getUserNo());
 		
 		model.addAttribute("payInfoList", payInfoList);
@@ -59,7 +63,9 @@ public class RefundWebController {
 	@GetMapping(value = "/request")
 	@ResponseBody
 	public String refundRequest(@RequestParam long pay_no,User user,Model model) throws Exception {
-		
+
+		log.info("RefundWebController.refundRequest :::");
+
 		boolean isSuccess = refundService.updatePaymentStateOnRefund(pay_no,user.getUserNo());
 		
 		HashMap<String, Object> rtnMap = new HashMap<>();

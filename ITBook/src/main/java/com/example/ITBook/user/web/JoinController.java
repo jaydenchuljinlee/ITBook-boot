@@ -1,5 +1,6 @@
 package com.example.ITBook.user.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,31 +20,50 @@ import com.example.ITBook.common.enums.SocialType;
 import com.example.ITBook.common.exception.DoNotUpdateOrInsertException;
 import com.example.ITBook.user.service.JoinService;
 
+/*
+* 회원가입 컨트롤러
+* */
+@Slf4j
 @Controller
 @RequestMapping("/join")
 public class JoinController {
-	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 	
 	@Autowired
 	private JoinService joinService;
-	
+
+	/*
+	* 회원가입 메인 페이지
+	* */
 	@GetMapping()
 	public String join() {
+
+		log.info("JoinController.join");
 		
 		return "join/join.join";
 	}
-	
+
+	/*
+	* 아이디 중복 체크
+	* */
 	@PostMapping(value="/identityCheck")
 	@ResponseBody
 	public String identityCheck(@RequestParam(required = false) String identity) throws Exception {
-		
+
+		log.info("JoinController.identityCheck");
+
 		if (!joinService.findByEmail(identity)) return "0";
 		else return "1";
 	}
-	
+
+
+	/*
+	* 회원가입 성공
+	* */
 	@PostMapping(value="/joinSuccess")
 	public String joinSuccess(@ModelAttribute User user, Model model) throws Exception{
-		
+
+		log.info("JoinController.joinSuccess");
+
 		boolean isSuccess = joinService.insertUser(user);
 		
 		if (!isSuccess) throw new DoNotUpdateOrInsertException();

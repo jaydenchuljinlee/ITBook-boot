@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.Table;
 
 import com.example.ITBook.common.domain.pk.BookCategoryPK;
 
@@ -20,6 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
+@Table(name = "book_category")
 public class Bookcategory  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
